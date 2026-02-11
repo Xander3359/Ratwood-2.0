@@ -38,6 +38,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	"Wood Arm (L) (+1 TRI)"=/datum/charflaw/limbloss/arm_l,
 	"Wood Arm (R) (+1 TRI)"=/datum/charflaw/limbloss/arm_r,
 	"Hemophage (+1 TRI)"=/datum/charflaw/hemophage,
+	"Crimson Curse (+1 TRI)"=/datum/charflaw/crimson_curse,
 	))
 
 /datum/charflaw
@@ -753,3 +754,11 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	ADD_TRAIT(vamp_wannabe, TRAIT_HEMOPHAGE, TRAIT_GENERIC)
 	ADD_TRAIT(vamp_wannabe, TRAIT_VAMPBITE, TRAIT_GENERIC)
 	vamp_wannabe.adjust_triumphs(1)
+
+/datum/charflaw/crimson_curse
+	name = "Crimson Curse (+1 TRI)"
+	desc = "You suffer from the Crimson Curse, a weak form of Vampirism acquired from dark rites or a particularly cruel hex. Unlike a 'true' Vampire, you are incapable of converting others or commiting Diablerie."
+
+/datum/charflaw/crimson_curse/on_mob_creation(mob/user)
+	ADD_TRAIT(user, TRAIT_CRIMSON_CURSE, TRAIT_GENERIC)
+	user.adjust_triumphs(1)

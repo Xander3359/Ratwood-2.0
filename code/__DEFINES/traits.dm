@@ -97,6 +97,7 @@
 #define TRAIT_WAGES_SUSPENDED "Wages Suspended" //Stops nerve master daily pay for this guy
 #define TRAIT_SCALEARMOR "Weathered Scales"//Mage armor, refluffed to scales.
 #define TRAIT_HEMOPHAGE "Hemophage"//You can drink blood for heals, but normal food and water makes you ill. Shitty vampire.
+#define TRAIT_CRIMSON_CURSE "Crimson Curse" //Turns you into a fake vampire. You burn in the light, get silver weakness and have a disguise
 
 //Hearthstone port (Tracking)
 #define TRAIT_PERFECT_TRACKER "Huntmaster" //Will always find any tracks and analyzes them perfectly.
