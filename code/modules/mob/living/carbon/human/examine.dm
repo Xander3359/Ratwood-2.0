@@ -50,6 +50,13 @@
 		user.apply_status_effect(/datum/status_effect/buff/xylix_joy)
 		to_chat(user, span_info("Their beauty brings a smile to my face, and fortune to my steps!"))
 
+/mob/living/carbon/human/proc/human_modular_examine_lines(mob/user, observer_privilege, m1, m2, m3)
+	var/list/lines = list()
+	var/list/ext_lines = human_modular_examine_extension(user, observer_privilege, m1, m2, m3)
+	if(length(ext_lines))
+		lines += ext_lines
+	return lines
+
 /mob/living/carbon/human/examine(mob/user)
 	var/observer_privilege = isobserver(user)
 	var/t_He = p_they(TRUE)
@@ -202,6 +209,9 @@
 				. += (L.STAPER >= 8 && L.STAINT >= 5) ? span_aiprivradio("[m1] [wet_or_dry]!") : span_warning("[m1] letting out some glossy stuff!")
 			else
 				. += span_aiprivradio("[m1] [wet_or_dry]!")
+		var/list/modular_lines = human_modular_examine_lines(user, observer_privilege, m1, m2, m3)
+		if(length(modular_lines))
+			. += modular_lines
 
 		if((HAS_TRAIT(src, TRAIT_OUTLANDER) && !HAS_TRAIT(user, TRAIT_OUTLANDER)) || (HAS_TRAIT(user, TRAIT_RACISMISBAD) && !(src.dna.species.name == "Elf" || src.dna.species.name == "Dark Elf" || src.dna.species.name == "Half Elf")))
 			. += span_phobia("A foreigner...")
@@ -533,6 +543,11 @@
 			if(belt_with_dildo.attached_toy)
 				. += "[m3] [belt_with_dildo.attached_toy.get_examine_string(user)] attached to [m2] belt. "
 
+	var/modular_chastity_toy_line = human_modular_chastity_toy_examine_line(user, m2, m3)
+	if(modular_chastity_toy_line)
+		. += modular_chastity_toy_line
+
+
 	//right belt
 	if(beltr && !(SLOT_BELT_R in obscured))
 		var/str = "[m3] [beltr.get_examine_string(user)] on [m2] belt. "
@@ -636,22 +651,38 @@
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		appears_dead = TRUE
 
-	var/temp = getBruteLoss() + getFireLoss() //no need to calculate each of these twice
-
 	if (get_bodypart(BODY_ZONE_HEAD)?.grievously_wounded)
 		msg += span_bloody("<b>[p_their(TRUE)] neck is a ghastly ruin of blood and bone, barely hanging on!</b>")
 
+	var/temp = getBruteLoss()
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
-		// Damage
-		switch(temp)
-			if(5 to 25)
-				msg += "[m1] a little wounded."
-			if(25 to 50)
-				msg += "[m1] wounded."
-			if(50 to 100)
-				msg += "<B>[m1] severely wounded.</B>"
-			if(100 to INFINITY)
-				msg += span_danger("[m1] gravely wounded.")
+		if(temp)
+			if (temp < 25)
+				msg += "[m3] some bruises.\n"
+			else if (temp < 50)
+				msg += "[m3] a lot of bruises!\n"
+			else
+				msg += "<B>[m1] black and blue!!</B>\n"
+
+		temp = getFireLoss()
+		if(temp)
+			if (temp < 25)
+				msg += "[m3] some burns.\n"
+			else if (temp < 50)
+				msg += "[m3] many burns!\n"
+			else
+				msg += "<B>[m1] dragon food!!</B>\n"
+
+	//body temp
+	switch(bodytemperature)
+		if(0 to BODYTEMP_COLD_LEVEL_ONE_MAX)
+			msg += span_biginfo("<font color='#023E8A'> [m1] shivering uncontrollably</font>")
+		if(BODYTEMP_COLD_LEVEL_ONE_MAX to BODYTEMP_NORMAL_MIN)
+			msg += span_biginfo("<font color='#99e6ff'> [m1] shivering</font>")
+		if(BODYTEMP_NORMAL_MAX to BODYTEMP_HEAT_LEVEL_ONE_MAX)
+			msg += span_biginfo("<font color='#ffff00'> [m1] sweating</font>")
+		if(BODYTEMP_HEAT_LEVEL_ONE_MAX to 600)
+			msg += span_biginfo("<font color='#DC143C?'> [m1] sweating greatly</font>")
 
 	// Blood volume
 	switch(blood_volume)
@@ -730,6 +761,10 @@
 			missing_limb_message = span_danger("[missing_limb_message]")
 		msg += missing_limb_message
 
+	if(has_status_effect(/datum/status_effect/fire_handler/fire_stacks))
+		msg += "[t_He] [t_is] covered in something flammable.\n"
+	if(has_status_effect(/datum/status_effect/fire_handler/wet_stacks))
+		msg += "[t_He] look[p_s()] a little soaked.\n"
 	//Grabbing
 	if(pulledby && pulledby.grab_state)
 		msg += "[m1] being grabbed by [pulledby]."

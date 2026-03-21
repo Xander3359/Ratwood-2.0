@@ -31,6 +31,16 @@
 /datum/stressevent/vice/godfearing
 	desc = list(span_boldred("Time to pray to my Patron."),span_boldred("I need to visit my Patron's realm."))
 
+/datum/stressevent/chastity_frustration
+	timer = 999 MINUTES
+	stressadd = 1
+	desc = span_red("This restraint is maddening.")
+
+/datum/stressevent/chastity_flat_cramped
+	timer = 999 MINUTES
+	stressadd = 1
+	desc = span_red("This cage is too cramped for me.")
+
 /datum/stressevent/miasmagas
 	timer = 10 SECONDS
 	stressadd = 2
@@ -129,6 +139,11 @@
 	timer = 15 SECONDS
 	stressadd = 2
 	desc = span_red("I'm panicking!")
+
+/datum/stressevent/bloodrain
+	timer = 1 MINUTES
+	stressadd = 4
+	desc = span_red("It's raining blood! I'm covered in it!")
 
 /datum/stressevent/felldown
 	timer = 1 MINUTES
