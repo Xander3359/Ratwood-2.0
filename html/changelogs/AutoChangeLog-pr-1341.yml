@@ -1,0 +1,4 @@
+author: "Jamdrawers"
+delete-after: True
+changes:
+  - bugfix: "Head Slave in desert map gets the vomitorium trait as well"
