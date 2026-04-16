@@ -24249,7 +24249,6 @@
 /area/rogue/under/underdarker/rockhill)
 "fPp" = (
 /mob/living/simple_animal/hostile/retaliate/rogue/infernal/imp{
-	despawn_on_idle = 0;
 	wander = 0
 	},
 /turf/open/floor/rogue/woodturned,
@@ -30258,9 +30257,7 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/rtfield/rockhill)
 "hoG" = (
-/obj/structure/roguewindow/openclose{
-	currently_opened = 1
-	},
+/obj/structure/roguewindow/openclose,
 /turf/open/floor/rogue/concrete,
 /area/rogue/under/cavewet/wizarddungeon)
 "hoJ" = (
@@ -46674,6 +46671,10 @@
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/rogue/concrete,
 /area/rogue/under/town/basement/keep)
 "lvO" = (
@@ -51440,6 +51441,11 @@
 "mBL" = (
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/woodsrat/south)
+"mBN" = (
+/obj/machinery/light/rogue/torchholder/r,
+/obj/structure/fluff/statue/knight/interior/r,
+/turf/open/floor/rogue/blocks,
+/area/rogue/under/town/basement/keep)
 "mBU" = (
 /turf/open/floor/rogue/greenstone/runed,
 /area/rogue/indoors/shelter/mountains)
@@ -57492,7 +57498,6 @@
 "ocp" = (
 /obj/effect/landmark/events/haunts,
 /mob/living/simple_animal/hostile/retaliate/rogue/infernal/hellhound{
-	despawn_on_idle = 0;
 	wander = 0
 	},
 /turf/open/floor/rogue/greenstone,
@@ -73171,6 +73176,7 @@
 /turf/open/floor/rogue/ruinedwood/herringbone,
 /area/rogue/indoors)
 "rXr" = (
+/obj/machinery/gear_painter,
 /turf/open/floor/rogue/concrete,
 /area/rogue/under/town/basement/keep)
 "rXs" = (
@@ -79876,7 +79882,6 @@
 /area/rogue/outdoors/beach/harbor)
 "tGe" = (
 /mob/living/simple_animal/hostile/retaliate/rogue/infernal/imp{
-	despawn_on_idle = 0;
 	wander = 0
 	},
 /turf/open/floor/rogue/blocks,
@@ -94914,7 +94919,6 @@
 "xsA" = (
 /obj/item/paper,
 /mob/living/simple_animal/hostile/retaliate/rogue/infernal/imp{
-	despawn_on_idle = 0;
 	wander = 0
 	},
 /turf/open/floor/rogue/woodturned,
@@ -282890,7 +282894,7 @@ sYi
 sYi
 sYi
 sYi
-tHV
+mBN
 sYi
 sYi
 sYi

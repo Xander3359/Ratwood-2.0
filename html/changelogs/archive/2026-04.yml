@@ -153,3 +153,11 @@
       \ assets, unless otherwise stated. You acknowledge that the project maintainers\
       \ are under no obligation to remove any materials that do not violate these\
       \ licenses. -->"
+2026-04-15:
+  Jamdrawers:
+  - bugfix: desertdeep added to valid hunting areas
+  - bugfix: Head Slave in desert map gets the vomitorium trait as well
+  Kroto-Ker:
+  - bugfix: Examine runtime.
+  Xander3359:
+  - bugfix: Fix void dragon not dropping the spell points scrolls
