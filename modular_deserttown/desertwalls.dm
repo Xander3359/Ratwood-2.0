@@ -17,6 +17,15 @@
 	hardness = 3
 
 
+/datum/crafting_recipe/roguetown/turfs/desert/sandstone
+	name = "sandstone wall"
+	result = /turf/closed/wall/mineral/rogue/sandstone
+	reqs = list(/obj/item/natural/stone = 2)
+	skillcraft = /datum/skill/craft/masonry
+	verbage_simple = "construct"
+	verbage = "constructs"
+	craftdiff = 2
+
 /turf/closed/wall/mineral/rogue/sandbrick
 	name = "sandbrick wall"
 	desc = "A wall of smooth, unyielding bricks."
@@ -34,6 +43,15 @@
 	climbdiff = 3
 	damage_deflection = 10
 	hardness = 3
+
+/datum/crafting_recipe/roguetown/turfs/desert/sandbrick
+	name = "sandbrick wall"
+	result = /turf/closed/wall/mineral/rogue/sandstone
+	reqs = list(/obj/item/natural/stone = 2)
+	skillcraft = /datum/skill/craft/masonry
+	verbage_simple = "construct"
+	verbage = "constructs"
+	craftdiff = 2
 
 /turf/closed/mineral/rogue/sandstone
 	name = "sandstone"
