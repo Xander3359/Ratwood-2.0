@@ -1048,7 +1048,7 @@
 	debris = list(/obj/item/natural/fibers = 2, /obj/item/grown/log/tree/stick = 1, /obj/item/grown/log/tree/small = 1)
 	static_debris = list(/obj/item/grown/log/tree = 1)
 
-/obj/structure/flora/roguegrass/bush/jungle/large/Initialize()
+/obj/structure/flora/roguegrass/bush/jungle/large/Initialize(mapload)
 	. = ..()
 	icon_state = "bush[pick(1,2,3)]"
 
