@@ -2234,6 +2234,11 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	path = /obj/item/rogue/instrument/bagpipe
 	triumph_cost = 1
 
+/datum/loadout_item/banjo
+	name = "Banjo"
+	path = /obj/item/rogue/instrument/banjo
+	triumph_cost = 1
+
 /datum/loadout_item/drum
 	name = "Drum"
 	path = /obj/item/rogue/instrument/drum
@@ -2247,6 +2252,11 @@ GLOBAL_LIST_EMPTY(loadout_items)
 /datum/loadout_item/guitar
 	name = "Guitar"
 	path = /obj/item/rogue/instrument/guitar
+	triumph_cost = 1
+
+/datum/loadout_item/harmonica
+	name = "Harmonica"
+	path = /obj/item/rogue/instrument/harmonica
 	triumph_cost = 1
 
 /datum/loadout_item/harp
