@@ -1761,6 +1761,11 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	path = /obj/item/clothing/head/roguetown/roguehood/hierophant
 	triumph_cost = 2
 
+/datum/loadout_item/tri_armorhood_hood
+	name = "Studded Leather Hood"
+	path = /obj/item/clothing/head/roguetown/helmet/leather/armorhood/advanced
+	triumph_cost = 2
+
 /datum/loadout_item/tri_pontifex_hood
 	name = "Pontifex Hood"
 	path = /obj/item/clothing/head/roguetown/roguehood/pontifex
