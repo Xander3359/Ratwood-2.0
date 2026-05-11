@@ -22746,11 +22746,8 @@
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/town/garrison)
 "eKL" = (
-/obj/structure/rack/rogue,
-/obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy,
-/obj/machinery/light/rogue/candle/red/r,
-/turf/open/floor/rogue/concrete,
-/area/rogue/indoors/inq/basement)
+/turf/closed,
+/area/rogue/under/cave)
 "eKQ" = (
 /turf/open/water/river/flow,
 /area/rogue/under/cavewet/bogcaves/south)
@@ -25552,7 +25549,10 @@
 /area/rogue/under/cave)
 "fnz" = (
 /obj/structure/rack/rogue,
-/obj/item/rogueweapon/sword/long/zizo,
+/obj/effect/spawner/lootdrop/heresy,
+/obj/machinery/light/rogue/candle/red{
+	pixel_y = -32
+	},
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/inq/basement)
 "fnC" = (
@@ -72351,11 +72351,6 @@
 /obj/structure/table/wood/poor/alt_alt,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/under/underdark/north)
-"oSS" = (
-/obj/structure/rack/rogue,
-/obj/machinery/light/rogue/candle/red/l,
-/turf/open/floor/rogue/concrete,
-/area/rogue/indoors/inq/basement)
 "oSV" = (
 /obj/structure/fluff/railing/fence,
 /turf/open/floor/rogue/rooftop/green/north,
@@ -73616,6 +73611,7 @@
 "phc" = (
 /obj/structure/rack/rogue,
 /obj/machinery/light/rogue/candle/red/r,
+/obj/effect/spawner/lootdrop/heresy,
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/inq/basement)
 "phg" = (
@@ -99434,12 +99430,6 @@
 /obj/item/rogueweapon/blowrod,
 /turf/open/floor/rogue/blocks/stonered/tiny,
 /area/rogue/indoors/town/dwarfin)
-"uyn" = (
-/obj/structure/rack/rogue,
-/obj/machinery/light/rogue/candle/red/r,
-/obj/item/rogueweapon/flail/peasantwarflail/matthios,
-/turf/open/floor/rogue/concrete,
-/area/rogue/indoors/inq/basement)
 "uyp" = (
 /obj/structure/glowshroom,
 /turf/open/water/swamp,
@@ -110368,7 +110358,7 @@
 "wIA" = (
 /obj/structure/rack/rogue,
 /obj/machinery/light/rogue/candle/red/l,
-/obj/item/rogueweapon/greataxe/steel/doublehead/graggar,
+/obj/effect/spawner/lootdrop/heresy,
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/inq/basement)
 "wIB" = (
@@ -156180,6 +156170,7 @@ ybI
 ybI
 ybI
 ybI
+ybI
 hMk
 hMk
 hMk
@@ -156193,7 +156184,6 @@ ybI
 ybI
 sPj
 sPj
-ybI
 ybI
 ybI
 ybI
@@ -156632,6 +156622,7 @@ ybI
 ybI
 ybI
 ybI
+ybI
 hMk
 hMk
 hMk
@@ -156645,7 +156636,6 @@ ybI
 ybI
 sPj
 gnm
-ybI
 ybI
 ybI
 ybI
@@ -157077,6 +157067,7 @@ sPj
 sPj
 sPj
 sPj
+sPj
 ybI
 ybI
 ybI
@@ -157097,7 +157088,6 @@ ybI
 ybI
 sPj
 sPj
-ybI
 ybI
 ybI
 ybI
@@ -157529,6 +157519,7 @@ rSk
 sPj
 sPj
 ybI
+sPj
 ybI
 ybI
 ybI
@@ -157549,7 +157540,6 @@ ybI
 ybI
 sPj
 sPj
-ybI
 ybI
 ybI
 ybI
@@ -157972,15 +157962,16 @@ ybI
 ybI
 ybI
 ybI
+ybI
+ybI
+ybI
+ybI
+ybI
+rSk
+rSk
+ybI
+ybI
 sPj
-rSk
-rSk
-rSk
-rSk
-rSk
-rSk
-ybI
-ybI
 ybI
 ybI
 ybI
@@ -158004,7 +157995,6 @@ sPj
 gnm
 sPj
 gnm
-ybI
 ybI
 ybI
 bVD
@@ -158423,16 +158413,17 @@ ybI
 ybI
 ybI
 ybI
-rSk
-rSk
-rSk
-rSk
-rSk
-rSk
-rSk
-rSk
 ybI
 ybI
+ybI
+ybI
+ybI
+ybI
+ybI
+rSk
+rSk
+sPj
+sPj
 ybI
 ybI
 ybI
@@ -158456,7 +158447,6 @@ sPj
 sPj
 sPj
 sPj
-ybI
 ybI
 ybI
 bVD
@@ -158877,11 +158867,12 @@ ybI
 ybI
 ybI
 ybI
-rSk
-rSk
-rSk
-rSk
-rSk
+ybI
+ybI
+ybI
+ybI
+ybI
+ybI
 rSk
 xIr
 xIr
@@ -158908,7 +158899,6 @@ ybI
 ybI
 sPj
 sPj
-ybI
 ybI
 ybI
 bVD
@@ -159336,6 +159326,7 @@ ybI
 ybI
 qHj
 qHj
+qHj
 xIr
 xIr
 ybI
@@ -159360,7 +159351,6 @@ ybI
 ybI
 sPj
 sPj
-ybI
 ybI
 ybI
 bVD
@@ -159788,6 +159778,7 @@ cyY
 cyY
 qHj
 qHj
+qHj
 xIr
 xIr
 xIr
@@ -159812,7 +159803,6 @@ sPj
 sPj
 sPj
 sPj
-qHj
 qHj
 qHj
 miF
@@ -160232,7 +160222,7 @@ cyY
 bho
 qij
 cyY
-oSS
+wIA
 cyY
 wIA
 cyY
@@ -160241,30 +160231,30 @@ cyY
 qHj
 qHj
 qHj
-xIr
-xIr
-xIr
-ybI
-ybI
-ybI
-gnm
-gnm
-sPj
-gnm
-sPj
-sPj
-sPj
-sPj
-ybI
-sPj
-sPj
-sPj
-sPj
-sPj
-sPj
-sPj
-dIV
 qHj
+xIr
+xIr
+xIr
+ybI
+ybI
+ybI
+gnm
+gnm
+sPj
+gnm
+sPj
+sPj
+sPj
+sPj
+ybI
+sPj
+sPj
+sPj
+sPj
+sPj
+sPj
+sPj
+gnm
 qHj
 miF
 miF
@@ -160694,9 +160684,10 @@ cyY
 cyY
 qHj
 qHj
-xIr
-xIr
 qHj
+xIr
+xIr
+eKL
 ybI
 ybI
 sPj
@@ -160707,7 +160698,6 @@ gnm
 sPj
 gnm
 sPj
-ybI
 ybI
 ybI
 ybI
@@ -161146,11 +161136,11 @@ fnz
 cyY
 qHj
 qHj
+qHj
 xIr
 xIr
 xIr
 qHj
-ybI
 ybI
 ybI
 ybI
@@ -161598,11 +161588,11 @@ cyY
 cyY
 qHj
 qHj
-bhJ
-bhJ
-xIr
-xIr
 qHj
+bhJ
+bhJ
+xIr
+xIr
 qHj
 qHj
 qHj
@@ -162040,20 +162030,20 @@ cyY
 eiO
 eiO
 cyY
-uyn
+phc
 cyY
 phc
 cyY
-eKL
+phc
 cyY
 qHj
 qHj
 qHj
 qHj
+qHj
 bhJ
 bhJ
 bhJ
-xIr
 xIr
 xIr
 xIr
