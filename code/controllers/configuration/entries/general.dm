@@ -105,7 +105,9 @@
 	integer = FALSE
 	min_val = 0
 
-/datum/config_entry/flag/default_no_vote	// vote does not default to nochange/norestart
+/// If disabled, no-voters will automatically have their votes added to certain vote options
+/// (For eample: restart votes will default to "no restart", map votes will default to their preferred map / default map)
+/datum/config_entry/flag/default_no_vote
 
 /datum/config_entry/flag/no_dead_vote	// dead people can't vote
 
