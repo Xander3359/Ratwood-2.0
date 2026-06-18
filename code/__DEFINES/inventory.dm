@@ -1,12 +1,18 @@
 /*ALL DEFINES RELATED TO INVENTORY OBJECTS, MANAGEMENT, ETC, GO HERE*/
 
 //ITEM INVENTORY WEIGHT, FOR w_class
-#define WEIGHT_CLASS_TINY     1 //Usually items smaller then a human hand, (e.g. playing cards, lighter, scalpel, coins/holochips)
-#define WEIGHT_CLASS_SMALL    2 //Pockets can hold small and tiny items, (e.g. flashlight, multitool, grenades, GPS device)
-#define WEIGHT_CLASS_NORMAL   3 //Standard backpacks can carry tiny, small & normal items, (e.g. fire extinguisher, stun baton, gas mask, metal sheets)
-#define WEIGHT_CLASS_BULKY    4 //Items that can be weilded or equipped but not stored in an inventory, (e.g. defibrillator, backpack, space suits)
-#define WEIGHT_CLASS_HUGE     5 //Usually represents objects that require two hands to operate, (e.g. shotgun, two-handed melee weapons)
-#define WEIGHT_CLASS_GIGANTIC 6 //Essentially means it cannot be picked up or placed in an inventory, (e.g. mech parts, safe)
+/// Usually items smaller then a human hand, (e.g. playing cards, lighter, scalpel, coins/holochips)
+#define WEIGHT_CLASS_TINY 1
+/// Pockets can hold small and tiny items, (e.g. flashlight, multitool, grenades, GPS device)
+#define WEIGHT_CLASS_SMALL 2
+/// Standard backpacks can carry tiny, small & normal items, (e.g. fire extinguisher, stun baton, gas mask, metal sheets)
+#define WEIGHT_CLASS_NORMAL 3
+/// Items that can be weilded or equipped but not stored in an inventory, (e.g. defibrillator, backpack, space suits)
+#define WEIGHT_CLASS_BULKY 4
+/// Usually represents objects that require two hands to operate, (e.g. shotgun, two-handed melee weapons)
+#define WEIGHT_CLASS_HUGE 5
+/// Essentially means it cannot be picked up or placed in an inventory, (e.g. mech parts, safe)
+#define WEIGHT_CLASS_GIGANTIC 6
 
 //Inventory depth: limits how many nested storage items you can access directly.
 //1: stuff in mob, 2: stuff in backpack, 3: stuff in box in backpack, etc
@@ -21,24 +27,25 @@
 #define ITEM_SLOT_SHOES			(1<<3)
 #define ITEM_SLOT_GLOVES		(1<<4)
 #define ITEM_SLOT_RING			(1<<5)
-//#define ITEM_SLOT_MASK			(1<<6) Redefined twice, now we have a nazty azz empty bitflag 6 here cause it was using the def below by default
-#define ITEM_SLOT_MOUTH			(1<<7)
-#define ITEM_SLOT_HEAD			(1<<8)
-#define ITEM_SLOT_CLOAK			(1<<9)
-#define ITEM_SLOT_NECK			(1<<10)
-#define ITEM_SLOT_MASK			(1<<11)
-#define ITEM_SLOT_HANDS			(1<<12)
-#define ITEM_SLOT_BELT			(1<<13)
-#define ITEM_SLOT_BACK_R		(1<<14)
-#define ITEM_SLOT_BACK_L		(1<<15)
-#define ITEM_SLOT_INBACK		(1<<16)
-#define ITEM_SLOT_HIP			(1<<17)
-#define ITEM_SLOT_WRISTS		(1<<18)
-#define ITEM_SLOT_OCLOTHING		(1<<19)
-#define ITEM_SLOT_ICLOTHING		(1<<20)
-#define ITEM_SLOT_POCKET		(1<<21) // this is to allow items with a w_class of WEIGHT_CLASS_NORMAL or WEIGHT_CLASS_BULKY to fit in pockets.
-#define ITEM_SLOT_DENYPOCKET	(1<<22) // this is to deny items with a w_class of WEIGHT_CLASS_SMALL or WEIGHT_CLASS_TINY to fit in pockets.
-#define ITEM_SLOT_BACKPACK		(1<<23)
+#define ITEM_SLOT_MOUTH			(1<<6)
+#define ITEM_SLOT_HEAD			(1<<7)
+#define ITEM_SLOT_CLOAK			(1<<8)
+#define ITEM_SLOT_NECK			(1<<9)
+#define ITEM_SLOT_MASK			(1<<10)
+#define ITEM_SLOT_HANDS			(1<<11)
+#define ITEM_SLOT_BELT			(1<<12)
+#define ITEM_SLOT_BACK_R		(1<<13)
+#define ITEM_SLOT_BACK_L		(1<<14)
+
+#define ITEM_SLOT_INBACK		(1<<15)
+
+#define ITEM_SLOT_HIP			(1<<16)
+#define ITEM_SLOT_WRISTS		(1<<17)
+
+#define ITEM_SLOT_OCLOTHING		(1<<18)
+
+#define ITEM_SLOT_ICLOTHING		(1<<19)
+#define ITEM_SLOT_POCKET		(1<<20) // this is to allow items with a w_class of WEIGHT_CLASS_NORMAL or WEIGHT_CLASS_BULKY to fit in pockets.
 
 #define ITEM_SLOT_BACK			ITEM_SLOT_BACK_L | ITEM_SLOT_BACK_R
 

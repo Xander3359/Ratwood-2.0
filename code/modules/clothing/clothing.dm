@@ -613,7 +613,7 @@ BLIND     // can't see anything
 		return TRUE
 	if(slot_flags & ITEM_SLOT_HEAD)
 		return TRUE
-	if(slot_flags & (ITEM_SLOT_BACK | ITEM_SLOT_BACKPACK | ITEM_SLOT_BELT | ITEM_SLOT_HIP | ITEM_SLOT_CLOAK))
+	if(slot_flags & (ITEM_SLOT_BACK | ITEM_SLOT_BELT | ITEM_SLOT_HIP | ITEM_SLOT_CLOAK))
 		return FALSE
 	return TRUE
 

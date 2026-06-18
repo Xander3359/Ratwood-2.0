@@ -2,13 +2,13 @@
 	var/magic = FALSE
 	var/holy = FALSE
 	var/psychic = FALSE
-	var/allowed_slots = ~ITEM_SLOT_BACKPACK
+	var/allowed_slots
 	var/charges = INFINITY
 	var/blocks_self = TRUE
 	var/datum/callback/reaction
 	var/datum/callback/expire
 
-/datum/component/anti_magic/Initialize(_magic = FALSE, _holy = FALSE, _psychic = FALSE, _allowed_slots, _charges, _blocks_self = TRUE, datum/callback/_reaction, datum/callback/_expire)
+/datum/component/anti_magic/Initialize(_magic = FALSE, _holy = FALSE, _psychic = FALSE, allowed_slots, _charges, _blocks_self = TRUE, datum/callback/_reaction, datum/callback/_expire)
 	if(isitem(parent))
 		RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 		RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
@@ -20,8 +20,8 @@
 	magic = _magic
 	holy = _holy
 	psychic = _psychic
-	if(_allowed_slots)
-		allowed_slots = _allowed_slots
+	if(allowed_slots)
+		src.allowed_slots = allowed_slots
 	if(!isnull(_charges))
 		charges = _charges
 	blocks_self = _blocks_self

@@ -892,8 +892,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				if(!disable_warning)
 					to_chat(H, span_warning("I need a jumpsuit before you can attach this [I.name]!"))
 				return FALSE
-			if(I.slot_flags & ITEM_SLOT_DENYPOCKET)
-				return FALSE
 			if( I.w_class <= WEIGHT_CLASS_SMALL || (I.slot_flags & ITEM_SLOT_POCKET) )
 				return TRUE
 		if(SLOT_R_STORE)
@@ -907,8 +905,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(!H.wear_pants && !nojumpsuit && (!O || O.status != BODYPART_ROBOTIC))
 				if(!disable_warning)
 					to_chat(H, span_warning("I need a jumpsuit before you can attach this [I.name]!"))
-				return FALSE
-			if(I.slot_flags & ITEM_SLOT_DENYPOCKET)
 				return FALSE
 			if( I.w_class <= WEIGHT_CLASS_SMALL || (I.slot_flags & ITEM_SLOT_POCKET) )
 				return TRUE
