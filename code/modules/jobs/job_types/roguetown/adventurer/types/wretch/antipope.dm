@@ -11,6 +11,7 @@
 	allowed_races = RACES_ALL_KINDS //The Inhumen discriminate not.
 	outfit = /datum/outfit/job/roguetown/wretch/antipope
 	cmode_music = 'sound/music/combat_cult.ogg'
+	class_select_category = CLASS_CAT_CLERIC
 	category_tags = list(CTAG_WRETCH)
 //Seer to see other Inhumen.
 	traits_applied = list(TRAIT_HERETIC_SEER, TRAIT_RITUALIST, TRAIT_GRAVEROBBER, TRAIT_RESONANCE, TRAIT_OVERTHERETIC)
@@ -26,8 +27,7 @@
 		/datum/skill/misc/reading = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT, //For self-defence, no STR so can't grab well, only resist
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/staves = SKILL_LEVEL_EXPERT,
+		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/magic/holy = SKILL_LEVEL_MASTER, //You are Ascendants' chosen.
@@ -50,13 +50,19 @@
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/cloth/monk
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/monk
-	gloves = /obj/item/clothing/gloves/roguetown/bandages/weighted
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel/special
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backr = /obj/item/rogueweapon/woodstaff/quarterstaff
-	id = /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy
+	if(istype(H.patron, /datum/patron/inhumen/zizo))
+		id = /obj/item/clothing/neck/roguetown/psicross/inhumen/g
+	if(istype(H.patron, /datum/patron/inhumen/graggar))
+		id = /obj/item/clothing/neck/roguetown/psicross/inhumen/graggar
+	if(istype(H.patron, /datum/patron/inhumen/baotha))
+		id = /obj/item/clothing/neck/roguetown/psicross/inhumen/baotha
+	if(istype(H.patron, /datum/patron/inhumen/matthios))
+		id = /obj/item/clothing/neck/roguetown/psicross/inhumen/matthios
 	backpack_contents = list(
 		/obj/item/flashlight/flare/torch/lantern/prelit = 1,
 		/obj/item/rope/chain = 1,
@@ -66,17 +72,17 @@
 	)
 	if(H.age == AGE_OLD)
 		H.adjust_skillrank_up_to(/datum/skill/magic/holy, 6, TRUE)
-	if(istype (H.patron, /datum/patron/inhumen/zizo))
-		H.mind?.current.faction += "[H.name]_faction"
 
-	H.mind?.AddSpell(new /obj/effect/proc_holder/spell/invoked/convert_heretic)
-	H.mind?.AddSpell(new /obj/effect/proc_holder/spell/invoked/wound_heal)
-	H.mind?.AddSpell(new /obj/effect/proc_holder/spell/invoked/silence)//Shut that guy up!
-	H.mind?.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/nondetection)//For the purposes of meeting folks.
-	H.mind?.AddSpell(new /obj/effect/proc_holder/spell/self/message)//See above.
-	H.mind?.AddSpell(new /obj/effect/proc_holder/spell/invoked/evil_resurrect)//Sacrifice a heart to bring somebody back to life.
-	H.verbs |= /mob/living/carbon/human/proc/completesermon_evil
-	H.verbs |= /mob/living/carbon/human/proc/revelations
+	if(H.mind)
+		wretch_select_bounty(H)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/convert_heretic)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/wound_heal)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/silence)//Shut that guy up!
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/nondetection)//For the purposes of meeting folks.
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/message)//See above.
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/evil_resurrect)//Sacrifice a heart to bring somebody back to life.
+		H.verbs |= /mob/living/carbon/human/proc/completesermon_evil
+		H.verbs |= /mob/living/carbon/human/proc/revelations
 
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
 	C.grant_miracles(H, cleric_tier = CLERIC_T4, passive_gain = CLERIC_REGEN_MAJOR, start_maxed = TRUE)	//Starts off maxed out.
@@ -147,6 +153,11 @@
 			t0.Remove(t0_choice)
 			t0_count--
 
+	if(H.mind?.has_spell(/obj/effect/proc_holder/spell/invoked/raise_undead_formation/miracle))
+		H.mind?.current.faction += "[H.name]_faction"
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/command_undead)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/gravemark)
+
 /mob/living/carbon/human/proc/completesermon_evil()
 	set name = "Inhumen Sermon"
 	set category = "Antipope"
@@ -177,7 +188,7 @@
 		if (!H.patron)
 			continue
 		//We invert the sermon positives and negatives. Wild how that works.
-		if (istype(H.patron, /datum/patron/divine))
+		if (istype(H.patron, /datum/patron/divine) && !HAS_TRAIT(H, TRAIT_HERESIARCH)) //Tennite Wretches won't be affected for the sake of convenience.
 			H.apply_status_effect(/datum/status_effect/debuff/hereticsermon)
 			H.add_stress(/datum/stressevent/heretic_on_sermon)
 			to_chat(H, span_warning("Your patron seethes with disapproval."))
@@ -208,8 +219,8 @@
 	if (!H.restrained())
 		to_chat(src, span_warning ("My victim needs to be restrained in order to do this!"))
 		return
-	if(!istype(S, /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy))
-		to_chat(src, span_warning("I need to be holding a zcross to extract this divination!"))
+	if(!istype(S, /obj/item/clothing/neck/roguetown/psicross/inhumen/))
+		to_chat(src, span_warning("I need to be holding an inhumen amulet to extract this divination!"))
 		return
 	for(var/obj/structure/fluff/psycross/zizocross/N in oview(5, src))
 		found = N
@@ -223,7 +234,7 @@
 			"ARE YOU FAITHFUL!?",
 			"WHO IS YOUR SHEPHERD!?",
 		)
-		src.visible_message(span_warning("[src] shoves the decrepit zcross into [H]'s lux!"))
+		src.visible_message(span_warning("[src] shoves [S] into [H]'s lux!"))
 		say(pick(faith_lines), spans = list("torture"))
 		H.emote("agony", forced = TRUE)
 

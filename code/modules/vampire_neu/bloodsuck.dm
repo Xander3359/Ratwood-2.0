@@ -58,6 +58,8 @@
 			var/mob/living/carbon/human/H = src
 			H.adjust_nutrition(35)
 			H.adjust_hydration(35)
+			if(H.reagents)
+				H.reagents.add_reagent(/datum/reagent/medicine/vital_essence, 12)
 			if(H.blood_volume < BLOOD_VOLUME_NORMAL)
 				H.blood_volume = min(H.blood_volume + 35, BLOOD_VOLUME_NORMAL)
 		return
@@ -142,6 +144,9 @@
 		return
 
 	if(sire.stat == DEAD) // If you accept the prompt as a corpse, you get turned into a corpse vampire, which RR's you pretty much
+		return FALSE
+
+	if(HAS_TRAIT_FROM(sire, TRAIT_UNLYCKERABLE, REF(src))) // Cannot turn Gnolls to Sires
 		return FALSE
 
 	fully_heal(TRUE, FALSE)

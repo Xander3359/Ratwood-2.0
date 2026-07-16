@@ -121,9 +121,14 @@
 	rmb_intent.update_icon()
 
 	bloods = new /atom/movable/screen/healths/blood
-	bloods.hud = src
+	claim_screen(bloods)
 	bloods.screen_loc = rogueui_blood
 	static_inventory += bloods
+
+	temperature = new /atom/movable/screen/temperature()
+	temperature.hud = src
+	temperature.screen_loc = rogueui_temperature
+	infodisplay += temperature
 
 	quad_intents = new /atom/movable/screen/quad_intents
 	quad_intents.hud = src
@@ -148,6 +153,10 @@
 	hsover =  new /atom/movable/screen/heatstamover()
 	hsover.hud = src
 	static_inventory += hsover
+
+	tempover =  new /atom/movable/screen/tempbase()
+	tempover.hud = src
+	static_inventory += tempover
 
 	fov = new /atom/movable/screen/fov()
 	fov.hud = src
@@ -397,20 +406,16 @@
 	infodisplay += healthdoll
 */
 	zone_select =  new /atom/movable/screen/zone_sel()
-	zone_select.icon = 'icons/mob/roguehud64.dmi'
 	zone_select.screen_loc = rogueui_targetdoll
-	zone_select.update_icon()
-	zone_select.hud = src
+	claim_screen(zone_select)
+	zone_select.update_zone_layers()
 	static_inventory += zone_select
-
-	zone_select.update_icon()
 
 	stamina = new /atom/movable/screen/stamina()
 	infodisplay += stamina
 
 	energy = new /atom/movable/screen/energy()
 	infodisplay += energy
-
 	for(var/atom/movable/screen/inventory/inv in (static_inventory + toggleable_inventory))
 		if(inv.slot_id)
 			inv.hud = src
@@ -631,12 +636,6 @@
 
 	devilsouldisplay = new /atom/movable/screen/devil/soul_counter
 	infodisplay += devilsouldisplay
-
-	zone_select =  new /atom/movable/screen/zone_sel()
-	zone_select.icon = ui_style
-	zone_select.hud = src
-	zone_select.update_icon()
-	static_inventory += zone_select
 
 	for(var/atom/movable/screen/inventory/inv in (static_inventory + toggleable_inventory))
 		if(inv.slot_id)

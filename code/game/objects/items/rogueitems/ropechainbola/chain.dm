@@ -28,3 +28,5 @@
 	sewrepair = FALSE
 	anvilrepair = /datum/skill/craft/blacksmithing
 	resistance_flags = FIRE_PROOF
+	nudist_approved = TRUE
+	dropshrink = null

@@ -14,17 +14,8 @@
 	if(stat != DEAD && bleed_rate)
 		to_chat(src, span_warning("The blood soaks through my bandage."))
 
-/mob/living/carbon/monkey/handle_blood()
-	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
-		return
-	//Blood regeneration if there is some space
-	if(blood_volume < BLOOD_VOLUME_NORMAL)
-		blood_volume += 0.1 // regenerate blood VERY slowly
-		if((blood_volume < BLOOD_VOLUME_OKAY) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
-			adjustOxyLoss(round((BLOOD_VOLUME_NORMAL - blood_volume) * 0.02, 1))
-
 /mob/living/proc/handle_blood()
-	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
+	if(HAS_TRAIT(src, TRAIT_HUSK)) //husked people do not pump the blood.
 		return
 
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
@@ -79,7 +70,7 @@
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/handle_blood()
-	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
+	if(HAS_TRAIT(src, TRAIT_HUSK)) //husked people do not pump the blood.
 		return
 
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
@@ -212,6 +203,9 @@
 	if(!iscarbon(src) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
 
+	if(bodytemperature <= TCRYO) //cold blood is viscous, bleeds slower
+		amt *= 0.5
+
 	//For each CON above 10, we bleed slower.
 	//Consequently, for each CON under 10 we bleed faster.
 	var/conbonus = 1
@@ -232,7 +226,7 @@
 	if (old_volume > 0 && !blood_volume) // it looks like we've just bled out. bummer.
 		to_chat(src, span_userdanger("The last of your lyfeblood ebbs from your ravaged body and soaks the cold earth below..."))
 	record_round_statistic(STATS_BLOOD_SPILT, amt)
-	if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
+	if(isturf(src.loc))
 		add_drip_floor(src.loc, amt)
 	var/vol2use
 	if(amt > 1)
@@ -337,10 +331,6 @@
 
 /mob/living/simple_animal/get_blood_id()
 	if(blood_volume)
-		return /datum/reagent/blood
-
-/mob/living/carbon/monkey/get_blood_id()
-	if(!(HAS_TRAIT(src, TRAIT_HUSK)))
 		return /datum/reagent/blood
 
 /mob/living/carbon/human/get_blood_id()
@@ -451,6 +441,12 @@
 		else
 			new /obj/effect/decal/cleanable/blood/drip(T)
 
+//OV edit
+/mob/living/carbon/human/add_drip_floor(turf/T, amt)
+	if(!(NOBLOOD in dna.species.species_traits) && !(INVISBLOOD in dna.species.species_traits))
+		..()
+//OV edit end
+
 /mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
-	if(!(NOBLOOD in dna.species.species_traits))
+	if(!(NOBLOOD in dna.species.species_traits) && !(INVISBLOOD in dna.species.species_traits)) //OV EDIT
 		..()

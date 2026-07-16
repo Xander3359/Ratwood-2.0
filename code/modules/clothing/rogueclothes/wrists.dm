@@ -42,19 +42,27 @@
 	sewrepair = FALSE
 	smeltresult = /obj/item/ingot/steel
 
+/obj/item/clothing/wrists/roguetown/bracers/ancient
+	name = "ancient bracers"
+	desc = "Polished gilbranze cuffings, clasped around the wrists. Through ascension, the chains of mortality are broken; and only through death will the spirit be ready to embrace divinity."
+	icon_state = "ancientbracers"
+	smeltresult = /obj/item/ingot/aaslag
+
+/obj/item/clothing/wrists/roguetown/bracers/ancient/decrepit
+	name = "decrepit bracers"
+	desc = "Frayed bronze cuffings, bound across the wrists. Don't bother counting the tallies left behind by their former legionnaires; none of them ever returned from the battlefields."
+	max_integrity = ARMOR_INT_SIDE_DECREPIT
+	color = "#bb9696"
+	anvilrepair = null
+
 /obj/item/clothing/wrists/roguetown/bracers/psythorns
 	name = "psydonic thorns"
 	desc = "Thorns fashioned from pliable yet durable blacksteel - woven and interlinked, fashioned to be wrapped around the wrists."
-	body_parts_covered = ARMS
 	icon_state = "psybarbs"
 	item_state = "psybarbs"
 	armor = ARMOR_PLATE_BSTEEL
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
-	blocksound = PLATEHIT
-	resistance_flags = FIRE_PROOF
 	max_integrity = ARMOR_INT_SIDE_BLACKSTEEL
-	anvilrepair = /datum/skill/craft/armorsmithing
-	sewrepair = FALSE
 	alternate_worn_layer = WRISTS_LAYER
 
 /obj/item/clothing/wrists/roguetown/bracers/psythorns/equipped(mob/user, slot)
@@ -79,21 +87,6 @@
 		user.visible_message(span_warning("[user] stops reshaping [src]."))
 		return
 
-/obj/item/clothing/wrists/roguetown/bracers/aalloy
-	name = "decrepit bracers"
-	desc = "Frayed bronze cuffings, bound across the wrists. Don't bother counting the tallies left behind by their former legionnaires; none of them ever returned from the battlefields."
-	max_integrity = ARMOR_INT_SIDE_DECREPIT
-	icon_state = "ancientbracers"
-	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
-	anvilrepair = null
-
-/obj/item/clothing/wrists/roguetown/bracers/paalloy
-	name = "ancient bracers"
-	desc = "Polished gilbranze cuffings, clasped around the wrists. Through ascension, the chains of mortality are broken; and only through death will the spirit be ready to embrace divinity."
-	icon_state = "ancientbracers"
-	smeltresult = /obj/item/ingot/aaslag
-
 /obj/item/clothing/wrists/roguetown/bracers/leather
 	name = "leather bracers"
 	desc = "Standard leather bracers that offer some meager protection for the arms."
@@ -103,15 +96,19 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
+	equip_sound = 'sound/foley/equip/rummaging-01.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
 	smeltresult = null
 	sewrepair = TRUE
 	smeltresult = null
+	dropshrink = null
 	salvage_amount = 0 // sry
 	salvage_result = /obj/item/natural/hide/cured
 	color = "#684338"
+	cold_protection = ARM_LEFT | ARM_RIGHT
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/wrists/roguetown/bracers/leather/heavy
 	name = "hardened leather bracers"
@@ -124,6 +121,9 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
 	color = "#4d4d4d"
+	cold_protection =  ARM_RIGHT | ARM_LEFT
+	min_cold_protection_temperature = 50
+	dropshrink = 0.8
 
 /obj/item/clothing/wrists/roguetown/bracers/copper
 	name = "copper bracers"
@@ -138,14 +138,14 @@
 	slot_flags = ITEM_SLOT_WRISTS
 	icon_state = "wrappings"
 	item_state = "wrappings"
-	sewrepair = TRUE
+	nudist_approved = TRUE
 
 /obj/item/clothing/wrists/roguetown/nocwrappings
 	name = "moon wrappings"
 	slot_flags = ITEM_SLOT_WRISTS
 	icon_state = "nocwrappings"
 	item_state = "nocwrappings"
-	sewrepair = TRUE
+	nudist_approved = TRUE
 
 /obj/item/clothing/wrists/roguetown/allwrappings
 	name = "wrappings"
@@ -153,7 +153,7 @@
 	slot_flags = ITEM_SLOT_WRISTS
 	icon_state = "nocwrappings" //Greyscale. Accessable in the loadout.
 	item_state = "nocwrappings"
-	sewrepair = TRUE
+	nudist_approved = TRUE
 
 /obj/item/clothing/wrists/roguetown/bracers/cloth
 	name = "cloth bracers"
@@ -168,16 +168,20 @@
 	blocksound = SOFTHIT
 	anvilrepair = null
 	sewrepair = TRUE
+	cold_protection = ARM_LEFT | ARM_RIGHT
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/wrists/roguetown/bracers/cloth/monk
 	name = "monk's wrappings"
 	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. Taut fibers turn weeping gashes into mere tears along the cloth, allowing for Monks to more confidently parry blades with their bare hands."
 	color = "#BFB8A9"
+	nudist_approved = TRUE
 
 /obj/item/clothing/wrists/roguetown/bracers/cloth/naledi
 	name = "sojourner's wrappings"
 	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. Naledian-trained monks rarely share the same fatalistic mindset as their Otavan cousins, and - consequency - tend to be averse with binding their wrists in jagged thorns. Unbloodied fingers tend to work far better with the arcyne, too. </br>'..And so, the great tears that they wept when it took it's last breath, the rain of the Weeper, is what marked this era of silence. Fools would tell you that Psydon has died, that they splintered into ‘ten smaller fragments', but that does not make sense. They are everything within and without, they are beyond size and shape. How can everything become something? No, they have merely turned their ear from us. They mourn, for their greatest child and their worst..'"
 	color = "#48443B"
+	nudist_approved = TRUE
 
 //Queensleeves
 /obj/item/clothing/wrists/roguetown/royalsleeves
@@ -236,14 +240,8 @@
 	icon_state = "ironsplintarms"
 	item_state = "ironsplintarms"
 	armor = ARMOR_LEATHER_STUDDED //not plate armor, is leather + iron bits
-	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT)
-	blocksound = SOFTHIT
 	max_integrity = ARMOR_INT_SIDE_LEATHER
-	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
-	w_class = WEIGHT_CLASS_NORMAL
-	resistance_flags = FIRE_PROOF
-	sewrepair = FALSE
 
 /obj/item/clothing/wrists/roguetown/bracers/iron
 	name = "iron bracers"
@@ -265,6 +263,7 @@
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	smeltresult = null
+
 /obj/item/clothing/wrists/roguetown/gem
 	name = "gem bracelet base"
 	desc = "You shouldn't be seeing this."
@@ -273,6 +272,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gembracelet.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_gembracelet.dmi'
 	salvage_result = null
+	sewrepair = FALSE
 
 /obj/item/clothing/wrists/roguetown/gem/jadebracelet
 	name = "jade bracelets"
@@ -315,6 +315,13 @@
 	desc = "A set of bracelets carved out of rosestone."
 	icon_state = "br_rose"
 	sellprice = 30
+
+/obj/item/clothing/wrists/roguetown/gem/chitinbracelet
+	name = "chitin bracelets"
+	desc = "A set of bracelets carved out of beetle chitin."
+	icon_state = "br_shell"
+	color = "#7B8C5E"
+	sellprice = 25
 
 /obj/item/clothing/wrists/roguetown/gem/opalbracelet
 	name = "opal bracelets"

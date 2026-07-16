@@ -141,6 +141,7 @@
 	buckle_lying = FALSE
 	var/datum/component/riding/D = LoadComponent(/datum/component/riding)
 	D.set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(0, 8), TEXT_SOUTH = list(0, 8), TEXT_EAST = list(-2, 8), TEXT_WEST = list(2, 8)))
+	D.set_riding_offsets(2, list(TEXT_NORTH = list(0, 0), TEXT_SOUTH = list(0, 16), TEXT_EAST = list(-10, 8), TEXT_WEST = list(10, 8)))
 	D.set_vehicle_dir_layer(SOUTH, ABOVE_MOB_LAYER)
 	D.set_vehicle_dir_layer(NORTH, OBJ_LAYER)
 	D.set_vehicle_dir_layer(EAST, OBJ_LAYER)
@@ -291,7 +292,7 @@
 	return ..()
 
 /mob/living/simple_animal/chicken/attackby(obj/item/O, mob/user, params)
-	if(is_type_in_list(O, food_type)) //feedin' dem chickens
+	if(food_typecache?[O.type]) //feedin' dem chickens
 		if(!stat && eggsleft < 8)
 			var/feedmsg = "[user] feeds [O] to [name]! [pick(feedMessages)]"
 			user.visible_message(feedmsg)

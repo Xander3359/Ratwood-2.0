@@ -333,7 +333,7 @@
 		qdel(src)
 		return
 
-	zombie.can_do_sex = FALSE	//no fuck off
+	
 
 	zombie.blood_volume = BLOOD_VOLUME_NORMAL
 	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE)
@@ -429,6 +429,8 @@
 		return
 	if(mind.has_antag_datum(/datum/antagonist/skeleton))
 		return
+	if(mind.has_antag_datum(/datum/antagonist/gnoll))
+		return FALSE
 	if(HAS_TRAIT(src, TRAIT_ZOMBIE_IMMUNE))
 		return
 	return mind.add_antag_datum(/datum/antagonist/zombie)

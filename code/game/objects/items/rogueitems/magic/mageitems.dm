@@ -256,6 +256,7 @@
 	desc = "A small mimic, imbued with the arcane to make it docile. It can transform into most things it touchs. "
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "mimic_trinket"
+	dropshrink = 0.6
 	possible_item_intents = list(/datum/intent/use)
 	var/duration = 10 MINUTES
 	var/oldicon
@@ -510,7 +511,6 @@
 		return FALSE
 	if(ckey) //player
 		src.ckey = ckey
-
 	to_chat(src, span_userdanger("My summoner is [master.real_name]. They will need to convince me to obey them."))
 	to_chat(src, span_notice("[summon_primer]"))
 

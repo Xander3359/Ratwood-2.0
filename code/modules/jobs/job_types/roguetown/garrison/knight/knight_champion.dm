@@ -9,7 +9,7 @@
 	category_tags = list(CTAG_ROYALGUARD)
 	subclass_stats = list(
 		STATKEY_STR = 1,
-		STATKEY_INT = 1,
+		STATKEY_INT = 3,
 		STATKEY_WIL = 2,
 		STATKEY_SPD = 2,
 	)
@@ -30,6 +30,11 @@
 		/datum/skill/misc/tracking = SKILL_LEVEL_APPRENTICE,
 	)
 
+	extra_context = "This class is restricted from using the Equestrian virtue."
+
+	virtue_restrictions = list(
+		/datum/virtue/utility/riding
+	)
 
 /datum/outfit/job/roguetown/knight/irregularknight/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -86,7 +91,7 @@
 
 		var/helmets = list(
 			"Pigface Bascinet" 	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface,
-			"Guard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
+			"Savoyard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
 			"Barred Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/sheriff,
 			"Bucket Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/bucket,
 			"Knight Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/knight,
@@ -95,6 +100,7 @@
 			"Hounskull Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/hounskull,
 			"Etruscan Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan,
 			"Slitted Kettle" = /obj/item/clothing/head/roguetown/helmet/heavy/knight/skettle,
+			"Froggemund Helmet"	= /obj/item/clothing/head/roguetown/helmet/heavy/frogmouth,
 			"None"
 		)
 
@@ -106,3 +112,6 @@
 		/obj/item/rope/chain = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1
 	)
+	
+	if (H.mind)
+		H.AddSpell(new /obj/effect/proc_holder/spell/self/choose_riding_virtue_mount)

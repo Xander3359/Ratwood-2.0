@@ -110,6 +110,8 @@
 	name = "tinker suit"
 	desc = "Typical fashion of the best engineers."
 	icon_state = "artishirt"
+	cold_protection = CHEST | ARM_RIGHT | ARM_LEFT
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/lowcut
 	name = "low cut tunic"
@@ -124,6 +126,8 @@
 	r_sleeve_status = SLEEVE_TORN
 	l_sleeve_status = SLEEVE_TORN
 	body_parts_covered = CHEST|VITALS
+	heat_protection = CHEST | ARM_RIGHT | ARM_LEFT
+	max_heat_protection_temperature = BODYTEMP_HEAT_LEVEL_ONE_MAX
 
 /obj/item/clothing/suit/roguetown/shirt/shadowshirt/elflock
 	allowed_race = NON_DWARVEN_RACE_TYPES
@@ -236,6 +240,8 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	cold_protection = CHEST | ARM_RIGHT | ARM_LEFT
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 //Is this terrible, yes, but at this point ehhhhhhhh.
 /obj/item/clothing/suit/roguetown/shirt/dress/royal/hand_m
@@ -294,6 +300,8 @@
 	detail_color = "#e395bb"
 	salvage_result = /obj/item/natural/silk
 	salvage_amount = 2
+	heat_protection = CHEST | ARM_RIGHT | ARM_LEFT
+	max_heat_protection_temperature = BODYTEMP_HEAT_LEVEL_ONE_MAX
 
 /obj/item/clothing/suit/roguetown/shirt/dress/gown/fallgown
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
@@ -312,6 +320,8 @@
 	detail_color = "#45749d"
 	salvage_result = /obj/item/natural/silk
 	salvage_amount = 2
+	cold_protection = CHEST | ARM_RIGHT | ARM_LEFT
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 	icon_state = "sailorblues"
@@ -367,6 +377,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	flags_inv = HIDECROTCH|HIDEBOOB
+	dropshrink = null
 
 /obj/item/clothing/suit/roguetown/shirt/tribalrag
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
@@ -379,9 +390,10 @@
 	l_sleeve_status = SLEEVE_NORMAL
 	salvage_result = /obj/item/natural/hide
 	salvage_amount = 1
+	dropshrink = null
 
 /obj/item/clothing/suit/roguetown/shirt/robe/archivist
-	name = "archivist's robe"
+	name = "scholar's robe"
 	desc = "Robes belonging to seekers of knowledge."
 	icon_state = "archivist"
 	icon = 'icons/roguetown/clothing/shirts.dmi'
@@ -405,6 +417,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	flags_inv = HIDECROTCH|HIDEBOOB
+	dropshrink = null
 
 /obj/item/clothing/suit/roguetown/shirt/tunic/green
 	color = CLOTHING_GREEN
@@ -441,6 +454,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	flags_inv = HIDECROTCH|HIDEBOOB
+	dropshrink = null
 
 /obj/item/clothing/suit/roguetown/shirt/dress/gen
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
@@ -475,6 +489,9 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 	salvage_result = /obj/item/natural/silk
 	salvage_amount = 2
+	heat_protection = CHEST | ARM_RIGHT | ARM_LEFT
+	max_heat_protection_temperature = BODYTEMP_HEAT_LEVEL_ONE_MAX
+	dropshrink = null
 
 /obj/item/clothing/suit/roguetown/shirt/dress/silkdress/princess
 	color = CLOTHING_WHITE
@@ -515,6 +532,16 @@
 
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy/black/Initialize(mapload)
 	. = ..()
+	color = CLOTHING_BLACK
+
+/obj/item/clothing/suit/roguetown/shirt/dress/slit
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	name = "slitted dress"
+	desc = "A finely sewn dress with a slit to expose the thigh, how scandalous!"
+	icon_state = "slitdress"
+	item_state = "slitdress"
+	r_sleeve_status = SLEEVE_NOMOD
+	l_sleeve_status = SLEEVE_NOMOD
 	color = CLOTHING_BLACK
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/webs
@@ -608,11 +635,11 @@
 	icon_state = "exoticsilkbra"
 	item_state = "exoticsilkbra"
 	body_parts_covered = CHEST
-	sewrepair = TRUE
 	flags_inv = null
 	slot_flags = ITEM_SLOT_SHIRT
 	salvage_result = /obj/item/natural/silk
 	salvage_amount = 2
+	dropshrink = null
 
 //................ Noble Dress ............... //
 /obj/item/clothing/suit/roguetown/shirt/dress/noble
@@ -660,6 +687,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	icon_state = "velvetdress"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
+	dropshrink = 0.9
 
 //Servant Clothing:
 //................ Maid Dress   ............... //

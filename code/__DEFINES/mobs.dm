@@ -29,6 +29,10 @@
 #define MOVE_INTENT_RUN  "run"
 #define MOVE_INTENT_SNEAK "sneak"
 
+//time of day bitflags for mobs
+#define TIME_OF_DAY_BIT_DAY		(1 << 0)
+#define TIME_OF_DAY_BIT_NIGHT	(1 << 1)
+
 //resist
 #define RESIST_INTENT 0
 #define SUBMIT_INTENT 1
@@ -42,7 +46,7 @@
 #define BLOOD_VOLUME_BAD 224
 #define BLOOD_VOLUME_SURVIVE 122
 
-/// Blood pool regeneration in non-vampiric living mobs per SSmobs tick. 
+/// Blood pool regeneration in non-vampiric living mobs per SSmobs tick.
 #define BLOODPOL_REGEN 2
 
 //Sizes of mobs, used by mob/living/var/mob_size
@@ -89,8 +93,6 @@
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 #define DEFAULT_BODYPART_ICON_ROBOTIC 'icons/mob/augmentation/augments.dmi'
 
-#define MONKEY_BODYPART "monkey"
-#define DEVIL_BODYPART "devil"
 /*see __DEFINES/inventory.dm for bodypart bitflag defines*/
 
 // Health/damage defines for carbon mobs
@@ -285,14 +287,6 @@
 #define INCORPOREAL_MOVE_BASIC 1
 #define INCORPOREAL_MOVE_SHADOW 2 // leaves a trail of shadows
 #define INCORPOREAL_MOVE_JAUNT 3 // is blocked by holy water/salt
-
-//Secbot and ED209 judgement criteria bitflag values
-#define JUDGE_EMAGGED		(1<<0)
-#define JUDGE_IDCHECK		(1<<1)
-#define JUDGE_WEAPONCHECK	(1<<2)
-#define JUDGE_RECORDCHECK	(1<<3)
-//ED209's ignore monkeys
-#define JUDGE_IGNOREMONKEYS	(1<<4)
 
 #define MEGAFAUNA_DEFAULT_RECOVERY_TIME 5
 
@@ -494,6 +488,7 @@
 
 //AASIMAR SKIN TONES
 #define SKIN_COLOR_CULTOR "b5a4a4"
+#define SKIN_COLOR_ARCHON "feddcd"
 #define SKIN_COLOR_SPIRITUS "f0eded"
 #define SKIN_COLOR_PLANETAR "ffd859"
 #define SKIN_COLOR_DEVA "b6f1f2"

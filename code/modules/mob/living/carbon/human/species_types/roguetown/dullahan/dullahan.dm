@@ -71,6 +71,7 @@
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
+		/datum/customizer/bodypart_feature/legwear,
 		/datum/customizer/organ/snout/anthro/dullahan,
 		/datum/customizer/organ/horns/demihuman,
 		/datum/customizer/organ/wings/anthro,
@@ -101,6 +102,12 @@
 		/datum/body_marking/bangs,
 		/datum/body_marking/bun,
 		/datum/body_marking/plain,
+		/datum/body_marking/womb_tattoo,
+		/datum/body_marking/butterfly,
+		/datum/body_marking/waist,
+		/datum/body_marking/diagonal_eyes,
+		/datum/body_marking/wide_eyes,
+		/datum/body_marking/stripes,
 	)
 	descriptor_choices = list(
 		/datum/descriptor_choice/trait,

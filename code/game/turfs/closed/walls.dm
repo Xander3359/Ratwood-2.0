@@ -119,10 +119,6 @@
 	if(!QDELETED(src) && !density)
 		..()
 
-/turf/closed/wall/attack_paw(mob/living/user)
-	user.changeNext_move(CLICK_CD_MELEE)
-	return attack_hand(user)
-
 
 /turf/closed/wall/attack_animal(mob/living/simple_animal/M)
 	M.changeNext_move(CLICK_CD_MELEE)
@@ -137,7 +133,8 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	feel_turf(user)
+	if(locate(/obj/structure/lever/hidden, src))
+		feel_turf(user)
 	playsound(src, 'sound/blank.ogg', 25, TRUE)
 	add_fingerprint(user)
 

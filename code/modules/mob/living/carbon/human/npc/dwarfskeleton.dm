@@ -56,6 +56,7 @@ GLOBAL_LIST_INIT(dwarfskeleton_aggro, world.file2list("strings/rt/dskeletonaggro
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_EXTREME_TEMPERATURE_IMMUNE, TRAIT_GENERIC)
 	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
 		eyes.Remove(src,1)
@@ -182,9 +183,9 @@ GLOBAL_LIST_INIT(dwarfskeleton_aggro, world.file2list("strings/rt/dskeletonaggro
 // 	belt = /obj/item/storage/belt/rogue/leather/rope
 // 	neck = /obj/item/clothing/neck/roguetown/collar/leather
 // 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-// 	r_hand = /obj/item/rogueweapon/pick/aalloy
+// 	r_hand = /obj/item/rogueweapon/pick/decrepit
 // 	if(prob(20))
-// 		r_hand = /obj/item/rogueweapon/shovel/aalloy
+// 		r_hand = /obj/item/rogueweapon/shovel/decrepit
 
 // 	H.STASTR = 12
 // 	H.STASPD = 11

@@ -325,22 +325,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(usr, "<font color='red'>There is no active key like that in the game or the person is not currently a ghost.</font>")
 		return
 
-	if(G_found.mind && !G_found.mind.active)	//mind isn't currently in use by someone/something
-
-		//check if they were a monkey
-		if(findtext(G_found.real_name,"monkey"))
-			if(alert("This character appears to have been a monkey. Would you like to respawn them as such?",,"Yes","No")=="Yes")
-				var/mob/living/carbon/monkey/new_monkey = new
-				SSjob.SendToLateJoin(new_monkey)
-				G_found.mind.transfer_to(new_monkey)	//be careful when doing stuff like this! I've already checked the mind isn't in use
-				new_monkey.key = G_found.key
-				to_chat(new_monkey, "You have been fully respawned. Enjoy the game.")
-				var/msg = span_adminnotice("[key_name_admin(usr)] has respawned [new_monkey.key] as a filthy xeno.")
-				message_admins(msg)
-				admin_ticket_log(new_monkey, msg)
-				return	//all done. The ghost is auto-deleted
-
-
 	//Ok, it's not a xeno or a monkey. So, spawn a human.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
 	SSjob.SendToLateJoin(new_character)
@@ -420,8 +404,52 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	log_admin("[key_name(usr)] healed / revived [key_name(M)]")
 	var/msg = span_danger("Admin [key_name_admin(usr)] healed / revived [ADMIN_LOOKUPFLW(M)]!")
 	message_admins(msg)
-	admin_ticket_log(M, msg)
+	// Friendlier ticket-log line for the player
+	admin_ticket_log(M, "<font color='green'>[key_name_admin(usr)] has fully healed you in relation to this ticket.</font>")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Rejuvinate") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/admin_spawn_cake(mob/living/M in GLOB.mob_list)
+	set category = "-GameMaster-"
+	set name = "Give Cake Slice"
+
+	if(!check_rights(R_ADMIN))
+		return
+	if(!M)
+		return
+
+	var/turf/T = get_turf(M)
+	if(!T)
+		return
+
+	var/list/cake_types = list(
+		/obj/item/reagent_containers/food/snacks/rogue/cakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/frostedcakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/applecakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/applenutcakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/berrycakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/blackberrycakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/carrotcakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/lemoncakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/limecakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/menthacakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/peacecakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/raspberrycakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/rocknutcakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/strawberrycakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/tangerinecakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/hcakeslice,
+		/obj/item/reagent_containers/food/snacks/rogue/ccakeslice,
+	)
+	var/cake_type = pick(cake_types)
+	new cake_type(T)
+
+	log_admin("[key_name(usr)] gave a cake slice ([cake_type]) to [key_name(M)].")
+	var/msg = span_adminnotice("[key_name_admin(usr)] gave a cake slice to [ADMIN_LOOKUPFLW(M)].")
+	message_admins(msg)
+	// Tell the player (and ticket) in a friendly way
+	to_chat(M, span_notice("[key_name_admin(usr)] has given you a cake slice. How nice!"))
+	admin_ticket_log(M, "<font color='green'>[key_name_admin(usr)] has given you a cake slice. How nice!</font>")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Give Cake Slice") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_create_centcom_report()
 	set category = "-Server-"
@@ -830,7 +858,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			humie.add_stress(/datum/stressevent/maniac_woke_up)
 			to_chat(humie, span_deadsay("<span class='reallybig'>... WHERE AM I? ...</span>"))
 			var/static/list/slop_lore = list(
-				span_deadsay("... Rotwood Vale? No ... It doesn't exist ..."),
+				span_deadsay("... Rockhill? No ... It doesn't exist ..."),
 				span_deadsay("... My name is Trey. Trey Liam, Liamtific Troverseer ..."),
 				span_deadsay("... I'm on NT Liam, a self Treystaining ship, used to Treyserve what Liamains of roguemanity ..."),
 				span_deadsay("... Launched into the Grim Darkness, War and Grim Darkness preserves their grimness ... Their edge ..."),

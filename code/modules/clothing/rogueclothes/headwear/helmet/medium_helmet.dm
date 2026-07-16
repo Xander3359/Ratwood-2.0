@@ -17,6 +17,7 @@
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
+	sewrepair = FALSE
 	blocksound = PLATEHIT
 	max_integrity = ARMOR_INT_HELMET_STEEL
 	grid_height = 64
@@ -75,6 +76,7 @@
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 	body_parts_covered = HEAD|HAIR
+	dropshrink = null
 
 /obj/item/clothing/head/roguetown/helmet/kettle
 	name = "kettle helmet"
@@ -89,6 +91,19 @@
 	icon_state = "ikettle"
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_HELMET_IRON
+
+/obj/item/clothing/head/roguetown/helmet/kettle/ancient
+	name = "ancient kettle helmet"
+	desc = "A polished gilbranze helmet which protects the top and sides of the head. ZIZO's glare musn't be interceded when matters of unholy war are at hand. Undead ballistaemen practice a curious method of tying dyed cloth around its rim; can they, too, think and associate?"
+	icon_state = "ancientkettle"
+	smeltresult = /obj/item/ingot/aaslag
+
+/obj/item/clothing/head/roguetown/helmet/kettle/ancient/decrepit
+	name = "decrepit kettle helmet"
+	desc = "A frayed, bronze helmet which protects the top and sides of the head. Atop a resurrected levyman's scalp, it's a sign that forces-most-foul are soon to besiege; and atop a fleshless ballistaeman's skull, it's a sign that you should probably duck."
+	max_integrity = ARMOR_INT_HELMET_DECREPIT
+	color = "#bb9696"
+	anvilrepair = null
 
 /obj/item/clothing/head/roguetown/helmet/kettle/wide
 	name = "wide kettle helmet"
@@ -230,7 +245,7 @@
 	item_state = "bascinet_novisor"
 	color = COLOR_ASSEMBLY_GOLD
 
-/obj/item/clothing/head/roguetown/helmet/sallet/raneshen
+/obj/item/clothing/head/roguetown/helmet/sallet/zyb
 	name = "kulah khud"
 	desc = "A sturdy, conical helm that has served the Empire well throughout its many campaigns. It's a sight to see, thousands of these bobbing as an army marches. The only greater humiliation than losing it is losing one's medallion."
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
@@ -281,16 +296,29 @@
 	dynamic_hair_suffix = ""
 	edelay_type = 1
 	adjustable = CAN_CADJUST
+	resistance_flags = FIRE_PROOF
 	toggle_icon_state = TRUE
 	max_integrity = 200
 
 /obj/item/clothing/head/roguetown/roguehood/warden/antler
 	name = "warden's antlered hood"
-	desc = "A hunter's leather hood with two linen layers, sewn larger than usual tooo accommodate a helmet, and fitted with the large horns of an elder saiga."
+	desc = "A hunter's leather hood with two linen layers, sewn larger than usual to accommodate a helmet, and fitted with the large horns of an elder saiga."
 	icon_state = "wardenhoodalt"
 	item_state = "wardenhoodalt"
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden64.dmi'
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	bloody_icon = 'icons/effects/blood64.dmi'
+
+/obj/item/clothing/head/roguetown/helmet/sallet/beastskull
+	name = "beast skull"
+	desc = "The skull of a horned beast, carved and fashioned into a helmet. An steel skull cap has been inserted on the inside."
+	icon_state = "marauder_head"
+	body_parts_covered = HEAD|EARS|HAIR
+	max_integrity = ARMOR_INT_HELMET_STEEL + 50
+	smeltresult = /obj/item/ingot/steel
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 	bloody_icon = 'icons/effects/blood64.dmi'
@@ -523,7 +551,7 @@
 // Warden Helmets
 /obj/item/clothing/head/roguetown/helmet/bascinet/antler
 	name = "wardens's helmet"
-	desc = "A beastly snouted armet with the large horns of an elder saiga protruding from it. Residents of the vale know not to fear such a sight in the wilds, for they are exclusively associated with the Rotwood wardens."
+	desc = "A beastly snouted armet with the large horns of an elder saiga protruding from it. Residents of the realm know not to fear such a sight in the wilds, for they are exclusively associated with the Wardens."
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/warden64.dmi'
 	bloody_icon = 'icons/effects/blood64.dmi'
@@ -588,7 +616,7 @@
 
 /obj/item/clothing/head/roguetown/roguehood/warden/antler
 	name = "warden's antlered hood"
-	desc = "A hunter's leather hood with two linen layers, sewn larger than usual tooo accommodate a helmet, and fitted with the large horns of an elder saiga."
+	desc = "A hunter's leather hood with two linen layers, sewn larger than usual to accommodate a helmet, and fitted with the large horns of an elder saiga."
 	icon_state = "wardenhoodalt"
 	item_state = "wardenhoodalt"
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
@@ -608,5 +636,21 @@
 	body_parts_covered = HEAD|HAIR|EARS|NOSE|NECK
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_STAB)
 	max_integrity = 250
-	anvilrepair = TRUE
 	smeltresult = /obj/item/ingot/iron
+	dropshrink = null
+
+
+	//----------------- INFAREDBARON/HATS.DM ---------------------
+/obj/item/clothing/head/roguetown/helmet/citywatch
+	name = "city watch helmet"
+	desc = "A heavy helmet. Notably resilient. Issued to the Citywatch."
+	icon = 'icons/roguetown/clothing/licensed-infraredbaron/head.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/licensed-infraredbaron/onmob/armor.dmi'
+	icon_state = "citywatch_helmet"
+	item_state = "citywatch_helmet"
+	armor_class = ARMOR_CLASS_MEDIUM
+	body_parts_covered = HEAD|HAIR|EARS
+	flags_inv = HIDEHAIR
+	smeltresult = /obj/item/ingot/steel
+	emote_environment = 3
+	dropshrink = null

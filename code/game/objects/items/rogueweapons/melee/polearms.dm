@@ -70,7 +70,7 @@
 	sharpness_penalty = 2
 
 /datum/intent/spear/cut/halberd
-	damfactor = 0.9
+	damfactor = 1.2
 
 /datum/intent/spear/cut/scythe
 	reach = 3
@@ -261,6 +261,16 @@
 	anvilrepair = /datum/skill/craft/carpentry
 	resistance_flags = FLAMMABLE
 
+// Allows blind carbons to examine if they click on an object using a wooden staff
+/obj/item/rogueweapon/woodstaff/pre_attack(atom/A, mob/living/user, params)
+	if(HAS_TRAIT(user, TRAIT_BLIND) && !user.cmode) //if is not used by a blind mob in combat mode it won't examine
+		var/list/exam = A.examine(user) //directly extracts the examine string without using the examinate proc
+		if(A != user) // avoids the message of user poking themselves
+			src.visible_message(span_notice("[user] pokes [A] with [user.p_their()] wooden staff"))
+		if(exam)
+			to_chat(user, exam.Join("\n"))//relays the examine string to the user
+		return TRUE
+
 /obj/item/rogueweapon/woodstaff/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -328,6 +338,24 @@
 	thrown_bclass = BCLASS_STAB
 	throwforce = 25
 	resistance_flags = FLAMMABLE
+	special = /datum/special_intent/polearm_backstep
+
+/obj/item/rogueweapon/spear/ancient
+	name = "ancient spear"
+	desc = "A gnarled staff, tipped with polished gilbranze. Your breathing hilts, and your knuckles tighten around the staff; you see what is yet to come, yet your mind refuses to retain it. To know what fate this dying world has - it would drive any man inzane."
+	icon_state = "ancient_spear"
+	smeltresult = /obj/item/ingot/aaslag
+
+/obj/item/rogueweapon/spear/ancient/decrepit
+	name = "decrepit spear"
+	desc = "A rotting staff, tipped with frayed bronze. After the stone, but before the sword; an interlude for the violence that would soon engulf His world."
+	force = 13
+	force_wielded = 22
+	max_integrity = 120
+	blade_dulling = DULLING_SHAFT_CONJURED
+	color = "#bb9696"
+	anvilrepair = null
+	randomize_blade_int_on_init = TRUE
 
 /obj/item/rogueweapon/spear/trident
 	// Better one handed & throwing weapon, flimsier.
@@ -412,26 +440,6 @@
 				else
 					to_chat(user, "<span class='warning'>I must stand still to fish.</span>")
 			update_icon()
-
-/obj/item/rogueweapon/spear/aalloy
-	name = "decrepit spear"
-	desc = "A rotting staff, tipped with frayed bronze. After the stone, but before the sword; an interlude for the violence that would soon engulf His world."
-	icon_state = "ancient_spear"
-	force = 13
-	force_wielded = 22
-	max_integrity = 120
-	blade_dulling = DULLING_SHAFT_CONJURED
-	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
-	anvilrepair = null
-	randomize_blade_int_on_init = TRUE
-
-/obj/item/rogueweapon/spear/paalloy
-	name = "ancient spear"
-	desc = "A gnarled staff, tipped with polished gilbranze. Your breathing hilts, and your knuckles tighten around the staff; you see what is yet to come, yet your mind refuses to retain it. To know what fate this dying world has - it would drive any man inzane."
-	smeltresult = /obj/item/ingot/aaslag
-	icon_state = "ancient_spear"
-
 
 /obj/item/rogueweapon/spear/psyspear
 	name = "psydonic spear"
@@ -522,6 +530,7 @@
 	wdefense = 4
 	max_integrity = 60
 	throwforce = 20
+	special = null
 
 /obj/item/rogueweapon/spear/billhook
 	name = "billhook"
@@ -532,6 +541,7 @@
 	minstr = 8
 	wdefense = 6
 	throwforce = 15
+	special = null
 
 /obj/item/rogueweapon/spear/improvisedbillhook
 	force = 12
@@ -766,6 +776,7 @@
 	associated_skill = /datum/skill/combat/polearms
 	walking_stick = TRUE
 	wdefense = 6
+	special = /datum/special_intent/polearm_backstep
 
 /obj/item/rogueweapon/halberd/getonmobprop(tag)
 	. = ..()
@@ -796,25 +807,22 @@
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 200
 
-/obj/item/rogueweapon/halberd/bardiche/aalloy
-	name = "decrepit bardiche"
-	desc = "An imposing poleaxe, wrought from frayed bronze. Whatever noble purpose this weapon held has long since decayed; for it now persists to sunder the chaff that clings to this dying world."
-	max_integrity = 180
-	force = 12
-	force_wielded = 22
-	icon_state = "ancient_bardiche"
-	blade_dulling = DULLING_SHAFT_CONJURED
-	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
-	anvilrepair = null
-	randomize_blade_int_on_init = TRUE
-
-/obj/item/rogueweapon/halberd/bardiche/paalloy
+/obj/item/rogueweapon/halberd/bardiche/ancient
 	name = "ancient bardiche"
 	desc = "A terrifying poleaxe, forged from polished gilbranze. When Her ascension came, these weapons - bereft of their wielders - sunk deep into the earth. Shadowed hands cradled the blades over the centuries, and would eventually create its steel-tipped successor; the glaive."
 	icon_state = "ancient_bardiche"
 	smeltresult = /obj/item/ingot/aaslag
 
+/obj/item/rogueweapon/halberd/bardiche/ancient/decrepit
+	name = "decrepit bardiche"
+	desc = "An imposing poleaxe, wrought from frayed bronze. Whatever noble purpose this weapon held has long since decayed; for it now persists to sunder the chaff that clings to this dying world."
+	force = 12
+	force_wielded = 22
+	max_integrity = 180
+	blade_dulling = DULLING_SHAFT_CONJURED
+	color = "#bb9696"
+	anvilrepair = null
+	randomize_blade_int_on_init = TRUE
 
 /obj/item/rogueweapon/halberd/bardiche/scythe
 	name = "summer scythe"
@@ -887,7 +895,7 @@
 	force = 15
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/spear/thrust/eaglebeak/oneh)
-	gripped_intents = list(/datum/intent/spear/thrust/eaglebeak, /datum/intent/spear/bash/eaglebeak, /datum/intent/mace/smash/eaglebeak)
+	gripped_intents = list(/datum/intent/spear/bash/eaglebeak, /datum/intent/mace/smash/eaglebeak, /datum/intent/spear/thrust/eaglebeak)
 	name = "eagle's beak"
 	desc = "A reinforced pole affixed with an ornate steel eagle's head, of which its beak is intended to pierce with great harm."
 	icon_state = "eaglebeak"
@@ -903,7 +911,8 @@
 	minstr = 11
 	smeltresult = /obj/item/ingot/steel
 	associated_skill = /datum/skill/combat/polearms
-	max_blade_int = 180
+	sharpness = IS_BLUNT
+	max_blade_int = 0
 	walking_stick = TRUE
 	wdefense = 5
 	wbalance = WBALANCE_HEAVY
@@ -969,8 +978,8 @@
 	max_integrity = 155
 
 /obj/item/rogueweapon/greatsword
-	force = 12
-	force_wielded = 30
+	force = 14
+	force_wielded = 35
 	possible_item_intents = list(/datum/intent/sword/chop,/datum/intent/sword/strike) //bash is for nonlethal takedowns, only targets limbs
 	// Design Intent: I have a big fucking sword and I want to rend people in half.
 	gripped_intents = list(/datum/intent/sword/cut/zwei, /datum/intent/rend, /datum/intent/sword/thrust/zwei, /datum/intent/sword/strike/bad)
@@ -998,6 +1007,7 @@
 	max_blade_int = 300
 	wdefense = 5
 	smelt_bar_num = 3
+	special = /datum/special_intent/greatsword_swing
 
 /obj/item/rogueweapon/greatsword/getonmobprop(tag)
 	. = ..()
@@ -1012,6 +1022,23 @@
 			if("altgrip")
 				return list("shrink" = 0.6,"sx" = 4,"sy" = 0,"nx" = -7,"ny" = 1,"wx" = -8,"wy" = 0,"ex" = 8,"ey" = -1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -135,"sturn" = -35,"wturn" = 45,"eturn" = 145,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
 
+/obj/item/rogueweapon/greatsword/ancient
+	name = "ancient greatsword"
+	desc = "A massive blade, forged from polished gilbranze. Your kind will discover your true nature, in wrath and ruin. You will take to the stars and burn them out, one by one. Only when the last star turns to dust, will you finally realize that She was trying to save you from Man's greatest foe; oblivion."
+	icon_state = "ancient_gsw"
+	smeltresult = /obj/item/ingot/aaslag
+
+/obj/item/rogueweapon/greatsword/ancient/decrepit
+	name = "decrepit greatsword"
+	desc = "A massive blade, wrought in frayed bronze. It is too big to be called a sword; massive, thick, heavy, and far too rough. Indeed, this blade was more like a heap of raw metal."
+	force = 10
+	force_wielded = 25
+	max_integrity = 150
+	blade_dulling = DULLING_SHAFT_CONJURED
+	color = "#bb9696"
+	anvilrepair = null
+	randomize_blade_int_on_init = TRUE
+
 /obj/item/rogueweapon/greatsword/iron
 	name = "iron greatsword"
 	desc = "Wrought in iron. Heftier and less sturdier than its steel equivalent - but it still does the job."
@@ -1022,26 +1049,6 @@
 	smelt_bar_num = 3
 	smeltresult = /obj/item/ingot/iron
 
-/obj/item/rogueweapon/greatsword/aalloy
-	name = "decrepit greatsword"
-	desc = "A massive blade, wrought in frayed bronze. It is too big to be called a sword; massive, thick, heavy, and far too rough. Indeed, this blade was more like a heap of raw metal."
-	force = 10
-	force_wielded = 25
-	max_integrity = 150
-	icon_state = "ancient_gsw"
-	blade_dulling = DULLING_SHAFT_CONJURED
-	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
-	anvilrepair = null
-	randomize_blade_int_on_init = TRUE
-
-
-/obj/item/rogueweapon/greatsword/paalloy
-	name = "ancient greatsword"
-	desc = "A massive blade, forged from polished gilbronze. Your kind will discover your true nature, in wrath and ruin. You will take to the stars and burn them out, one by one. Only when the last star turns to dust, will you finally realize that She was trying to save you from Man's greatest foe; oblivion."
-	icon_state = "ancient_gsw"
-	smeltresult = /obj/item/ingot/aaslag
-
 /obj/item/rogueweapon/greatsword/zwei
 	name = "claymore"
 	desc = "This is much longer than a common greatsword, and well balanced too!"
@@ -1050,8 +1057,8 @@
 	smelt_bar_num = 3
 	max_blade_int = 220
 	wdefense = 4
-	force = 14
-	force_wielded = 35
+	force = 12
+	force_wielded = 30
 
 /obj/item/rogueweapon/greatsword/grenz
 	name = "steel zweihander"
@@ -1070,6 +1077,8 @@
 	max_blade_int = 200
 	max_integrity = 180
 	wdefense = 6
+	force = 14
+	force_wielded = 35
 
 /obj/item/rogueweapon/greatsword/grenz/flamberge/ravox
 	name = "Censure"
@@ -1183,7 +1192,7 @@
 
 /obj/item/rogueweapon/greatsword/bsword/psy/unforgotten
 	name = "unforgotten blade"
-	desc = "High Inquisitor Archibald once recorded an expedition of seven brave Adjudicators into Gronnian snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in rememberance."
+	desc = "High Inquisitor Archibald once recorded an expedition of seven brave Adjudicators into Gronnian snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
 	icon_state = "forgottenblade"
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silver
@@ -1223,6 +1232,7 @@
 	)
 	bigboy = TRUE
 	gripsprite = TRUE
+	special = /datum/special_intent/piercing_lunge
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
 	minstr = 8
@@ -1324,7 +1334,7 @@
 	It serves a more noble purpose, now, as a sojourner's casting implement. Though, with enough force, one may still drive the tip forward."
 	icon_state = "psystaff"//Temp
 	possible_item_intents = list(SPEAR_BASH, /datum/intent/special/magicarc)
-	gripped_intents = list(/datum/intent/spear/thrust/blunted, /datum/intent/mace/smash/wood/ranged, /datum/intent/special/magicarc)
+	gripped_intents = list(/datum/intent/spear/thrust/blunted, /datum/intent/special/magicarc, /datum/intent/mace/smash/wood/ranged)
 	force = 18
 	force_wielded = 20//Worse than just using a knife, really, despite the range.
 	thrown_bclass = BCLASS_STAB
@@ -1352,7 +1362,6 @@
 	force_wielded = 20
 	gripped_intents = list(/datum/intent/spear/bash/ranged/quarterstaff, /datum/intent/spear/thrust/quarterstaff)
 	icon_state = "quarterstaff"
-	associated_skill = /datum/skill/combat/staves
 	max_integrity = 150
 
 /obj/item/rogueweapon/woodstaff/quarterstaff/iron
@@ -1362,7 +1371,6 @@
 	force_wielded = 22
 	gripped_intents = list(/datum/intent/spear/bash/ranged/quarterstaff, /datum/intent/spear/thrust/quarterstaff)
 	icon_state = "quarterstaff_iron"
-	associated_skill = /datum/skill/combat/staves
 	max_integrity = 200
 
 /obj/item/rogueweapon/woodstaff/quarterstaff/steel
@@ -1372,7 +1380,6 @@
 	force_wielded = 25
 	gripped_intents = list(/datum/intent/spear/bash/ranged/quarterstaff, /datum/intent/spear/thrust/quarterstaff)
 	icon_state = "quarterstaff_steel"
-	associated_skill = /datum/skill/combat/staves
 	max_integrity = 200
 
 /obj/item/rogueweapon/woodstaff/quarterstaff/silver
@@ -1382,7 +1389,6 @@
 	force_wielded = 27
 	gripped_intents = list(/datum/intent/spear/bash/ranged/quarterstaff, /datum/intent/spear/thrust/quarterstaff)
 	icon_state = "quarterstaff_silver"
-	associated_skill = /datum/skill/combat/staves
 	max_integrity = 250
 	is_silver = TRUE
 
@@ -1404,7 +1410,6 @@
 	force_wielded = 27
 	gripped_intents = list(/datum/intent/spear/bash/ranged/quarterstaff, /datum/intent/spear/thrust/quarterstaff)
 	icon_state = "quarterstaff_silver"
-	associated_skill = /datum/skill/combat/staves
 	max_integrity = 250
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
@@ -1554,7 +1559,7 @@
 	possible_item_intents = list(/datum/intent/spear/thrust/eaglebeak/oneh, SPEAR_BASH)
 	gripped_intents = list(/datum/intent/spear/thrust/glaive, /datum/intent/spear/cut/glaive, /datum/intent/axe/chop/scythe, SPEAR_BASH)
 	name = "'Deliverer'"
-	desc = "As if glaives werent hard enough to produce, this one in particular is made out of blacksteel. A piece of art made for the captain of the guard, its a tool to deliver justice and help those weaker than the wielder."
+	desc = "As if glaives weren't hard enough to produce, this one in particular is made out of blacksteel. A piece of art made for the captain of the guard, it's a tool to deliver justice and help those weaker than the wielder."
 	force = 17
 	force_wielded = 35
 	icon = 'icons/roguetown/weapons/special/captainglaive.dmi'
@@ -1695,6 +1700,7 @@
 	force = 35
 	force_wielded = 55
 	minstr = 15
+	minstr_req = TRUE//You MUST have the required strength. No exceptions.
 	wdefense = 15
 	max_integrity = 555
 	max_blade_int = 555

@@ -25,10 +25,7 @@
 	. |= FALL_NO_MESSAGE
 
 /atom/movable //reference to all obj/item/grabbing
-	var/list/grabbedby = list()
-
-/turf
-	var/list/grabbedby = list()
+	var/list/grabbedby
 
 /obj/item/grabbing/Initialize(mapload)
 	. = ..()
@@ -38,7 +35,9 @@
 	valid_check()
 
 /obj/item/grabbing/proc/valid_check()
-	// We require adjacency to count the grab as valid
+	if(!grabbee || !grabbed)
+		qdel(src)
+		return FALSE
 	if(grabbee.Adjacent(grabbed))
 		return TRUE
 	grabbee.stop_pulling(FALSE)
@@ -88,24 +87,26 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	if(isobj(grabbed))
 		var/obj/I = grabbed
-		I.grabbedby -= src
+		LAZYREMOVE(I.grabbedby, src)
 	if(ismob(grabbed))
 		var/mob/M = grabbed
-		M.grabbedby -= src
-		if(iscarbon(M) && sublimb_grabbed)
+		LAZYREMOVE(M.grabbedby, src)
+		if(iscarbon(M))
 			var/mob/living/carbon/carbonmob = M
-			var/obj/item/bodypart/part = carbonmob.get_bodypart(sublimb_grabbed)
+			var/obj/item/bodypart/part = limb_grabbed
+			if(!part && sublimb_grabbed)
+				part = carbonmob.get_bodypart(sublimb_grabbed)
 
 			// Edge case: if a weapon becomes embedded in a mob, our "grab" will be destroyed...
 			// In this case, grabbed will be the mob, and sublimb_grabbed will be the weapon, rather than a bodypart
 			// This means we should skip any further processing for the bodypart
 			if(part)
-				part.grabbedby -= src
+				var/released_held_index = part.held_index
+				LAZYREMOVE(part.grabbedby, src)
+				carbonmob.update_hud_hand_slot(released_held_index)
+				carbonmob.mark_zone_selector_hud_dirty()
 				part = null
 				sublimb_grabbed = null
-	if(isturf(grabbed))
-		var/turf/T = grabbed
-		T.grabbedby -= src
 	if(grabbee)
 		if(grabbee.r_grab == src)
 			grabbee.r_grab = null
@@ -113,6 +114,7 @@
 			grabbee.l_grab = null
 		if(grabbee.mouth == src)
 			grabbee.mouth = null
+		grabbee = null
 	for(var/datum/D in dependents)
 		D.grabdropped(src)
 	return ..()
@@ -208,6 +210,9 @@
 			if(M.grippedby(user))			//Aggro grip
 				bleed_suppressing = 0.5		//Better bleed suppression
 		if(/datum/intent/grab/choke)
+			if(HAS_TRAIT(user, TRAIT_PACIFISM))
+				to_chat(user, span_warning("I don't want to harm [src]!"))
+				return FALSE
 			if(user.buckled)
 				to_chat(user, span_warning("I can't do this while buckled!"))
 				return FALSE
@@ -286,6 +291,9 @@
 						else
 							to_chat(user, span_warning("[H]'s neck is covered!"))
 		if(/datum/intent/grab/twist)
+			if(HAS_TRAIT(user, TRAIT_PACIFISM))
+				to_chat(user, span_warning("I don't want to harm [src]!"))
+				return FALSE
 			if(user.buckled)
 				to_chat(user, span_warning("I can't do this while buckled!"))
 				return FALSE
@@ -488,7 +496,7 @@
 
 			qdel(src)
 			user.put_in_active_hand(limb_grabbed)
-	  
+
 	// Dealing damage to the head beforehand is intentional.
 	if(limb_grabbed.body_zone == BODY_ZONE_HEAD && isdullahan(C))
 		var/mob/living/carbon/human/target = C

@@ -105,8 +105,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 	var/datum/sleep_adv/sleep_adv = null
 
-	var/mugshot_set = FALSE
-
 	var/heretic_nickname 	// Nickname used for heretic commune
 
 	var/picking = FALSE		// Variable that lets the event picker see if someones getting chosen or not
@@ -479,7 +477,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/recall_targets(mob/recipient, window=1)
 	var/output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
 	for(var/mob/living/carbon in GLOB.mob_living_list) // Iterate through all mobs in the world
-		if((carbon.real_name != recipient.real_name) && ((carbon.has_flaw(/datum/charflaw/hunted)) && (!istype(carbon, /mob/living/carbon/human/dummy))))//To be on the list they must be hunted, not be the user and not be a dummy (There is a dummy that has all vices for some reason)
+		if((carbon.real_name != recipient.real_name) && ((carbon.has_flaw(/datum/charflaw/assassintarget)) && (!istype(carbon, /mob/living/carbon/human/dummy))))//To be on the list they must be hunted, not be the user and not be a dummy (There is a dummy that has all vices for some reason)
 			output += "<br>[carbon.real_name]"
 			output += "<br>[carbon.real_name]"
 			if (carbon.job)
@@ -938,6 +936,9 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /proc/handle_special_items_retrieval(mob/user, atom/host_object)
 	// Attempts to retrieve an item from a player's stash, and applies any base colors, custom names, and descriptions.
 	if(user.mind && isliving(user))
+		var/area/rogue/user_area = get_area(user)
+		if(user_area?.no_special_item_retrieval) // area does not allow fetching special items, return
+			return
 		if(user.mind.special_items && user.mind.special_items.len)
 			var/item = input(user, "What will I take?", "STASH") as null|anything in user.mind.special_items
 			if(item)

@@ -1,7 +1,9 @@
 /obj/effect/proc_holder/spell/invoked/vigorousexchange
 	name = "Vigorous Exchange"
 	desc = "Restores the targets Energy, Twice as effective on someone else."
-	overlay_state = "vigorousexchange"
+	overlay_icon = 'icons/mob/actions/malummiracles.dmi'
+	action_icon = 'icons/mob/actions/malummiracles.dmi'
+	overlay_state = "vigorous_exchange"
 	releasedrain = 0
 	chargedrain = 0
 	chargetime = 0
@@ -24,7 +26,9 @@
 /obj/effect/proc_holder/spell/invoked/heatmetal
 	name = "Heat Metal"
 	desc= "Damages Armor, Forces target to drop a metallic weapon, heats up an ingot in tongs or smelts a single item."
-	overlay_state = "heatmetal"
+	overlay_icon = 'icons/mob/actions/malummiracles.dmi'
+	action_icon = 'icons/mob/actions/malummiracles.dmi'
+	overlay_state = "heat_metal"
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
@@ -48,7 +52,9 @@
 /obj/effect/proc_holder/spell/invoked/hammerfall
 	name = "Hammerfall"
 	desc = "Damages structures in an area while possibly knocking down mobs in the area."
-	overlay_state = "Hammerfall"
+	overlay_icon = 'icons/mob/actions/malummiracles.dmi'
+	action_icon = 'icons/mob/actions/malummiracles.dmi'
+	overlay_state = "hammerfall"
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
@@ -103,8 +109,10 @@
 		aoemining.take_damage(structure_damage, BRUTE,"blunt",1)
 
 /obj/effect/proc_holder/spell/invoked/craftercovenant
-	name = "The Crafter’s Covenant"
+	name = "The Crafter's Covenant"
 	desc = "Melt a pile of valuables and convert them into a single item. Sacrifice is accepted even if its not valuable enough to make anything."
+	overlay_icon = 'icons/mob/actions/malummiracles.dmi'
+	action_icon = 'icons/mob/actions/malummiracles.dmi'
 	overlay_state = "craftercovenant"
 	releasedrain = 30
 	chargedrain = 0
@@ -151,8 +159,8 @@
 	if (!target.smeltresult) return
 	var/obj/item/itemtospawn = target.smeltresult
 	show_visible_message(user, "After [user]'s incantation, [target] glows brightly and melts into an ingot.", null)
-	new itemtospawn(target.loc)
-	sparks.set_up(1, 1, target.loc)
+	new itemtospawn(get_turf(target))
+	sparks.set_up(1, 1, get_turf(target))
 	sparks.start()
 	qdel(target)
 
@@ -224,8 +232,8 @@
 	target.dropItemToGround(targeteditem)
 	show_visible_message(target, "[target]'s [targeteditem.name] glows brightly, searing their flesh.", "Your [targeteditem.name] glows brightly, It burns!")
 	target.emote("painscream")
-	playsound(target.loc, 'sound/misc/frying.ogg', 100, FALSE, -1)
-	sparks.set_up(1, 1, target.loc)
+	playsound(get_turf(target), 'sound/misc/frying.ogg', 100, FALSE, -1)
+	sparks.set_up(1, 1, get_turf(target))
 	sparks.start()
 
 /proc/should_heat_in_hand(mob/user, mob/target, obj/item/targeteditem, list/nosmeltore)
@@ -258,7 +266,7 @@
 	apply_damage_if_covered(target, list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG), targeteditem, GROIN|LEGS|FEET, damage_to_apply)
 	apply_damage_if_covered(target, list(BODY_ZONE_HEAD), targeteditem, HEAD|HAIR|NECK|NOSE|MOUTH|EARS|EYES, damage_to_apply)
 	show_visible_message(target, "[target]'s [targeteditem.name] glows brightly, searing their flesh.", "My [targeteditem.name] glows brightly, It burns!")
-	playsound(target.loc, 'sound/misc/frying.ogg', 100, FALSE, -1)
+	playsound(get_turf(target), 'sound/misc/frying.ogg', 100, FALSE, -1)
 
 /proc/apply_damage_if_covered(mob/living/carbon/target, list/body_zones, obj/item/clothing/targeteditem, mask, damage)
 	var/datum/effect_system/spark_spread/sparks = new()
@@ -269,7 +277,7 @@
 			affecting = target.get_bodypart(zone)
 		if (affecting)
 			affecting.receive_damage(0, damage)
-			sparks.set_up(1, 1, target.loc)
+			sparks.set_up(1, 1, get_turf(target))
 			sparks.start()
 	}
 
@@ -347,10 +355,10 @@ GLOBAL_LIST_EMPTY(anvil_recipe_prices)
 	if (recipe.additional_items)
 		for (var/obj/additional_item in recipe.additional_items)
 			total_sellprice += additional_item.sellprice
-	if (istype(recipe.created_item, /list))
+	if (islist(recipe.created_item))
 		var/list/itemlist = recipe.created_item
 		total_sellprice = total_sellprice/itemlist.len
-		itemtosend = recipe.created_item[1]
+		itemtosend = itemlist[1]
 	if (!istype(recipe.created_item, /list))
 		itemtosend = recipe.created_item
 	if (total_sellprice > 0)
@@ -387,7 +395,9 @@ GLOBAL_LIST_EMPTY(anvil_recipe_prices)
 /obj/effect/proc_holder/spell/invoked/malum_flame_rogue
 	name = "Malum's Fire"
 	desc = "Ignites target."
-	overlay_state = "sacredflame"
+	overlay_icon = 'icons/mob/actions/malummiracles.dmi'
+	action_icon = 'icons/mob/actions/malummiracles.dmi'
+	overlay_state = "malum_fire"
 	releasedrain = 15
 	chargedrain = 0
 	chargetime = 0

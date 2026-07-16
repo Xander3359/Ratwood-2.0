@@ -79,6 +79,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_fire()
 	var/datum/status_effect/fire_handler/fire_stacks/sunder/sunder_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder)
 	var/datum/status_effect/fire_handler/fire_stacks/sunder/blessed/blessed_sunder = has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
+	defer_overlay_vision_updates()
 	if(sunder_status?.on_fire || blessed_sunder?.on_fire)
 		var/filter = get_filter(SUNDER_FILTER)
 		if(!filter)
@@ -90,11 +91,13 @@ There are several things that need to be remembered:
 		new_fire_overlay.appearance_flags = RESET_COLOR
 		overlays_standing[SUNDER_LAYER] = new_fire_overlay
 		apply_overlay(SUNDER_LAYER)
+		resume_overlay_vision_updates()
 		return
 	else
 		remove_filter(SUNDER_FILTER)
 		remove_overlay(SUNDER_LAYER)
 		QDEL_NULL(sunder_light_obj)
+		resume_overlay_vision_updates()
 
 	if(fire_stacks < 10)
 		return ..("Generic_mob_burning")
@@ -148,6 +151,7 @@ There are several things that need to be remembered:
 		return
 	damage_overlay_cache_key = new_cache_key
 
+	defer_overlay_vision_updates()
 	remove_overlay(DAMAGE_LAYER)
 	remove_overlay(LEG_DAMAGE_LAYER)
 	remove_overlay(ARM_DAMAGE_LAYER)
@@ -264,6 +268,7 @@ There are several things that need to be remembered:
 	apply_overlay(DAMAGE_LAYER)
 	apply_overlay(LEG_DAMAGE_LAYER)
 	apply_overlay(ARM_DAMAGE_LAYER)
+	resume_overlay_vision_updates()
 
 	if(needs_hair_update)
 		queue_icon_update(PENDING_UPDATE_HAIR)
@@ -396,6 +401,10 @@ There are several things that need to be remembered:
 		update_hud_neck(wear_neck)
 	rebuild_obscured_flags()
 	update_hair()
+	// Snowflake check to stop species with custom body sprites of having ugly pouches appear on their sprite, unaccustomed to the shape.
+	if(dna.species.custom_base_icon)
+		return
+
 	apply_overlay(NECK_LAYER)
 
 /mob/living/carbon/human/update_inv_wear_id()
@@ -627,7 +636,7 @@ There are several things that need to be remembered:
 		inv.update_icon()
 
 	var/obj/item/bodypart/taur/taur = get_taur_tail()
-	var/icon/c_mask = taur?.clip_mask
+	var/icon/c_mask = taur?.clip_mask_legs || taur?.clip_mask
 
 	if(shoes)
 		shoes.screen_loc = rogueui_shoes					//move the item to the appropriate screen loc
@@ -697,9 +706,11 @@ There are several things that need to be remembered:
 	update_inv_head_real(hide_nonstandard)
 
 /mob/living/carbon/human/update_inv_head_real(hide_nonstandard = FALSE)
+	defer_overlay_vision_updates()
 	remove_overlay(HEAD_LAYER)
 
 	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
+		resume_overlay_vision_updates()
 		return
 
 	if(client && hud_used && hud_used.inv_slots[SLOT_HEAD])
@@ -711,7 +722,6 @@ There are several things that need to be remembered:
 		overlays_standing[HEAD_LAYER] = head.build_worn_icon(default_layer = HEAD_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/head.dmi', female = FALSE)
 		var/mutable_appearance/head_overlay = overlays_standing[HEAD_LAYER]
 		if(head_overlay)
-			remove_overlay(HEAD_LAYER)
 			if(gender == MALE)
 				if(OFFSET_HEAD in dna.species.offset_features)
 					head_overlay.pixel_x += dna.species.offset_features[OFFSET_HEAD][1]
@@ -725,6 +735,7 @@ There are several things that need to be remembered:
 
 	rebuild_obscured_flags()
 	update_hair() //hoodies
+	resume_overlay_vision_updates()
 
 /mob/living/carbon/human/update_inv_belt(hide_experimental = FALSE)
 	queue_icon_update(PENDING_UPDATE_INV_BELT)
@@ -894,11 +905,15 @@ There are several things that need to be remembered:
 				if(istype(belt, /obj/item/storage/belt/rogue)) // check if belt has dildo attached
 					var/obj/item/storage/belt/rogue/belt_with_dildo = belt
 					if(istype(belt_with_dildo.attached_toy, /obj/item/dildo)) // draw dildo in correct position
-						var/mutable_appearance/mbeltoverlaydildo = mutable_appearance('modular/icons/obj/lewd/dildo.dmi', "dildo_belt_[belt_with_dildo.attached_toy.dildo_size]")
+						var/mutable_appearance/mbeltoverlaydildo = mutable_appearance('modular/icons/obj/lewd/dildo.dmi', "dildo_belt_[belt_with_dildo.attached_toy.dildo_size]", layer = -ABOVE_BODY_FRONT_LAYER)
 						mbeltoverlaydildo.color = belt_with_dildo.attached_toy.color // get material color
 						mbeltoverlaydildo.pixel_x = mbeltoverlay.pixel_x
 						mbeltoverlaydildo.pixel_y = mbeltoverlay.pixel_y
 						standing_front += mbeltoverlaydildo
+
+	var/mutable_appearance/modular_chastity_overlay = modular_chastity_attached_toy_overlay()
+	if(modular_chastity_overlay)
+		standing_front += modular_chastity_overlay
 
 	overlays_standing[BELT_LAYER] = standing_front
 	overlays_standing[BELT_BEHIND_LAYER] = standing_behind
@@ -962,6 +977,7 @@ There are several things that need to be remembered:
 
 
 /mob/living/carbon/human/update_inv_wear_mask()
+	defer_overlay_vision_updates()
 	..()
 	update_body_parts(TRUE)
 	var/mutable_appearance/mask_overlay = overlays_standing[MASK_LAYER]
@@ -978,6 +994,7 @@ There are several things that need to be remembered:
 				mask_overlay.pixel_y += dna.species.offset_features[OFFSET_FACEMASK_F][2]
 		overlays_standing[MASK_LAYER] = mask_overlay
 		apply_overlay(MASK_LAYER)
+	resume_overlay_vision_updates()
 
 /mob/living/carbon/human/update_inv_back(hide_experimental = FALSE)
 	queue_icon_update(PENDING_UPDATE_INV_BACK)
@@ -1109,6 +1126,13 @@ There are several things that need to be remembered:
 	if(undercloaks.len)
 		overlays_standing[UNDER_CLOAK_LAYER] = undercloaks
 
+	var/obj/item/bodypart/taur/taur_back = get_taur_tail()
+	if(taur_back?.taur_clothing_category && (istype(backr, /obj/item/storage) || istype(backl, /obj/item/storage)))
+		var/mutable_appearance/saddlebag_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "saddlebag_[taur_back.taur_clothing_category]", -BACK_LAYER)
+		saddlebag_ov.pixel_x = taur_back.offset_x
+		overcloaks += saddlebag_ov
+		overlays_standing[BACK_LAYER] = overcloaks
+
 	rebuild_obscured_flags()
 	apply_overlay(BACK_LAYER)
 	apply_overlay(BACK_BEHIND_LAYER)
@@ -1160,7 +1184,20 @@ There are several things that need to be remembered:
 					cloak_overlay.pixel_x += dna.species.offset_features[OFFSET_CLOAK_F][1]
 					cloak_overlay.pixel_y += dna.species.offset_features[OFFSET_CLOAK_F][2]
 			if(cloak.alternate_worn_layer == TABARD_LAYER)
-				overlays_standing[TABARD_LAYER] = cloak_overlay
+				if(taur?.taur_clothing_category && istype(cloak, /obj/item/clothing/cloak/tabard))
+					var/mutable_appearance/taur_tabard_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "caparison-tabard_[taur.taur_clothing_category]", -TABARD_LAYER)
+					taur_tabard_ov.pixel_x = taur.offset_x
+					if(cloak.color)
+						taur_tabard_ov.color = cloak.color
+					overlays_standing[TABARD_LAYER] = list(cloak_overlay, taur_tabard_ov)
+				else if(taur?.taur_clothing_category && istype(cloak, /obj/item/clothing/cloak/stabard))
+					var/mutable_appearance/taur_cap_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "caparison_[taur.taur_clothing_category]", -TABARD_LAYER)
+					taur_cap_ov.pixel_x = taur.offset_x
+					if(cloak.color)
+						taur_cap_ov.color = cloak.color
+					overlays_standing[TABARD_LAYER] = list(cloak_overlay, taur_cap_ov)
+				else
+					overlays_standing[TABARD_LAYER] = cloak_overlay
 			if(cloak.alternate_worn_layer == UNDER_ARMOR_LAYER)
 				overlays_standing[UNDER_ARMOR_LAYER] = cloak_overlay	
 			if(cloak.alternate_worn_layer == CLOAK_BEHIND_LAYER)
@@ -1279,7 +1316,41 @@ There are several things that need to be remembered:
 				if(OFFSET_SHIRT_F in dna.species.offset_features)
 					shirt_overlay.pixel_x += dna.species.offset_features[OFFSET_SHIRT_F][1]
 					shirt_overlay.pixel_y += dna.species.offset_features[OFFSET_SHIRT_F][2]
-			overlays_standing[SHIRT_LAYER] = shirt_overlay
+			// Taur barding overlay for shirt slot
+			if(taur?.taur_clothing_category)
+				var/list/taur_shirt_states = list()
+				switch(wear_shirt.armor_class)
+					if(ARMOR_CLASS_LIGHT)
+						taur_shirt_states += "leather"
+					if(ARMOR_CLASS_MEDIUM)
+						taur_shirt_states += "chainmail"
+					if(ARMOR_CLASS_HEAVY)
+						taur_shirt_states += "plate"
+				if(taur_shirt_states.len)
+					var/list/all_shirt = list(shirt_overlay)
+					for(var/taur_state in taur_shirt_states)
+						var/mutable_appearance/taur_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "[taur_state]_[taur.taur_clothing_category]", -SHIRT_LAYER)
+						taur_ov.pixel_x = taur.offset_x
+						all_shirt += taur_ov
+					// Colorable tasset overlays for heavy armor
+					if(wear_shirt.armor_class == ARMOR_CLASS_HEAVY)
+						var/mutable_appearance/tasset1_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "plate-tasset1_[taur.taur_clothing_category]", -SHIRT_LAYER)
+						tasset1_ov.pixel_x = taur.offset_x
+						tasset1_ov.appearance_flags = RESET_COLOR
+						if(taur.tasset1_color)
+							tasset1_ov.color = taur.tasset1_color
+						all_shirt += tasset1_ov
+						var/mutable_appearance/tasset2_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "plate-tasset2_[taur.taur_clothing_category]", -SHIRT_LAYER)
+						tasset2_ov.pixel_x = taur.offset_x
+						tasset2_ov.appearance_flags = RESET_COLOR
+						if(taur.tasset2_color)
+							tasset2_ov.color = taur.tasset2_color
+						all_shirt += tasset2_ov
+					overlays_standing[SHIRT_LAYER] = all_shirt
+				else
+					overlays_standing[SHIRT_LAYER] = shirt_overlay
+			else
+				overlays_standing[SHIRT_LAYER] = shirt_overlay
 
 			//add sleeve overlays, then offset
 			var/list/sleeves = list()
@@ -1312,6 +1383,9 @@ There are several things that need to be remembered:
 	queue_icon_update(PENDING_UPDATE_INV_ARMOR)
 
 /mob/living/carbon/human/update_inv_armor_real()
+	// Snowflake check to stop species with custom body sprites of losing their armor when it's handled by the skin armor they wear.
+	if(dna.species.custom_base_icon)
+		return
 	remove_overlay(ARMOR_LAYER)
 	remove_overlay(ARMORSLEEVE_LAYER)
 
@@ -1352,7 +1426,41 @@ There are several things that need to be remembered:
 				if(OFFSET_ARMOR_F in dna.species.offset_features)
 					armor_overlay.pixel_x += dna.species.offset_features[OFFSET_ARMOR_F][1]
 					armor_overlay.pixel_y += dna.species.offset_features[OFFSET_ARMOR_F][2]
-			overlays_standing[ARMOR_LAYER] = armor_overlay
+			// Taur barding overlay for armor slot
+			if(taur?.taur_clothing_category)
+				var/list/taur_armor_states = list()
+				switch(wear_armor.armor_class)
+					if(ARMOR_CLASS_LIGHT)
+						taur_armor_states += "leather"
+					if(ARMOR_CLASS_MEDIUM)
+						taur_armor_states += "chainmail"
+					if(ARMOR_CLASS_HEAVY)
+						taur_armor_states += "plate"
+				if(taur_armor_states.len)
+					var/list/all_armor = list(armor_overlay)
+					for(var/taur_state in taur_armor_states)
+						var/mutable_appearance/taur_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "[taur_state]_[taur.taur_clothing_category]", -ARMOR_LAYER)
+						taur_ov.pixel_x = taur.offset_x
+						all_armor += taur_ov
+					// Colorable tasset overlays for heavy armor
+					if(wear_armor.armor_class == ARMOR_CLASS_HEAVY)
+						var/mutable_appearance/tasset1_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "plate-tasset1_[taur.taur_clothing_category]", -ARMOR_LAYER)
+						tasset1_ov.pixel_x = taur.offset_x
+						tasset1_ov.appearance_flags = RESET_COLOR
+						if(taur.tasset1_color)
+							tasset1_ov.color = taur.tasset1_color
+						all_armor += tasset1_ov
+						var/mutable_appearance/tasset2_ov = mutable_appearance('icons/roguetown/clothing/special/onmob/taur_clothing.dmi', "plate-tasset2_[taur.taur_clothing_category]", -ARMOR_LAYER)
+						tasset2_ov.pixel_x = taur.offset_x
+						tasset2_ov.appearance_flags = RESET_COLOR
+						if(taur.tasset2_color)
+							tasset2_ov.color = taur.tasset2_color
+						all_armor += tasset2_ov
+					overlays_standing[ARMOR_LAYER] = all_armor
+				else
+					overlays_standing[ARMOR_LAYER] = armor_overlay
+			else
+				overlays_standing[ARMOR_LAYER] = armor_overlay
 
 			//add sleeve overlays, then offset
 			var/list/sleeves = list()
@@ -1389,7 +1497,7 @@ There are several things that need to be remembered:
 	remove_overlay(LEGSLEEVE_LAYER)
 
 	var/obj/item/bodypart/taur/taur = get_taur_tail()
-	var/icon/c_mask = taur?.clip_mask
+	var/icon/c_mask = taur?.clip_mask_legs || taur?.clip_mask
 
 	var/icon/clip_mask_init
 
@@ -1456,9 +1564,11 @@ There are several things that need to be remembered:
 	apply_overlay(LEGSLEEVE_LAYER)
 
 /mob/living/carbon/human/update_inv_mouth()
+	defer_overlay_vision_updates()
 	remove_overlay(MOUTH_LAYER)
 
 	if(!isdullahan(src) && !get_bodypart(BODY_ZONE_HEAD)) //Decapitated
+		resume_overlay_vision_updates()
 		return
 
 	if(client && hud_used && hud_used.inv_slots[SLOT_MOUTH])
@@ -1470,10 +1580,8 @@ There are several things that need to be remembered:
 			overlays_standing[MOUTH_LAYER] = mouth.build_worn_icon(default_layer = MOUTH_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/mouth_items.dmi')
 		update_hud_mouth(mouth)
 
-	apply_overlay(MOUTH_LAYER)
 	var/mutable_appearance/mouth_overlay = overlays_standing[MOUTH_LAYER]
 	if(mouth_overlay)
-		remove_overlay(MOUTH_LAYER)
 		if(gender == MALE)
 			if(OFFSET_MOUTH in dna.species.offset_features)
 				mouth_overlay.pixel_x += dna.species.offset_features[OFFSET_MOUTH][1]
@@ -1483,9 +1591,26 @@ There are several things that need to be remembered:
 				mouth_overlay.pixel_x += dna.species.offset_features[OFFSET_MOUTH_F][1]
 				mouth_overlay.pixel_y += dna.species.offset_features[OFFSET_MOUTH_F][2]
 		overlays_standing[MOUTH_LAYER] = mouth_overlay
-		apply_overlay(MOUTH_LAYER)
+	apply_overlay(MOUTH_LAYER)
 	
 	rebuild_obscured_flags()
+	resume_overlay_vision_updates()
+
+/mob/living/carbon/human/proc/update_inv_armor_special()
+	remove_overlay(ARMOR_LAYER)
+
+	if(!skin_armor)
+		return
+
+	var/armor_icon_state = skin_armor.icon_state
+	if(!(src.mobility_flags & MOBILITY_STAND))
+		armor_icon_state = "[skin_armor.icon_state]_down"
+	
+	var/mutable_appearance/armor_overlay = mutable_appearance(skin_armor.icon, armor_icon_state, layer = ARMOR_LAYER)
+
+	overlays_standing[ARMOR_LAYER] = armor_overlay
+
+	add_overlay(armor_overlay)
 
 //endrogue
 
@@ -1938,10 +2063,12 @@ generate/load female uniform sprites matching all previously decided variables
 	if(oldkey == icon_render_key && !redraw)
 		return
 
+	defer_overlay_vision_updates()
 	remove_overlay(BODYPARTS_LAYER)
 
 	if(!redraw && limb_icon_cache[icon_render_key])
 		load_limb_from_cache()
+		resume_overlay_vision_updates()
 		return
 
 	var/list/new_limbs = list()
@@ -1958,54 +2085,27 @@ generate/load female uniform sprites matching all previously decided variables
 		else
 			new_limbs += BP.get_limb_icon()
 
+	if(isooze(src))
+		for(var/image/limb_alpha in new_limbs)
+			limb_alpha.alpha = 180
+
 	if(length(new_limbs))
 		overlays_standing[BODYPARTS_LAYER] = new_limbs
 		limb_icon_cache[icon_render_key] = new_limbs
 
 	apply_overlay(BODYPARTS_LAYER)
 	update_damage_overlays()
+	resume_overlay_vision_updates()
 
 /mob/proc/update_body_parts_head_only()
 	return
 
+
 // Only renders the head of the human
+// TEMPORARILY REPLACED, this proc didn't properly use the overlays system
+// and also doesn't use the limb icon cache.
 /mob/living/carbon/human/update_body_parts_head_only()
-	if (!dna)
-		return
-
-	if (!dna.species)
-		return
-
-	var/obj/item/bodypart/HD = get_bodypart("head")
-
-	if (!istype(HD))
-		return
-
-	testing("ehadonly [src]")
-	HD.update_limb()
-
-	add_overlay(HD.get_limb_icon())
-	update_damage_overlays()
-
-	if(HD && !(HAS_TRAIT(src, TRAIT_HUSK)))
-
-		// lipstick
-		if(lip_style && (LIPS in dna.species.species_traits))
-			var/mutable_appearance/lip_overlay = mutable_appearance('icons/mob/human_face.dmi', "lips_[lip_style]", -BODY_LAYER)
-			lip_overlay.color = lip_color
-			if(gender == FEMALE)
-				if(OFFSET_FACE_F in dna.species.offset_features)
-					lip_overlay.pixel_x += dna.species.offset_features[OFFSET_FACE_F][1]
-					lip_overlay.pixel_y += dna.species.offset_features[OFFSET_FACE_F][2]
-			else
-				if(OFFSET_FACE in dna.species.offset_features)
-					lip_overlay.pixel_x += dna.species.offset_features[OFFSET_FACE][1]
-					lip_overlay.pixel_y += dna.species.offset_features[OFFSET_FACE][2]
-			add_overlay(lip_overlay)
-
-	update_inv_head()
-	update_inv_wear_mask()
-	update_inv_mouth()
+	return update_body_parts()
 
 /mob/living/carbon/proc/has_boobed_overlay()
 	var/obj/item/organ/breasts/boobs = getorganslot(ORGAN_SLOT_BREASTS)

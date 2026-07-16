@@ -13,11 +13,12 @@
 	armor = ARMOR_CLOTHING
 	prevent_crits = list(BCLASS_TWIST)
 	anvilrepair = null
-	sewrepair = TRUE
 	blocksound = SOFTHIT
+	nudist_approved = TRUE
 	salvage_result = /obj/item/natural/hide
 	salvage_amount = 1
-
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/beekeeper
 	name = "beekeeper's hood"
@@ -37,7 +38,8 @@
 	adjustable = CANT_CADJUST
 	toggle_icon_state = FALSE
 	max_integrity = 100
-	sewrepair = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/nochood
 	name = "moon hood"
@@ -47,7 +49,9 @@
 	item_state = "nochood"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
-	sewrepair = TRUE
+	nudist_approved = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/necrahood
 	name = "death shroud"
@@ -57,7 +61,10 @@
 	item_state = "necrahood"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
-	sewrepair = TRUE
+	nudist_approved = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
+
 /obj/item/clothing/head/roguetown/necramask
 	name = "death mask"
 	desc = "A hood with a decorated jaw bone at the chin, normally worn by some followers of Necra as a form of devotion"
@@ -70,8 +77,10 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	flags_inv = HIDEEARS|HIDESNOUT|HIDEHAIR|HIDEFACIALHAIR
 	dynamic_hair_suffix = ""
-	sewrepair = TRUE
 	mask_override = TRUE
+	nudist_approved = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/dendormask
 	name = "briarmask"
@@ -85,8 +94,10 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
-	sewrepair = TRUE
 	mask_override = TRUE
+	nudist_approved = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/necromhood
 	name = "necromancers hood"
@@ -96,7 +107,8 @@
 	body_parts_covered = NECK
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
-	sewrepair = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/menacing
 	name = "sack hood"
@@ -105,12 +117,18 @@
 	item_state = "menacing"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
-	sewrepair = TRUE
+	nudist_approved = TRUE
 	color = "#999999"
 	//dropshrink = 0.75
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/menacing/bandit
 	icon_state = "bandithood"
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
+	heat_protection = HEAD
+	max_heat_protection_temperature = BODYTEMP_HEAT_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/jester
 	name = "jester's hat"
@@ -120,11 +138,11 @@
 	detail_tag = "_detail"
 	altdetail_tag = "_detailalt"
 	dynamic_hair_suffix = "+generic"
-	sewrepair = TRUE
 	flags_inv = HIDEEARS
 	detail_color = CLOTHING_WHITE
 	color = CLOTHING_AZURE
 	altdetail_color = CLOTHING_WHITE
+	nudist_approved = TRUE
 
 /obj/item/clothing/head/roguetown/jester/update_icon()
 	cut_overlays()
@@ -160,3 +178,5 @@
 	else
 		flags_inv |= HIDE_HEADTOP
 	user.update_inv_head()
+	user.update_fov_angles()
+	user.update_vision_cone()

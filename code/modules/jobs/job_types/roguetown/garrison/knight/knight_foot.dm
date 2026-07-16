@@ -22,7 +22,7 @@
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/tracking = SKILL_LEVEL_APPRENTICE,
 	)
@@ -46,7 +46,7 @@
 				l_hand = /obj/item/rogueweapon/flail/sflail
 				H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, SKILL_LEVEL_MASTER, TRUE)
 			if ("Warhammer")
-				beltr = /obj/item/rogueweapon/mace/warhammer
+				beltr = /obj/item/rogueweapon/mace/warhammer/steel
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_MASTER, TRUE)
 			if("Sabre")
 				beltl = /obj/item/rogueweapon/scabbard/sword
@@ -59,7 +59,7 @@
 	if(H.mind)
 		var/helmets = list(
 			"Pigface Bascinet" 	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface,
-			"Guard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
+			"Savoyard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
 			"Barred Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/sheriff,
 			"Bucket Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/bucket,
 			"Knight Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/knight,
@@ -68,6 +68,7 @@
 			"Hounskull Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/hounskull,
 			"Etruscan Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan,
 			"Slitted Kettle"	= /obj/item/clothing/head/roguetown/helmet/heavy/knight/skettle,
+			"Froggemund Helmet"	= /obj/item/clothing/head/roguetown/helmet/heavy/frogmouth,
 			"None"
 		)
 		var/helmchoice = input(H, "Choose your Helm.", "TAKE UP HELMS") as anything in helmets

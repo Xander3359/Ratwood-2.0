@@ -74,6 +74,8 @@
 	var/intercept_parent_attack = TRUE
 	var/intercept_parent_mousedrop = TRUE
 
+	var/does_not_spill = FALSE						// Suppresses liquid spilling behavior for reagent containers held within
+
 /datum/component/storage/Initialize(datum/component/storage/concrete/master)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -102,7 +104,6 @@
 	if(intercept_parent_attack)
 		RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, PROC_REF(attackby))
 		RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(on_attack_hand))
-		RegisterSignal(parent, COMSIG_ATOM_ATTACK_PAW, PROC_REF(on_attack_hand))
 		RegisterSignal(parent, COMSIG_ITEM_PRE_ATTACK, PROC_REF(preattack_intercept))
 		RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(attack_self))
 
@@ -179,9 +180,10 @@
 	for(var/mob/living/L in can_see_contents())
 		if(!L.CanReach(A))
 			hide_from(L)
-	for(var/obj/item/reagent_containers/I in A.contents)
-		if(I.reagents && I.spillable)
-			I.reagents.remove_all(3)
+	if(!does_not_spill)
+		for(var/obj/item/reagent_containers/I in A.contents)
+			if(I.spillable && I.reagents)
+				I.reagents.remove_all(3)
 
 /datum/component/storage/proc/attack_self(datum/source, mob/M)
 	if(locked)

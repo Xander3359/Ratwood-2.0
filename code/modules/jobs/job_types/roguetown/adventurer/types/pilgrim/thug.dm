@@ -65,7 +65,7 @@
 					H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_EXPERT, TRUE)
 					r_hand = /obj/item/rogueweapon/knuckles
 				if("Navaja")
-					H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_APPRENTICE, TRUE)
+					H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 					r_hand = /obj/item/rogueweapon/huntingknife/idagger/navaja
 				if("Bare Hands")
 					H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_EXPERT, TRUE)
@@ -75,7 +75,6 @@
 			to_chat(H, span_warning("You're smarter than the rest, by a stone's throw - and you know better than to get up close and personal. Unlike most others, you can read."))
 			H.set_blindness(0)
 
-			H.change_stat(STATKEY_WIL, -2)
 			H.change_stat(STATKEY_CON, -2)
 			H.change_stat(STATKEY_SPD, 2)
 			H.change_stat(STATKEY_INT, 2)
@@ -85,13 +84,14 @@
 
 			H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, SKILL_LEVEL_NOVICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_NOVICE, TRUE)
+			H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/craft/alchemy, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/craft/crafting, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/craft/weaponsmithing, SKILL_LEVEL_NOVICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/craft/armorsmithing, SKILL_LEVEL_NOVICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/misc/athletics, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/misc/swimming, SKILL_LEVEL_APPRENTICE, TRUE)
-			H.adjust_skillrank_up_to(/datum/skill/misc/climbing, SKILL_LEVEL_APPRENTICE, TRUE)
+			H.adjust_skillrank_up_to(/datum/skill/misc/climbing, SKILL_LEVEL_EXPERT, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/labor/farming, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/labor/fishing, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/misc/reading, SKILL_LEVEL_APPRENTICE, TRUE)
@@ -112,7 +112,7 @@
 				if("Lockpicking Equipment")
 					H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, SKILL_LEVEL_EXPERT, TRUE)
 					H.adjust_skillrank_up_to(/datum/skill/misc/stealing, SKILL_LEVEL_EXPERT, TRUE)
-					H.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, SKILL_LEVEL_JOURNEYMAN, TRUE)
+					H.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, SKILL_LEVEL_EXPERT, TRUE)
 					ADD_TRAIT(H, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 					r_hand = /obj/item/lockpickring/mundane
 
@@ -140,7 +140,7 @@
 			H.adjust_skillrank_up_to(/datum/skill/labor/mining, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/labor/lumberjacking, SKILL_LEVEL_JOURNEYMAN, TRUE)
 
-			var/options = list("Hands-On", "Big Axe")
+			var/options = list("Hands-On", "Big Axe", "Big Stick")
 			var/option_choice = input(H, "Choose your means.", "TAKE UP ARMS") as anything in options
 
 			switch(option_choice)
@@ -160,7 +160,6 @@
 	settling down as do you. Still, there is coin to be made on land."))
 			H.set_blindness(0)
 
-	
 			ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 
 			H.change_stat(STATKEY_STR, 2)
@@ -177,7 +176,6 @@
 			r_hand = /obj/item/rogueweapon/sword/cutlass
 			beltr = /obj/item/rogueweapon/scabbard/sword
 			beltl = /obj/item/rogueweapon/huntingknife/idagger
-	
 
 			H.adjust_skillrank_up_to(/datum/skill/combat/wrestling, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_JOURNEYMAN, TRUE)
@@ -193,3 +191,22 @@
 			H.adjust_skillrank_up_to(/datum/skill/labor/fishing, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, SKILL_LEVEL_APPRENTICE, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/misc/stealing, SKILL_LEVEL_JOURNEYMAN, TRUE)
+
+	var/gang = list("Gang Rontz Ratz", "Gang Blortz Volves", "Neverminde")
+	var/gang_choice = input(H, "Want to become a gang member?") as anything in gang
+
+	switch(gang_choice)
+		if("Gang Rontz Ratz")
+			to_chat(H, span_warning("I'm a member of street gang Rontz Ratz, a lot of time has passed and now we have to build up our power again,\
+			those bastards from Blortz Volves will answer for this.\
+			Rontz Rats bite - feel the fight!"))
+			ADD_TRAIT(H, TRAIT_GANG_A, TRAIT_GENERIC)
+			mask = /obj/item/clothing/mask/rogue/ragmask/red
+		if("Gang Blortz Volves")
+			to_chat(H, span_warning("I'm a member of street gang Blortz Volves, a lot of time has passed and now we have to build up our power again, \
+			those bastards from Rontz Ratz will answer for this. \
+			Blortz Wolves howl - enemies cower!"))
+			ADD_TRAIT(H, TRAIT_GANG_B, TRAIT_GENERIC)
+			mask = /obj/item/clothing/mask/rogue/ragmask/azure
+		if("Neverminde")
+			return null

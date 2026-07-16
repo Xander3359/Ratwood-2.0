@@ -7,6 +7,8 @@
 	max_integrity = 200
 	integrity_failure = 0.1
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sewrepair = TRUE
+	dropshrink = 0.85
 	///What level of bright light protection item has.
 	var/flash_protect = FLASH_PROTECTION_NONE
 	var/tint = 0				//Sets the item's level of visual impairment tint, normally set to the same as flash_protect
@@ -74,6 +76,7 @@
 	var/ducal_primary = FALSE // Uses duchy primary color for base color
 	var/ducal_detail = FALSE // Uses duchy secondary color for detail_color
 	var/ducal_altdetail = FALSE // Uses duchy secondary color for altdetail_color
+	var/shoddy_repair = FALSE // if we've been field repaired by an unskilled person, set this to true
 
 /obj/item/clothing/New()
 	..()
@@ -337,6 +340,38 @@
 		how_cool_are_your_threads += "</span>"
 		. += how_cool_are_your_threads.Join()
 */
+/obj/item/clothing/proc/get_flung_off()
+	if(!ishuman(loc))
+		return
+	var/mob/living/carbon/human/H = loc
+	var/max_range = (H.mind ? 2 : 3)
+	var/throwprob = (H.mind ? 8 : 80) + ((10 - H.STALUC))    // More FOR we have the less likely it is to happen.
+	if(!prob(throwprob))
+		return
+	perform_fling(H, max_range)
+
+/// Proc mostly for admins to use that omits probabilities. We could use an arg in the proc above, but navigating proccall is simpler without them.
+/obj/item/clothing/proc/get_flung_off_forced()
+	if(!ishuman(loc))
+		return
+	var/mob/living/carbon/human/H = loc
+	var/max_range = rand(2, 3)
+	perform_fling(H, max_range)
+
+/// Actual proc for flinging the item off. This shouldn't really 'fail' if it is getting called.
+/obj/item/clothing/proc/perform_fling(mob/living/carbon/human/H, max_range)
+	if(!H.dropItemToGround(src, silent = TRUE))
+		return
+	H.update_fov_angles()
+	if(istype(src, /obj/item/clothing/suit/roguetown/armor/chainmail) || istype(src, /obj/item/clothing/suit/roguetown/armor/plate))
+		do_sparks(2, TRUE, get_turf(H))
+	var/turnangle = (prob(10) ? 180 : prob(50) ? 270 : 90)
+	var/turndir = turn(H.dir, turnangle)
+	var/dist = rand(1, max_range)
+	var/current_turf = get_turf(H)
+	var/target_turf = get_ranged_target_turf(current_turf, turndir, dist)
+	playsound(get_turf(H), 'sound/misc/obj_toss.ogg', 100, TRUE)
+	throw_at(target_turf, dist, 6, H, FALSE)
 
 /obj/item/clothing/obj_break(damage_flag)
 	original_armor = armor
@@ -344,6 +379,11 @@
 	for(var/x in armorlist)
 		if(armorlist[x] > 0)
 			armorlist[x] = 0
+	var/mob/living/carbon/human/wearer = loc
+	if(istype(wearer))
+		if(HAS_TRAIT(wearer, TRAIT_LOOSE_STRAPS) && !HAS_TRAIT(src, TRAIT_NODROP))
+			wearer.visible_message(span_danger("[src] gets flung off!"))	
+			get_flung_off_forced()
 	..()
 
 /obj/item/clothing/obj_fix(mob/user, full_repair = TRUE)
@@ -428,7 +468,7 @@ BLIND     // can't see anything
 	if(..())
 		return 1
 
-	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
+	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE))
 		return
 	else
 		if(attached_accessory)
@@ -494,16 +534,6 @@ BLIND     // can't see anything
 	flags_inv ^= visor_flags_inv
 	flags_cover ^= initial(flags_cover)
 	icon_state = "[initial(icon_state)][up ? "up" : ""]"
-	if(visor_vars_to_toggle & VISOR_FLASHPROTECT)
-		flash_protect ^= initial(flash_protect)
-	if(visor_vars_to_toggle & VISOR_TINT)
-		tint ^= initial(tint)
-
-/obj/item/clothing/head/helmet/space/plasmaman/visor_toggling() //handles all the actual toggling of flags
-	up = !up
-	clothing_flags ^= visor_flags
-	flags_inv ^= visor_flags_inv
-	icon_state = "[initial(icon_state)]"
 	if(visor_vars_to_toggle & VISOR_FLASHPROTECT)
 		flash_protect ^= initial(flash_protect)
 	if(visor_vars_to_toggle & VISOR_TINT)
@@ -614,6 +644,43 @@ BLIND     // can't see anything
 	if(examine_text && length(examine_text))
 		str += "<br><font color = '#808080'>[examine_text]</font>"
 	return str
+
+/obj/item/clothing/show_examine_hover_tooltip()
+	if(..())
+		return TRUE
+	if(slot_flags & ITEM_SLOT_HEAD)
+		return TRUE
+	if(slot_flags & (ITEM_SLOT_BACK | ITEM_SLOT_BACKPACK | ITEM_SLOT_BELT | ITEM_SLOT_HIP | ITEM_SLOT_CLOAK))
+		return FALSE
+	return TRUE
+
+/obj/item/clothing/get_hover_examine_stat_lines(mob/user, self_examine = FALSE)
+	var/list/lines = list()
+	if(armor && (armor.getRating("slash") != 0 || armor.getRating("stab") != 0 || armor.getRating("blunt") != 0 || armor.getRating("piercing") != 0))
+		var/armor_class_text = "None"
+		switch(armor_class)
+			if(ARMOR_CLASS_LIGHT)
+				armor_class_text = "Light"
+			if(ARMOR_CLASS_MEDIUM)
+				armor_class_text = "Medium"
+			if(ARMOR_CLASS_HEAVY)
+				armor_class_text = "Heavy"
+		lines += "<b>ARMOR CLASS:</b> [armor_class_text]"
+		lines += "[colorgrade_rating("🔨 BLUNT", armor.blunt, TRUE)] | [colorgrade_rating("🪓 SLASH", armor.slash, TRUE)]"
+		lines += "[colorgrade_rating("🗡️ STAB", armor.stab, TRUE)] | [colorgrade_rating("🏹 PIERCE", armor.piercing, TRUE)]"
+	if(length(prevent_crits))
+		var/list/prevents = list()
+		for(var/flag in prevent_crits)
+			var/prevent_text = "[flag]"
+			if(flag == BCLASS_PICK)
+				prevent_text = "pick"
+			prevents += capitalize(prevent_text)
+		lines += "<b>PREVENTS CRITS:</b> [prevents.Join(", ")]"
+	if(self_examine)
+		var/true_durability = get_true_durability_percent_text()
+		if(true_durability)
+			lines += "<b>Durability:</b> [true_durability]"
+	return lines
 
 // Handle clicks from chat to show the examine details
 /obj/item/clothing/Topic(href, href_list)

@@ -3,7 +3,6 @@
 	tutorial = "You are the picture-perfect knight from a high tale, knowledgeable in riding steeds into battle. \
 	You specialize in weapons most useful on a saiga including swords, polearms, and bows."
 	outfit = /datum/outfit/job/roguetown/knight/mountedknight
-	horse = /mob/living/simple_animal/hostile/retaliate/rogue/saiga/saigabuck/tame/saddled
 
 	category_tags = list(CTAG_ROYALGUARD)
 
@@ -27,9 +26,15 @@
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
+	)
+
+	extra_context = "This class is restricted from using the Equestrian virtue."
+
+	virtue_restrictions = list(
+		/datum/virtue/utility/riding
 	)
 
 /datum/outfit/job/roguetown/knight/mountedknight/pre_equip(mob/living/carbon/human/H)
@@ -84,7 +89,7 @@
 	if(H.mind)
 		var/helmets = list(
 			"Pigface Bascinet" 	= /obj/item/clothing/head/roguetown/helmet/bascinet/pigface,
-			"Guard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
+			"Savoyard Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/guard,
 			"Barred Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/sheriff,
 			"Bucket Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/bucket,
 			"Knight Helmet"		= /obj/item/clothing/head/roguetown/helmet/heavy/knight,
@@ -93,6 +98,7 @@
 			"Hounskull Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/pigface/hounskull,
 			"Etruscan Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan,
 			"Slitted Kettle"	= /obj/item/clothing/head/roguetown/helmet/heavy/knight/skettle,
+			"Froggemund Helmet"	= /obj/item/clothing/head/roguetown/helmet/heavy/frogmouth,
 			"None"
 		)
 		var/helmchoice = input(H, "Choose your Helm.", "TAKE UP HELMS") as anything in helmets
@@ -115,3 +121,6 @@
 		/obj/item/rope/chain = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1
 	)
+	
+	if (H.mind)
+		H.AddSpell(new /obj/effect/proc_holder/spell/self/choose_riding_virtue_mount)

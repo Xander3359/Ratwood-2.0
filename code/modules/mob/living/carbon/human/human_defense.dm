@@ -35,8 +35,10 @@
 		if(used.blocksound)
 			playsound(loc, get_armor_sound(used.blocksound, blade_dulling), 100)
 		var/intdamage = damage
+		var/consume_debuff = TRUE
 		// Penetrative damage deals significantly less to the armor. Tentative.
-		if((damage + armor_penetration) > protection)
+		if((damage + armor_penetration) > protection && d_type != "blunt")
+			consume_debuff = FALSE
 			intdamage = (damage + armor_penetration) - protection
 		if(intdamfactor != 1)
 			intdamage *= intdamfactor
@@ -44,12 +46,27 @@
 			if(used.armor?.getRating("blunt") > 0)
 				var/bluntrating = used.armor.getRating("blunt")
 				intdamage -= intdamage * ((bluntrating / 2) / 100)	//Half of the blunt rating reduces blunt damage taken by %-age.
-		if(istype(used_weapon) && used_weapon.is_silver && ((used.smeltresult in list(/obj/item/ingot/aaslag, /obj/item/ingot/aalloy, /obj/item/ingot/purifiedaalloy)) || used.GetComponent(/datum/component/cursed_item)))
+		if(istype(used_weapon) && used_weapon.is_silver && ((used.smeltresult in list(/obj/item/ingot/aaslag, /obj/item/ingot/decrepit, /obj/item/ingot/gilbranze)) || used.GetComponent(/datum/component/cursed_item)))
 			// Blessed silver delivers more int damage against "cursed" alloys, see component for multiplier values
 			var/datum/component/silverbless/bless = used_weapon.GetComponent(/datum/component/silverbless)
 			if(bless.is_blessed)
 				// Apply multiplier if the blessing is active.
 				intdamage = round(intdamage * bless.cursed_item_intdamage)
+
+		if(consume_debuff)	//If this is FALSE, then this is a penetrative hit -- we consume these in bodypart_attacked_by.
+			if(has_status_effect(/datum/status_effect/debuff/exposed))
+				intdamage *= EXPOSED_INTEG_MOD
+				playsound(src, 'sound/combat/exposed_pop.ogg', 100, TRUE)
+				visible_message(span_biginfo("[src] suffers a savage hit to their armor while exposed, sending them reeling!"))
+				remove_status_effect(/datum/status_effect/debuff/exposed)
+				emote("pain", forced = TRUE)
+			else if(has_status_effect(/datum/status_effect/debuff/vulnerable))
+				intdamage *= VULN_INTEG_MOD
+				playsound(src, 'sound/combat/vulnerable_pop.ogg', 100, TRUE)
+				visible_message(span_biginfo("[src] is struck while vulnerable, leaving a dent in their armor!"))
+				remove_status_effect(/datum/status_effect/debuff/vulnerable)
+				emote("groan", forced = TRUE)
+
 		used.take_damage(intdamage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 	if(physiology)
 		protection += physiology.armor.getRating(d_type)
@@ -259,58 +276,13 @@
 			var/stealthy = (m_intent == MOVE_INTENT_SNEAK)
 			if(H.try_accept_offered_item(src, offered_item, stealthy))
 				return TRUE
-	
+
 	if(..())	//to allow surgery to return properly.
 		return
 	retaliate(user)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		dna.species.spec_attack_hand(H, src)
-
-/mob/living/carbon/human/attack_paw(mob/living/carbon/monkey/M)
-	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-	var/obj/item/bodypart/affecting = get_bodypart(ran_zone(dam_zone))
-	if(!affecting)
-		affecting = get_bodypart(BODY_ZONE_CHEST)
-	if(M.used_intent.type == INTENT_HELP)
-		..() //shaking
-		return 0
-
-	retaliate(M)
-
-	if(M.used_intent.type == INTENT_DISARM) //Always drop item in hand, if no item, get stunned instead.
-		var/obj/item/I = get_active_held_item()
-		if(I && dropItemToGround(I, silent = FALSE))
-			playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
-			visible_message(span_danger("[M] disarmed [src]!"), \
-							span_danger("[M] disarmed you!"), span_hear("I hear aggressive shuffling!"), null, M)
-			to_chat(M, span_danger("I disarm [src]!"))
-		else if(!M.client || prob(5)) // only natural monkeys get to stun reliably, (they only do it occasionaly)
-			playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
-			if (src.IsKnockdown() && !src.IsParalyzed())
-				Paralyze(40)
-				log_combat(M, src, "pinned")
-				visible_message(span_danger("[M] pins [src] down!"), \
-								span_danger("[M] pins you down!"), span_hear("I hear shuffling and a muffled groan!"), null, M)
-				to_chat(M, span_danger("I pin [src] down!"))
-			else
-				Knockdown(30)
-				log_combat(M, src, "tackled")
-				visible_message(span_danger("[M] tackles [src] down!"), \
-								span_danger("[M] tackles you down!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), null, M)
-				to_chat(M, span_danger("I tackle [src] down!"))
-
-	if(M.limb_destroyer)
-		dismembering_strike(M, affecting.body_zone)
-
-	if(can_inject(M, 1, affecting))//Thick suits can stop monkey bites.
-		if(..()) //successful monkey bite, this handles disease contraction.
-			var/damage = rand(1, 3)
-			if(check_shields(M, damage, "the [M.name]"))
-				return 0
-			if(stat != DEAD)
-				apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, "slash", damage = damage))
-		return 1
 
 
 /mob/living/carbon/human/attack_animal(mob/living/simple_animal/M)
@@ -650,7 +622,17 @@
 			examination += "[m1] [IsSleeping() ? "asleep" : "unconscious"]."
 	else
 		examination += span_dead("[m1] dead.")
-
+	switch(bodytemperature)
+		if(0 to BODYTEMP_COLD_LEVEL_ONE_MAX)
+			examination += span_biginfo("<font color='#023E8A'> [m1] shivering greatly</font>")
+		if(BODYTEMP_COLD_LEVEL_ONE_MAX to BODYTEMP_NORMAL_MIN)
+			examination += span_biginfo("<font color='#99e6ff'> [m1] shivering</font>")
+		if(BODYTEMP_NORMAL_MIN to BODYTEMP_NORMAL_MAX)
+			examination += span_biginfo("<B>[m1] average temperature.</B>")
+		if(BODYTEMP_NORMAL_MAX to BODYTEMP_HEAT_LEVEL_ONE_MAX)
+			examination += span_biginfo("<font color='#ffff00'> [m1] sweating</font>")
+		if(BODYTEMP_HEAT_LEVEL_ONE_MAX to 600)
+			examination += span_biginfo("<font color='#DC143C?'> [m1] sweating greatly</font>")
 	switch(blood_volume)
 		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 			examination += span_artery("<B>[m1] extremely anemic.</B>")
@@ -677,7 +659,18 @@
 		BODY_ZONE_L_LEG,
 		BODY_ZONE_R_LEG,
 	)
-	for(var/body_zone in body_zones)
+	// this is done to avoid showing the taur part twice since there's two legs
+	var/static/list/taur_zones = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_TAUR
+	)
+	var/list/zones_to_check = body_zones
+	if(get_taur_tail())
+		zones_to_check = taur_zones
+	for(var/body_zone in zones_to_check)
 		var/obj/item/bodypart/bodypart = get_bodypart(body_zone)
 		if(!bodypart)
 			examination += span_info("☼ [capitalize(parse_zone(body_zone))]: <span class='deadsay'><b>MISSING</b></span>")
@@ -717,6 +710,71 @@
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))
+	return examination
+
+/mob/living/carbon/human/proc/get_temperature_state()
+
+	var/atom/movable/screen/temperature/T = hud_used.temperature
+	if(!T)
+		return TEMP_STATE_NORMAL
+
+	switch(T.icon_state)
+		if("tempverycold") return TEMP_STATE_VERY_COLD
+		if("tempcold") return TEMP_STATE_COLD
+		if("tempnormal") return TEMP_STATE_NORMAL
+		if("temphot") return TEMP_STATE_HOT
+		if("tempveryhot") return TEMP_STATE_VERY_HOT
+
+	return TEMP_STATE_NORMAL
+
+/mob/living/carbon/human/proc/check_temperature_state(mob/user = src, silent = FALSE)
+
+	var/list/examination = list("<span class='info'>ø ------------ ø")
+
+	var/m1
+	if(user == src)
+		m1 = "I am"
+		examination += span_notice("Let's see how my body temperature feels.")
+	else
+		m1 = "[p_they(TRUE)] [p_are()]"
+		examination += span_notice("Let's see how [src]'s temperature looks.")
+
+	// Get temperature state
+	var/temp_state = get_temperature_state()
+
+	switch(temp_state)
+
+		if(TEMP_STATE_VERY_COLD)
+			examination += span_danger("<B>[m1] extremely cold!</B>")
+			examination += span_biginfo("- Severe shivering")
+			examination += span_biginfo("- Movement speed reduced")
+			examination += span_biginfo("- Constitution reduced")
+			examination += span_danger("- Risk of frostbite after prolonged exposure")
+
+		if(TEMP_STATE_COLD)
+			examination += span_danger("[m1] cold.")
+			examination += span_biginfo("- Hunger increases faster")
+			examination += span_biginfo("- Occasional shivering")
+
+		if(TEMP_STATE_NORMAL)
+			examination += span_biginfo("[m1] at a comfortable temperature.")
+
+		if(TEMP_STATE_HOT)
+			examination += span_danger("[m1] hot.")
+			examination += span_biginfo("- Thirst increases faster")
+			examination += span_biginfo("- Occasional sweating")
+
+		if(TEMP_STATE_VERY_HOT)
+			examination += span_danger("<B>[m1] extremely hot!</B>")
+			examination += span_biginfo("- Actions take more stamina")
+			examination += span_biginfo("- Stamina recovery takes twice as long")
+			examination += span_danger("- Risk of heatstroke after prolonged exposure")
+
+	examination += "ø ------------ ø</span>"
+
+	if(!silent)
+		to_chat(user, examination.Join("\n"))
+
 	return examination
 
 /mob/living/carbon/human/damage_clothes(damage_amount, damage_type = BRUTE, damage_flag = 0, def_zone)

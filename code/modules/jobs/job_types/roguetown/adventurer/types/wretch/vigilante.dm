@@ -5,6 +5,7 @@
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/wretch/vigilante
 	cmode_music = 'sound/music/combatmaniac.ogg'
+	class_select_category = CLASS_CAT_ROGUE
 	category_tags = list(CTAG_WRETCH)
 	traits_applied = list(TRAIT_DECEIVING_MEEKNESS, TRAIT_PERFECT_TRACKER)
 	maximum_possible_slots = 1 // There can only be one.
@@ -85,7 +86,6 @@
 	H.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, 4, TRUE) //Investigations
 	H.adjust_skillrank_up_to(/datum/skill/combat/slings, 4, TRUE) // Funny as shit to use.
 	H.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE) //Last resort CQC. Enough def on a quarterstaff to fight defensively, not enough to be truly offensive.
-	H.adjust_skillrank_up_to(/datum/skill/combat/staves, 3, TRUE) //Nearly missed this while finishing up the staff-skill port.
 	H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 4, TRUE) //I lurk in the shadows...
 	H.adjust_skillrank_up_to(/datum/skill/craft/crafting, 4, TRUE) //Crafty
 	H.adjust_skillrank_up_to(/datum/skill/misc/climbing, 5, TRUE) // Escape routes

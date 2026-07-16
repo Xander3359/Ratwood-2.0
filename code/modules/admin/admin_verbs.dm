@@ -7,6 +7,8 @@ GLOBAL_PROTECT(admin_verbs_default)
 	return list(
 	/client/proc/check_pq,
 	/client/proc/adjust_pq,
+	/client/proc/recalc_pq_bulk,
+	/client/proc/recalc_pq_single,
 	/client/proc/hearallasghost,
 	/client/proc/hearglobalLOOC,
 	/client/proc/togglespawnmessages,
@@ -112,6 +114,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/sleep_view,
 	/datum/admins/proc/wake_view,
 	/datum/admins/proc/extend_round,
+	/client/proc/open_fax_panel,
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(
 	/client/proc/unban_panel,
@@ -127,7 +130,10 @@ GLOBAL_LIST_INIT(admin_verbs_sounds, list(
 	/client/proc/play_local_sound,
 	/client/proc/play_local_sound_variable,
 	/client/proc/play_sound,
-	/client/proc/set_round_end_sound
+	/client/proc/set_round_end_sound,
+	/client/proc/play_music_global_url,
+	/client/proc/play_music_local_url,
+	/client/proc/play_music_direct_url
 	))
 GLOBAL_PROTECT(admin_verbs_sounds)
 GLOBAL_LIST_INIT(admin_verbs_fun, list(
@@ -168,6 +174,7 @@ GLOBAL_PROTECT(admin_verbs_server)
 //	/datum/admins/proc/toggleAI,
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_debug_del_all,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/toggle_random_events,
 	/client/proc/forcerandomrotate,
 	/client/proc/adminchangemap,
@@ -190,6 +197,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/restart_controller,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
@@ -251,6 +259,9 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/play_local_sound_variable,
 	/client/proc/play_sound,
 	/client/proc/set_round_end_sound,
+	/client/proc/play_music_global_url,
+	/client/proc/play_music_local_url,
+	/client/proc/play_music_direct_url,
 	/client/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
@@ -278,6 +289,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/reload_admins,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_debug_del_all,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/enable_debug_verbs,
 	/proc/possess,
 	/proc/release,

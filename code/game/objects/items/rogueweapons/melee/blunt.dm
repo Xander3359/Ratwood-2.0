@@ -58,6 +58,12 @@
 		force = H.move_force)
 // Do not call handle_knockback like in knockback cuz that means it will hardstun
 
+/datum/intent/mace/strike/goden
+	reach = 2
+
+/datum/intent/mace/smash/goden
+	reach = 2
+
 /datum/intent/mace/rangedthrust
 	name = "thrust"
 	blade_class = BCLASS_STAB
@@ -103,6 +109,7 @@
 	wdefense = 2
 	wbalance = WBALANCE_HEAVY
 	icon_angle_wielded = 50
+	special = /datum/special_intent/ground_smash
 
 /obj/item/rogueweapon/mace/getonmobprop(tag)
 	. = ..()
@@ -126,19 +133,6 @@
 	max_integrity = 250
 	wdefense = 2
 
-/obj/item/rogueweapon/mace/alloy
-	name = "decrepit mace"
-	desc = "Frayed bronze, perched atop a rotwooden shaft. His sacrifice had drowned Old Syon, and - in its wake - left Man bereft of all it had accomplished. With all other prayers falling upon deaf ears, Man had crafted this idol in tribute to its new God; violence."
-	icon_state = "amace"
-	force = 17
-	force_wielded = 21
-	max_integrity = 180
-	blade_dulling = DULLING_SHAFT_CONJURED
-	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
-	anvilrepair = null
-
-
 /obj/item/rogueweapon/mace/church
 	force = 25
 	force_wielded = 30
@@ -160,11 +154,21 @@
 	wdefense = 3
 	smelt_bar_num = 2
 
-/obj/item/rogueweapon/mace/steel/palloy
-	name = "ancient alloy mace"
+/obj/item/rogueweapon/mace/steel/ancient
+	name = "ancient mace"
 	desc = "Polished gilbranze, perched atop a reinforced shaft. Break the unenlightened into naught-but-giblets; like a potter's vessels, dashed against the rocks."
 	icon_state = "amace"
 	smeltresult = /obj/item/ingot/aaslag
+
+/obj/item/rogueweapon/mace/steel/ancient/decrepit
+	name = "decrepit mace"
+	desc = "Frayed bronze, perched atop a rotwooden shaft. His sacrifice had drowned Old Syon, and - in its wake - left Man bereft of all it had accomplished. With all other prayers falling upon deaf ears, Man had crafted this idol in tribute to its new God; violence."
+	force = 17
+	force_wielded = 21
+	max_integrity = 180
+	blade_dulling = DULLING_SHAFT_CONJURED
+	color = "#bb9696"
+	anvilrepair = null
 
 /obj/item/rogueweapon/mace/steel/silver
 	force = 30
@@ -264,7 +268,6 @@
 	force_wielded = 30
 	minstr = 9
 	wdefense = 5
-	wbalance = WBALANCE_SWIFT
 	resistance_flags = FIRE_PROOF
 	icon_state = "psyflangedmace"
 	is_silver = TRUE
@@ -371,11 +374,12 @@
 	force = 15
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/rangedthrust, /datum/intent/effect/daze)
+	gripped_intents = list(/datum/intent/mace/strike/goden, /datum/intent/mace/smash/goden, /datum/intent/mace/rangedthrust, /datum/intent/effect/daze)
 	name = "Goedendag"
 	desc = "Good morning."
 	icon_state = "goedendag"
 	icon = 'icons/roguetown/weapons/64.dmi'
+	slot_flags = null
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
 	wlength = WLENGTH_LONG
@@ -403,17 +407,6 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/rogueweapon/mace/goden/aalloy
-	name = "decrepit grand mace"
-	desc = "Good nite, sire."
-	force = 12
-	force_wielded = 22
-	icon_state = "ancient_supermace"
-	blade_dulling = DULLING_SHAFT_CONJURED
-	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
-	anvilrepair = null
-
 /obj/item/rogueweapon/mace/goden/steel
 	name = "grand mace"
 	desc = "Good morning, sire."
@@ -424,12 +417,21 @@
 	smelt_bar_num = 2
 	wdefense_wbonus = 5
 
-/obj/item/rogueweapon/mace/goden/steel/paalloy
+/obj/item/rogueweapon/mace/goden/steel/ancient
 	name = "ancient grand mace"
 	desc = "A twisting polehammer, forged in polished gilbranze. What did you think this was all about? This destruction, this war, this sacrifice; it was all to prepare Man for its true ascension."
 	icon_state = "ancient_supermace"
 	smeltresult = /obj/item/ingot/aaslag
 
+/obj/item/rogueweapon/mace/goden/steel/ancient/decrepit
+	name = "decrepit grand mace"
+	desc = "Good nite, sire."
+	force = 12
+	force_wielded = 22
+	max_integrity = 180
+	blade_dulling = DULLING_SHAFT_CONJURED
+	color = "#bb9696"
+	anvilrepair = null
 
 /obj/item/rogueweapon/mace/goden/deepduke
 	name = "deep duke's staff"
@@ -447,24 +449,21 @@
 	name = "kanabo"
 	desc = "A steel-banded wooden club, made to break the enemy in spirit as much as in flesh. One of the outliers among the many more elegant weapons of Kazengun."
 	icon_state = "kanabo"
-	slot_flags = ITEM_SLOT_BACK
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/stab, /datum/intent/effect/daze)
+	gripped_intents = list(/datum/intent/mace/strike/goden, /datum/intent/mace/smash/goden, /datum/intent/stab, /datum/intent/effect/daze)
 	max_integrity = 225 // it's strong wood, but it's still wood.
 
-/obj/item/rogueweapon/mace/goden/psymace
-	name = "psydonic mace"
+/obj/item/rogueweapon/mace/goden/psy
+	name = "psydonic grand mace"
 	desc = "An ornate mace, plated in a ceremonial veneer of silver. Even the unholy aren't immune to discombobulation."
 	icon_state = "psymace"
-	force = 30
+	force = 15
 	force_wielded = 35
 	minstr = 12
-	wdefense = 6
-	wbalance = WBALANCE_HEAVY
 	smelt_bar_num = 2
 	is_silver = TRUE
 	smeltresult = /obj/item/ingot/silverblessed
 
-/obj/item/rogueweapon/mace/goden/psymace/ComponentInitialize()
+/obj/item/rogueweapon/mace/goden/psy/ComponentInitialize()
 	AddComponent(\
 		/datum/component/silverbless,\
 		pre_blessed = BLESSING_NONE,\
@@ -475,7 +474,18 @@
 		added_def = 1,\
 	)
 
-/obj/item/rogueweapon/mace/goden/psymace/old
+/obj/item/rogueweapon/mace/goden/psy/preblessed/ComponentInitialize()
+	AddComponent(\
+		/datum/component/silverbless,\
+		pre_blessed = BLESSING_PSYDONIAN,\
+		silver_type = SILVER_PSYDONIAN,\
+		added_force = 0,\
+		added_blade_int = 0,\
+		added_int = 50,\
+		added_def = 1,\
+	)
+
+/obj/item/rogueweapon/mace/goden/psy/old
 	name = "enduring mace"
 	desc = "An ornate mace, its silver tarnished by neglect. Even without HIS holy blessing, its weight ENDURES."
 	icon_state = "psymace"
@@ -487,7 +497,7 @@
 	smeltresult = /obj/item/ingot/steel
 	color = COLOR_FLOORTILE_GRAY
 
-/obj/item/rogueweapon/mace/goden/psymace/old/ComponentInitialize()
+/obj/item/rogueweapon/mace/goden/psy/old/ComponentInitialize()
 	return
 
 /obj/item/rogueweapon/mace/spiked
@@ -506,17 +516,6 @@
 	wbalance = WBALANCE_HEAVY
 	smeltresult = /obj/item/ingot/iron
 	wdefense = 3
-
-/obj/item/rogueweapon/mace/warhammer/alloy
-	name = "decrepit warhammer"
-	desc = "A macehead of frayed bronze, spiked and perched atop a thin shaft. To see such a knightly implement abandoned to decay and neglect; that wounds the heart greater than any well-poised strike."
-	icon_state = "awarhammer"
-	force = 17
-	max_integrity = 180
-	blade_dulling = DULLING_SHAFT_CONJURED
-	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
-	anvilrepair = null
 
 /obj/item/rogueweapon/mace/warhammer/steel
 	force = 25
@@ -538,11 +537,20 @@
 				return list("shrink" = 0.4,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 	return ..()
 
-/obj/item/rogueweapon/mace/warhammer/steel/paalloy
-	name = "ancient alloy warhammer"
+/obj/item/rogueweapon/mace/warhammer/steel/ancient
+	name = "ancient warhammer"
 	desc = "A macehead of polished gilbranze, spiked and perched atop a reinforced shaft. An elegant weapon from a more civilized age; when Man lived in harmony with one-another, and when 'the undying' was nothing more than a nitemare's thought."
 	icon_state = "awarhammer"
 	smeltresult = /obj/item/ingot/aaslag
+
+/obj/item/rogueweapon/mace/warhammer/steel/ancient/decrepit
+	name = "decrepit warhammer"
+	desc = "A macehead of frayed bronze, spiked and perched atop a thin shaft. To see such a knightly implement abandoned to decay and neglect; that wounds the heart greater than any well-poised strike."
+	force = 17
+	max_integrity = 180
+	blade_dulling = DULLING_SHAFT_CONJURED
+	color = "#bb9696"
+	anvilrepair = null
 
 /obj/item/rogueweapon/mace/warhammer/steel/silver
 	name = "silver warhammer"

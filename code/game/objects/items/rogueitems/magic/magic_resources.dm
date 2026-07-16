@@ -16,6 +16,7 @@
 	grid_width = 32
 	grid_height = 32
 	var/tier = 0 //used for determining potency for mob healing
+	dropshrink = 0.85
 
 // MELD
 /obj/item/magic/melded
@@ -82,7 +83,7 @@
 /obj/item/magic/manacrystal
 	name = "crystalized mana"
 	icon_state = "manacrystal"
-	desc = "A crystal made of mana, woven into an artifical structure."
+	desc = "A crystal made of mana, woven into an artificial structure."
 	w_class = WEIGHT_CLASS_SMALL
 	grind_results = list(/datum/reagent/medicine/manapot = 20)
 	mill_result = /obj/item/reagent_containers/powder/mana
@@ -92,6 +93,7 @@
 	icon_state = "runedartifact"
 	desc = "An old stone from age long ago, marked with glowing sigils."
 	w_class = WEIGHT_CLASS_SMALL
+	dropshrink = 0.8
 
 /obj/item/magic/artifact/Initialize(mapload)
 	.=..()
@@ -137,7 +139,7 @@
 /obj/item/magic/infernal/flame//T4 mage summon loot
 	name = "abyssal flame"
 	icon_state = "abyssalflame"
-	desc = "A  flickering, black flame contained in a crystal; the heart of an archfiend. Or atleast, what passes for one. It pulses with dense thrums of magick."
+	desc = "A flickering, black flame contained in a crystal; the heart of an archfiend. Or at least, what passes for one. It pulses with dense thrums of magick."
 	sellprice = T4SELLPRICE
 	tier = 4
 
@@ -161,7 +163,7 @@
 /obj/item/magic/fae/scale	//T2 mage summon loot
 	name = "iridescent scales"
 	icon_state = "iridescent_scale"
-	desc = "Tiny, colorful scales from a glimmerwing, they shine with inate magic"
+	desc = "Tiny, colorful scales from a glimmerwing; they shine with innate magic."
 	sellprice = T2SELLPRICE
 	tier = 2
 

@@ -763,6 +763,9 @@ SUBSYSTEM_DEF(gamemode)
 	chosen_storyteller.times_chosen++
 	GLOB.featured_stats[FEATURED_STATS_STORYTELLERS]["entries"][initial(chosen_storyteller.name)] = chosen_storyteller.times_chosen
 	current_storyteller = chosen_storyteller
+	if(SSgnoll_scaling)
+		SSgnoll_scaling.apply_storyteller_mode(current_storyteller.preferred_gnoll_mode, current_storyteller.name)
+		SSgnoll_scaling.unlock_gnoll_scaling()
 	if(!secret_storyteller)
 		send_to_playing_players(span_notice("<b>Storyteller is [current_storyteller.name]!</b>"))
 		send_to_playing_players(span_notice("[current_storyteller.welcome_text]"))
@@ -1200,6 +1203,7 @@ SUBSYSTEM_DEF(gamemode)
 		STATS_ALIVE_LUPIANS,
 		STATS_ALIVE_MOTHS,
 		STATS_ALIVE_HARPIES,
+		STATS_ALIVE_ARACHNIDS,
 	)
 
 	for(var/stat_name in statistics_to_clear)
@@ -1268,7 +1272,7 @@ SUBSYSTEM_DEF(gamemode)
 			var/mob/living/carbon/human/human_mob = client.mob
 			record_round_statistic(STATS_TOTAL_POPULATION)
 			for(var/obj/item/clothing/neck/current_item in human_mob.get_equipped_items(TRUE))
-				if(current_item.type in list(/obj/item/clothing/neck/roguetown/psicross, /obj/item/clothing/neck/roguetown/psicross/wood, /obj/item/clothing/neck/roguetown/psicross/aalloy, /obj/item/clothing/neck/roguetown/psicross/silver,	/obj/item/clothing/neck/roguetown/psicross/g))
+				if(current_item.type in list(/obj/item/clothing/neck/roguetown/psicross, /obj/item/clothing/neck/roguetown/psicross/wood, /obj/item/clothing/neck/roguetown/psicross/decrepit, /obj/item/clothing/neck/roguetown/psicross/silver,	/obj/item/clothing/neck/roguetown/psicross/g))
 					record_round_statistic(STATS_PSYCROSS_USERS)
 					break
 			switch(human_mob.pronouns)
@@ -1353,6 +1357,8 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ALIVE_MOTHS)
 			if(isharpy(human_mob))
 				record_round_statistic(STATS_ALIVE_HARPIES)
+			if(isarachnid(human_mob))
+				record_round_statistic(STATS_ALIVE_ARACHNIDS)
 
 			// Chronicle statistics
 			if(human_mob.STASTR > highest_strength)

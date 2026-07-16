@@ -1,6 +1,6 @@
 /datum/advclass/mercenary/atgervi
 	name = "Atgervi"
-	tutorial = "You are a Varangian of the Gronn Highlands. Warrior-Traders whose exploits into the Raneshen Empire will be forever remembered by historians."
+	tutorial = "You are a Varangian of the Gronn Highlands. Warrior-Traders whose exploits into the Zybantine Empire will be forever remembered by historians."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/mercenary/atgervi
@@ -39,7 +39,7 @@
 
 /datum/outfit/job/roguetown/mercenary/atgervi/pre_equip(mob/living/carbon/human/H)
 	..()
-	to_chat(H, span_warning("You are a Varangian of the Gronn Highlands. Warrior-Traders whose exploits into the Raneshen Empire will be forever remembered by historians."))
+	to_chat(H, span_warning("You are a Varangian of the Gronn Highlands. Warrior-Traders whose exploits into the Zybantine Empire will be forever remembered by historians."))
 	if(H.mind?.current)
 		H.mind.current.faction += "[H.name]_faction"
 	head = /obj/item/clothing/head/roguetown/helmet/bascinet/atgervi
@@ -185,6 +185,7 @@
 	worn_y_dimension = 48
 	experimental_inhand = FALSE
 	experimental_onhip = FALSE
+	dropshrink = 0.8
 
 /obj/item/clothing/shoes/roguetown/boots/leather/atgervi
 	name = "atgervi leather boots"

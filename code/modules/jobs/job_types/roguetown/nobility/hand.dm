@@ -86,6 +86,11 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/royal/hand_f
 	else if(should_wear_masc_clothes(H))
 		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/royal/hand_m
+	if(SSmapping.config.map_name == "Desert Town")
+		shoes = /obj/item/clothing/shoes/roguetown/shalal
+		r_hand = /obj/item/rogueweapon/sword/sabre/dec
+		head = /obj/item/clothing/head/roguetown/turban/fancypurple
+		shirt = /obj/item/clothing/suit/roguetown/shirt/robe/hierophant
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger/dtace = 1,//You don't get killer's ice for this because you're the gross swordsmaster and I HATE YOU!!!!
 		/obj/item/rogueweapon/scabbard/sheath = 1,
@@ -110,7 +115,7 @@
 		STATKEY_SPD = 3,
 		STATKEY_PER = 2,
 		STATKEY_INT = 2,
-		STATKEY_STR = -1,
+		STATKEY_LCK = 1,
 	)
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_EXPERT,
@@ -140,7 +145,7 @@
 	)
 	if(H.dna.species.type in NON_DWARVEN_RACE_TYPES)
 		shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/shadowrobe
-		cloak = /obj/item/clothing/cloak/half/shadowcloak
+		cloak = /obj/item/clothing/cloak/shadowcloak
 		gloves = /obj/item/clothing/gloves/roguetown/fingerless/shadowgloves
 		mask = /obj/item/clothing/mask/rogue/shepherd/shadowmask
 		pants = /obj/item/clothing/under/roguetown/trou/shadowpants
@@ -154,6 +159,10 @@
 		H.adjust_skillrank_up_to(/datum/skill/misc/sneaking, 6, TRUE)
 		H.adjust_skillrank_up_to(/datum/skill/misc/stealing, 6, TRUE)
 		H.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, 6, TRUE)
+	if(SSmapping.config.map_name == "Desert Town")
+		shoes = /obj/item/clothing/shoes/roguetown/shalal
+		head = /obj/item/clothing/head/roguetown/turban/fancypurple
+		shirt = /obj/item/clothing/suit/roguetown/shirt/robe/hierophant
 
 //Advisor Start
 /datum/advclass/hand/advisor
@@ -174,7 +183,7 @@
 		/datum/skill/combat/crossbows = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/staves = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
@@ -199,6 +208,10 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/royal/hand_f
 	else if(should_wear_masc_clothes(H))
 		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/royal/hand_m
+	if(SSmapping.config.map_name == "Desert Town")
+		shoes = /obj/item/clothing/shoes/roguetown/shalal
+		head = /obj/item/clothing/head/roguetown/turban/fancypurple
+		shirt = /obj/item/clothing/suit/roguetown/shirt/robe/hierophant
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger/dtace = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,

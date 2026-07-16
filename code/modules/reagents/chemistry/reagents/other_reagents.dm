@@ -59,8 +59,9 @@
 /datum/reagent/blood/on_mob_life(mob/living/carbon/H)//I hate you
 	..()
 	if(HAS_TRAIT(H, TRAIT_HEMOPHAGE))
-		H.adjust_nutrition(2)
-		H.adjust_hydration(2)
+		H.adjust_nutrition(10)
+		H.adjust_hydration(10)
+		H.reagents.add_reagent(/datum/reagent/medicine/vital_essence, 12)
 		if(H.blood_volume < BLOOD_VOLUME_NORMAL)
 			H.blood_volume = min(H.blood_volume+4, BLOOD_VOLUME_NORMAL)//Less effective than just water.
 		return
@@ -74,8 +75,9 @@
 /datum/reagent/blood/shitty/on_mob_life(mob/living/carbon/H)
 	..()
 	if(HAS_TRAIT(H, TRAIT_HEMOPHAGE))
-		H.adjust_nutrition(0.3)
-		H.adjust_hydration(0.3)
+		H.adjust_nutrition(3)
+		H.adjust_hydration(3)
+		H.reagents.add_reagent(/datum/reagent/medicine/vital_essence, 6)
 		if(H.blood_volume < BLOOD_VOLUME_NORMAL)
 			H.blood_volume = min(H.blood_volume+2, BLOOD_VOLUME_NORMAL)//Much less effective than just water.
 		if(prob(5))
@@ -98,7 +100,7 @@
 /datum/reagent/water
 	name = "Water"
 	description = "An ubiquitous chemical substance that is composed of hydrogen and oxygen."
-	color = "#6a9295c6"
+	color = "#6a9295"
 	taste_description = "water"
 	var/cooling_temperature = 2
 	glass_icon_state = "glass_clear"
@@ -115,6 +117,20 @@
 	results = list(/datum/reagent/water/gross = 2)
 	required_reagents = list(/datum/reagent/water/gross = 1, /datum/reagent/water = 1)
 
+/datum/reagent/water/reaction_mob(mob/living/M, method = TOUCH, reac_volume)
+	if(!isliving(M))
+		return ..()
+
+	if(method in list(TOUCH, VAPOR, PATCH))
+		var/mob/living/L = M
+
+		// 120u of water cools 100 temperature- or one level of temperature (A bucket/stonepot)
+		var/cooling = reac_volume * (100 / 120)
+
+		L.bodytemperature = max(L.bodytemperature - cooling, BODYTEMP_COLD_LEVEL_ONE_MAX)	//Will never put someone at level 2 cold
+
+	return ..()
+
 #define WATER_BLOOD_RESTORE 5
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	if(ishuman(M))
@@ -125,6 +141,8 @@
 			H.adjust_hydration(hydration)
 			if(M.blood_volume < BLOOD_VOLUME_NORMAL)
 				M.blood_volume = min(M.blood_volume+WATER_BLOOD_RESTORE, BLOOD_VOLUME_NORMAL)
+		if(M.bodytemperature > BODYTEMP_NORMAL_MIN + 5)	//drinking water lowers a persons temperature up to the 'normal' minimum
+			M.adjust_bodytemperature(-5)
 	..()
 #undef WATER_BLOOD_RESTORE
 
@@ -1578,17 +1596,9 @@
 
 	return ..()
 
-//monkey powder heehoo
-/datum/reagent/monkey_powder
-	name = "Monkey Powder"
-	description = "Just add water!"
-	color = "#9C5A19"
-	taste_description = "bananas"
-	can_synth = TRUE
-
 /datum/reagent/cellulose
 	name = "Cellulose Fibers"
-	description = "A crystaline polydextrose polymer, plants swear by this stuff."
+	description = "A crystalline polydextrose polymer, plants swear by this stuff."
 	reagent_state = SOLID
 	color = "#E6E6DA"
 	taste_mult = 0

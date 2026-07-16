@@ -23,6 +23,13 @@
 	if(smeltresult)
 		var/obj/item/smelted = smeltresult
 		. += span_info("Smelts into [smelted.name].")
+	
+	if(nudist_approved)
+		if(HAS_TRAIT(user, TRAIT_NUDE_SLEEPER))
+			. += span_smallnotice("I can tolerate having this on when I sleep.")
+		else if(HAS_TRAIT(user, TRAIT_NUDIST))
+			. += span_smallnotice("I can tolerate wearing this.")
+
 	for(var/datum/examine_effect/E in examine_effects)
 		E.trigger(user)
 
@@ -37,16 +44,15 @@
 
 	if(obj_broken)
 		return span_warning("It's broken.")
-	if(elaborate)
-		switch(int_percent)
-			if(1 to 15)
-				result = span_warning("It's nearly broken.")
-			if(16 to 30)
-				result = span_warning("It's severely damaged.")
-			if(31 to 80)
-				result = span_warning("It's damaged.")
-			if(80 to 99)
-				result = span_warning("It's a little damaged.")
+	switch(int_percent)
+		if(1 to 15)
+			result = span_warning("It's nearly broken.")
+		if(16 to 30)
+			result = span_warning("It's severely damaged.")
+		if(31 to 80)
+			result = span_warning("It's damaged.")
+		if(80 to 99)
+			result = span_warning("It's a little damaged.")
 	return result
 
 /obj/item/clothing/integrity_check(elaborate = FALSE)
@@ -59,17 +65,14 @@
 	var/percent = round((ratio * 100), 1)
 	var/result
 	if(percent < 100)
-		if(elaborate)
-			return span_warning("([percent]%)")
-		else
-			switch(percent)
-				if(1 to 15)
-					result = span_warning("It's nearly broken.")
-				if(16 to 30)
-					result = span_warning("It's severely damaged.")
-				if(31 to 80)
-					result = span_warning("It's damaged.")
-				if(80 to 99)
-					result = span_warning("It's a little damaged.")
+		switch(percent)
+			if(1 to 15)
+				result = span_warning("It's nearly broken.")
+			if(16 to 30)
+				result = span_warning("It's severely damaged.")
+			if(31 to 80)
+				result = span_warning("It's damaged.")
+			if(80 to 99)
+				result = span_warning("It's a little damaged.")
 	return result
 	

@@ -12,6 +12,14 @@
 	var/wallclimb = FALSE
 	var/climbdiff = 0
 
+/turf/closed/basic
+	baseturfs = /turf/closed/basic
+
+/turf/closed/basic/New()//Do not convert to Initialize
+	SHOULD_CALL_PARENT(FALSE)
+	//This is used to optimize the map loader
+	return
+
 /turf/closed/MouseDrop_T(atom/movable/O, mob/user)
 	. = ..()
 	if(!wallpress)
@@ -25,6 +33,11 @@
 		if(L.mobility_flags & MOBILITY_MOVE)
 			wallpress(L)
 			return
+	else if(user != O && ishuman(user) && ishuman(O)) // check to see if user is dragging another mob onto the wall
+		var/mob/living/carbon/human/us = user
+		var/mob/living/carbon/human/them = O
+		if((us.mobility_flags & MOBILITY_MOVE) && (them.mobility_flags & MOBILITY_MOVE) && us.get_highest_grab_state_on(them) > GRAB_PASSIVE)
+			wallpress(them, us)
 
 /turf/closed/proc/feel_turf(mob/living/user)
 	to_chat(user, span_notice("I start feeling around [src]"))
@@ -34,7 +47,7 @@
 	for(var/obj/structure/lever/hidden/lever in contents)
 		lever.feel_button(user)
 
-/turf/closed/proc/wallpress(mob/living/user)
+/turf/closed/proc/wallpress(mob/living/user, mob/living/pressing_mob = null)
 	if(user.wallpressed)
 		return
 	if(user.is_shifted)
@@ -42,11 +55,20 @@
 	if(!(user.mobility_flags & MOBILITY_STAND))
 		return
 	var/dir2wall = get_dir(user,src)
+	if(pressing_mob) // step up to the wall
+		user.Move(get_step(pressing_mob, user))
+		user.setDir(turn(get_dir(pressing_mob, src),180))
+		dir2wall = get_dir(user,src)
 	if(!(dir2wall in GLOB.cardinals))
 		return
 	user.wallpressed = dir2wall
 	user.update_wallpress_slowdown()
-	user.visible_message(span_info("[user] leans against [src]."))
+	if(pressing_mob)
+		user.visible_message(span_info("[user] is pushed against [src] by [pressing_mob]."))
+	else if(user.m_intent == MOVE_INTENT_SNEAK)
+		to_chat(user, span_info("You press yourself against [src]."))
+	else
+		user.visible_message(span_info("[user] leans against [src]."))
 	switch(dir2wall)
 		if(NORTH)
 			user.setDir(SOUTH)
@@ -60,6 +82,25 @@
 		if(WEST)
 			user.setDir(EAST)
 			user.set_mob_offsets("wall_press", _x = -12, _y = 0)
+
+/mob/living/proc/get_wallpress_alpha()
+	var/skill_level = src.get_skill_level(/datum/skill/misc/sneaking)
+
+	switch(skill_level)
+		if(1)
+			return 128 //50%
+		if(2)
+			return 115 //55%
+		if(3)
+			return 102 //60%
+		if(4)
+			return 90 //65%
+		if(5)
+			return 77 //70%
+		if(6)
+			return 64 //75%
+
+	return 255
 
 /turf/closed/proc/wallshove(mob/living/user)
 	if(user.wallpressed)
@@ -86,10 +127,21 @@
 			user.set_mob_offsets("wall_press", _x = -12, _y = 0)
 
 /mob/living/proc/update_wallpress_slowdown()
-	if(wallpressed)
-		add_movespeed_modifier("wallpress", TRUE, 100, override = TRUE, multiplicative_slowdown = 3)
-	else
+	if(!wallpressed)
 		remove_movespeed_modifier("wallpress")
+		animate(src, alpha = 255, time = 10)
+		REMOVE_TRAIT(src, TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC)
+		return
+
+	add_movespeed_modifier("wallpress", TRUE, 100, override = TRUE, multiplicative_slowdown = 3)
+	if(m_intent != MOVE_INTENT_SNEAK)
+		return
+	ADD_TRAIT(src, TRAIT_SPELLCOCKBLOCK, TRAIT_GENERIC) // spell restrictions don't seem to be working well so I'm doing it this way for now
+	var/lean_alpha = get_wallpress_alpha()
+	if(src.alpha != 0 && lean_alpha < src.alpha)
+		var/used_time = 50
+		used_time = max(used_time - (get_skill_level(/datum/skill/misc/sneaking) * 8), 10)
+		animate(src, alpha = lean_alpha, time = used_time)
 
 /turf/closed/Bumped(atom/movable/AM)
 	..()
@@ -128,9 +180,6 @@
 				if(count < 2)
 					above.ScrapeAway()
 	. = ..()
-
-/turf/closed/attack_paw(mob/user)
-	return attack_hand(user)
 
 /turf/closed/attack_hand(mob/user)
 	if(wallclimb)
@@ -312,17 +361,6 @@
 /turf/closed/indestructible/Melt()
 	to_be_destroyed = FALSE
 	return src
-
-/turf/closed/indestructible/sandstone
-	name = "sandstone wall"
-	desc = ""
-	icon = 'icons/turf/walls/sandstone_wall.dmi'
-	icon_state = "sandstone"
-	baseturfs = /turf/closed/indestructible/sandstone
-	smooth = SMOOTH_TRUE
-
-/turf/closed/indestructible/oldshuttle/corner
-	icon_state = "corner"
 
 /turf/closed/indestructible/splashscreen
 	name = ""

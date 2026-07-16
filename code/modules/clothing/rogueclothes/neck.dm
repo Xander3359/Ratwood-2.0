@@ -6,7 +6,49 @@
 	bloody_icon_state = "bodyblood"
 	experimental_inhand = FALSE
 	alternate_worn_layer = NECK_LAYER
+	sewrepair = FALSE //most neck items are necklaces or armor
 	var/overarmor
+
+/obj/item/clothing/neck/roguetown/examine()
+	. = ..()
+	if(bell)
+		. += span_info("It has a <a href='?src=[REF(src)];removebell=1'>bell</a> attached.")
+
+/obj/item/clothing/neck/roguetown/Topic(href, href_list)
+	..()
+
+	if(!usr)
+		return
+
+	if(href_list["removebell"])
+		remove_bell(usr)
+
+/obj/item/clothing/neck/roguetown/proc/remove_bell(mob/user)
+	if(!bell)
+		return
+	if(!Adjacent(user))
+		to_chat(user, span_warning("As much as I'd love to snatch that bell, I'm not close enough."))
+		return
+	for(var/obj/item/catbell/bell in src)
+		user.put_in_hands(bell)
+		break
+	bell = FALSE
+	bellsound = FALSE
+	qdel(src.GetComponent(/datum/component/squeak))
+	to_chat(user, span_info("I remove the bell from [src]."))
+
+/obj/item/clothing/neck/roguetown/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/catbell))
+		var/obj/item/catbell/bell = I
+		if(src.bellsound || src.bell) //Already has a bell, can't attach another one.
+			to_chat(user, span_info("[src] already has a bell attached!"))
+			return
+		to_chat(user, span_info("I attach \the [bell] to [src]."))
+		src.bell = TRUE
+		src.bellsound = TRUE
+		src.AddComponent(/datum/component/squeak, bell.jingle_sounds, 50, 100, 1)
+		I.forceMove(src)
+	..()
 
 /obj/item/clothing/neck/roguetown/MiddleClick(mob/user, params)
 	. = ..()
@@ -49,6 +91,8 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	sewrepair = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/neck/roguetown/coif/padded
 	name = "padded coif"
@@ -56,15 +100,9 @@
 	icon_state = "ccoif"
 	item_state = "ccoif"
 	color = "#ad977d"
-	flags_inv = HIDEHAIR
-	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HEAD
-	blocksound = SOFTHIT
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	armor = ARMOR_PADDED //gambeson for head
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
-	adjustable = CAN_CADJUST
-	toggle_icon_state = TRUE
-	sewrepair = TRUE
 
 /obj/item/clothing/neck/roguetown/coif/heavypadding
 	name = "heavy padded coif"
@@ -74,13 +112,8 @@
 	color = "#976E6B"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HEAD
-	blocksound = SOFTHIT
 	body_parts_covered = NECK|HAIR|EARS|HEAD|MOUTH
 	armor = ARMOR_PADDED_GOOD //full padded gambeson basically
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
-	adjustable = CAN_CADJUST
-	toggle_icon_state = TRUE
-	sewrepair = TRUE
 
 /obj/item/clothing/neck/roguetown/coif/heavypadding/ComponentInitialize()
 	return
@@ -157,19 +190,17 @@
 /obj/item/clothing/neck/roguetown/chaincoif/ComponentInitialize()
 	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, 'sound/foley/equip/chain_equip.ogg', null, (UPD_HEAD|UPD_MASK|UPD_NECK))	//Chain coif.
 
-/obj/item/clothing/neck/roguetown/chaincoif/paalloy
+/obj/item/clothing/neck/roguetown/chaincoif/ancient
 	name = "ancient coif"
-	desc = "Polished gilbranze rings, linked together to form a billowing hood. Let it not be a crown of thorns that saves this dying world, but a crown of progress; of fettered metal and stained bone, rejuvenated by Zizo's will to herald Her greatest works yet."
+	desc = "Polished gilbranze rings, linked together to form a billowing hood. Let it not be a crown of thorns that saves this dying world, but a crown of ambition; of fettered metal and stained bone, rejuvenated by Zizo's will to herald Her greatest works yet."
 	icon_state = "achaincoif"
 	smeltresult = /obj/item/ingot/aaslag
 
-/obj/item/clothing/neck/roguetown/chaincoif/iron/aalloy
+/obj/item/clothing/neck/roguetown/chaincoif/ancient/decrepit
 	name = "decrepit coif"
 	desc = "Frayed bronze rings, linked together to form a billowing hood. Shrapnel peppers the linkage; arrowheads and speartips, brought along from a battlefield who's history - and legionnaires - have been lost to tyme."
-	icon_state = "achaincoif"
 	max_integrity = ARMOR_INT_SIDE_DECREPIT
 	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
 
 /obj/item/clothing/neck/roguetown/chaincoif/chainmantle
@@ -181,6 +212,7 @@
 	slot_flags = ITEM_SLOT_NECK
 	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
 	cansnout = TRUE
+	dropshrink = 0.8
 
 /obj/item/clothing/neck/roguetown/chaincoif/chainmantle/ComponentInitialize()
 	AddComponent(/datum/component/adjustable_clothing, (NECK), null, null, 'sound/foley/equip/equip_armor_chain.ogg', null, (UPD_HEAD|UPD_MASK|UPD_NECK))	//Chain coif.
@@ -189,7 +221,6 @@
 	name = "iron chain coif"
 	desc = "A coif of meticulously crafted iron rings. It isn't steel, but metal is metal, and it might just save your life."
 	icon_state = "ichaincoif"
-	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_SIDE_IRON
 
@@ -265,7 +296,6 @@
 	icon_state = "ibevor"
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = ARMOR_INT_SIDE_IRON
-	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/neck/roguetown/gorget
 	name = "gorget"
@@ -284,13 +314,23 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
 
-/obj/item/clothing/neck/roguetown/gorget/aalloy
+/obj/item/clothing/neck/roguetown/gorget/steel
+	name = "steel gorget"
+	smeltresult = /obj/item/ingot/steel
+	max_integrity = ARMOR_INT_SIDE_STEEL
+	icon_state = "sgorget"
+
+/obj/item/clothing/neck/roguetown/gorget/steel/ancient
+	name = "ancient gorget"
+	desc = "Polished gilbranze plates, layered atop one-another to guard the neck. The spine; a sacred leyline between spirit and sinew. It must remain unsevered, lest Her blessings be lost."
+	icon_state = "ancientgorget"
+	smeltresult = /obj/item/ingot/aaslag
+
+/obj/item/clothing/neck/roguetown/gorget/steel/ancient/decrepit
 	name = "decrepit gorget"
 	desc = "Frayed bronze plates, shingled together to shroud the neck. Primitive scrapes line the flanks, yet the center seems to've been cored out by a spear's thrust."
-	icon_state = "ancientgorget"
 	max_integrity = ARMOR_INT_SIDE_DECREPIT
 	color = "#bb9696"
-	smeltresult = /obj/item/ingot/aaslag
 	anvilrepair = null
 
 /obj/item/clothing/neck/roguetown/gorget/copper
@@ -351,27 +391,14 @@
 	desc = "Nature knows not of mercy."
 	icon_state = "iwolfcollaralt"
 
-/obj/item/clothing/neck/roguetown/gorget/steel
-	name = "steel gorget"
-	smeltresult = /obj/item/ingot/steel
-	max_integrity = ARMOR_INT_SIDE_STEEL
-	icon_state = "sgorget"
-
 /obj/item/clothing/neck/roguetown/gorget/steel/kazengun
 	name = "kazengunite gorget"
 	desc = "A series of interlocking rings of metal set around the throat. Used by the kouken of Kazengun for precisely the same reason as the knights of Psydonia."
 	icon_state = "kazengunneckguard"
 
-/obj/item/clothing/neck/roguetown/gorget/paalloy
-	name = "ancient gorget"
-	desc = "Polished gilbranze plates, layered atop one-another to guard the neck. The spine; a sacred leyline between spirit and sinew. It must remain unsevered, lest Her blessings be lost."
-	icon_state = "ancientgorget"
-	max_integrity = ARMOR_INT_SIDE_STEEL
-	smeltresult = /obj/item/ingot/aaslag
-
-/obj/item/clothing/neck/roguetown/gorget/cursed_collar
-	name = "cursed collar"
-	desc = "A metal collar that seems to radiate an ominous aura."
+/obj/item/clothing/neck/roguetown/gorget/cursed_collar // minor flavor swap so people know it's a scam shitty knockoff.
+	name = "lesser cursed collar"
+	desc = "A metal collar that seems to radiate an ominous aura. A pale imitation of its artificed counterpart. \nLooks like you'd need someone else's help to take it off."
 	icon_state = "cursed_collar"
 	item_state = "cursed_collar"
 	armor = ARMOR_CLOTHING
@@ -387,21 +414,12 @@
 
 /obj/item/clothing/neck/roguetown/gorget/cursed_collar/Initialize(mapload)
 	. = ..()
-	name = "cursed collar"
 	ADD_TRAIT(src, TRAIT_NO_SELF_UNEQUIP, CURSED_ITEM_TRAIT)
-/*
-/obj/item/clothing/neck/roguetown/gorget/cursed_collar/dropped(mob/living/carbon/human/user)
-	. = ..()
-	if(QDELETED(src))
-		return
-	qdel(src)
-*/
 
 /obj/item/clothing/neck/roguetown/psicross
 	name = "psycross"
 	desc = "'With every broken bone, I swore I lived!'"
 	icon_state = "psycross"
-	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	possible_item_intents = list(/datum/intent/use, /datum/intent/special/magicarc)
@@ -410,6 +428,8 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	grid_width = 32
 	grid_height = 32
+	nudist_approved = TRUE
+	dropshrink = 0.6
 
 /obj/item/clothing/neck/roguetown/psicross/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
 	..()
@@ -428,35 +448,22 @@
 	user.emote("pray")
 	return
 
-/obj/item/clothing/neck/roguetown/psicross/aalloy
-	name = "decrepit psicross"
-	desc = "'A comet capable of rending all the enemies of humanity apart; oh, how graceful His power was! And His sacrifice, ever so noble! Yet now He slumbers, unaware of the fruits His efforts came to give. And He sighs. And He weeps.'"
-	icon_state = "psycross_a"
-	color = "#bb9696"
+/obj/item/clothing/neck/roguetown/psicross/inhumen
+	name = "inverted psycross"
+	desc = "A symbol of ambition from an era that had reason to believe in it."
+	icon_state = "zcross_iron"
 
-/obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy
+/obj/item/clothing/neck/roguetown/psicross/inhumen/ancient
 	name = "ancient zcross"
-	desc = "'Progress. Ascension. Destiny. A mandate, commanded by God, to be fufilled by Man. She called us forth from the edge of reality - and with Her dying breath, rasped out the final truth; the fire is gone, and the world will soon follow.'"
+	desc = "'Ambition. Destiny. Ascension. A mandate, commanded by God, to be fulfilled by Man. She called us forth from the edge of reality - and with Her dying breath, rasped out the final truth; the fire is gone, and the world will soon follow.'"
 	icon_state = "zcross_a"
 	color = "#bb9696"
-	resistance_flags = FIRE_PROOF
 
 /obj/item/clothing/neck/roguetown/psicross/undivided
 	name = "see amulet"
 	desc = "An amulet, typically worn by the Holy See's own influential figures. Stalwart for centuries against the darkness. \
 	Both a mark of station and grace."
 	icon_state = "undivided"
-	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
-
-/obj/item/clothing/neck/roguetown/zcross/iron
-	name = "inverted psycross"
-	desc = "A symbol of progress from an era that had reason to believe in it."
-	icon_state = "zcross_iron"
-	resistance_flags = FIRE_PROOF
-	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
-	anvilrepair = /datum/skill/craft/armorsmithing
-	grid_width = 32
-	grid_height = 32
 
 /obj/item/clothing/neck/roguetown/psicross/astrata
 	name = "amulet of Astrata"
@@ -524,6 +531,12 @@
 	salvage_result = /obj/item/grown/log/tree/stick
 	salvage_amount = 1
 
+/obj/item/clothing/neck/roguetown/psicross/decrepit
+	name = "decrepit psicross"
+	desc = "'A comet capable of rending all the enemies of humanity apart; oh, how graceful His power was! And His sacrifice, ever so noble! Yet now He slumbers, unaware of the fruits His efforts came to give. And He sighs. And He weeps.'"
+	icon_state = "psycross_a"
+	color = "#bb9696"
+
 /obj/item/clothing/neck/roguetown/psicross/silver
 	name = "silver psycross"
 	desc = "'The horrors persist, but so do I!'"
@@ -537,9 +550,13 @@
 	desc = "'Purity afloat, for paradise awaits!'"
 	icon_state = "psycross_g"
 	item_state = "psycross_g"
-	//dropshrink = 0.75
-	resistance_flags = FIRE_PROOF
 	sellprice = 100
+
+/obj/item/clothing/neck/roguetown/psicross/reform
+	name = "reformist psycross"
+	desc = "A psycross with its prongs bent inward. God is dead, but this world HE left is beautiful and worth of loving. ENDURE with every broken bone in your body."
+	sellprice = 0
+	icon_state = "psycross_reform"
 
 /obj/item/clothing/neck/roguetown/psicross/pearl //put it as a psycross so it can be used for miracles
 	name = "pearl amulet"
@@ -579,7 +596,7 @@
 	desc = "In moments of quiet it whispers softly, as though deciphering the silence itself."
 	icon_state = "talkstone"
 	item_state = "talkstone"
-	//dropshrink = 0.75
+	dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	allowed_race = CLOTHED_RACES_TYPES
 	sellprice = 70
@@ -589,7 +606,7 @@
 	name = "amulet of appraisal"
 	desc = "An amulet with a pristine eye embedded into it. Blind to everything, but to that which shines in gold."
 	icon_state = "horus"
-	//dropshrink = 0.75
+	dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	sellprice = 80
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -614,10 +631,10 @@
 
 /obj/item/clothing/neck/roguetown/shalal
 	name = "desert rider medal"
-	desc = "Made out of the silver from the Ranesheni mercenaries' first pay. A tradition is kept between these hired blades: to give this one away to someone is to symbolize a debt in their favor - to be redeemed by any other mercenary in times of need."
+	desc = "Made out of the silver from the Zybantine mercenaries' first pay. A tradition is kept between these hired blades: to give this one away to someone is to symbolize a debt in their favor - to be redeemed by any other mercenary in times of need."
 	icon_state = "shalal"
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING		//Hey I guess you could pretend it is wrapped around your hand? Just keep it on, don't be a hoe.
-	//dropshrink = 0.75
+	dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	sellprice = 30		// what if the economy crashes...........
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -626,7 +643,7 @@
 	name = "ornate amulet"
 	desc = "A beautiful amulet made of solid gold."
 	icon_state = "ornateamulet"
-	//dropshrink = 0.75
+	dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	sellprice = 100
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -655,10 +672,11 @@
 	name = "skull amulet"
 	desc = "Gold shaped into the form of a skull and strung into an amulet."
 	icon_state = "skullamulet"
-	//dropshrink = 0.75
+	dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	sellprice = 100
 	anvilrepair = /datum/skill/craft/armorsmithing
+	nudist_approved = TRUE
 
 /obj/item/clothing/neck/roguetown/psicross/naledi
 	name = "naledian psy-bracelet"
@@ -674,11 +692,12 @@
 	icon_state = "collar_rope"
 	item_state = "collar_rope"
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.5
+	dropshrink = 0.6
 	leashable = TRUE
 	bellsound = FALSE
 	bell = FALSE
 	salvage_result = null
+	nudist_approved = TRUE
 
 /obj/item/clothing/neck/roguetown/collar/leather
 	name = "leather collar"
@@ -689,7 +708,6 @@
 	item_state = "leathercollar"
 	leashable = TRUE
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.5
 	bellsound = FALSE
 	bell = FALSE
 
@@ -702,12 +720,11 @@
 	item_state = "cowbellcollar"
 	leashable = TRUE
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.5
 	bellsound = TRUE
 
 /obj/item/clothing/neck/roguetown/collar/cowbell/Initialize(mapload)
 		. = ..()
-		AddComponent(/datum/component/squeak, SFX_COLLARJINGLE, 50, 100, 1) //We want squeak so wearer jingles if touched while wearing collar
+		AddComponent(/datum/component/squeak, SFX_CBJINGLE, 50, 100, 1) //We want squeak so wearer jingles if touched while wearing collar
 
 /obj/item/clothing/neck/roguetown/collar/catbell
 	name = "catbell collar"
@@ -718,7 +735,6 @@
 	item_state = "catbellcollar"
 	leashable = TRUE
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.5
 	bellsound = TRUE
 
 /obj/item/clothing/neck/roguetown/collar/catbell/Initialize(mapload)
@@ -733,9 +749,9 @@
 	icon_state = "feldcollar"
 	item_state = "feldcollar"
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.5
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_MASK
 	body_parts_covered = NECK|FACE
+	nudist_approved = TRUE
 
 /obj/item/clothing/neck/roguetown/collar/surgcollar
 	name = "surgcollar"
@@ -745,9 +761,9 @@
 	icon_state = "surgcollar"
 	item_state = "surgcollar"
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.5
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_MASK
 	body_parts_covered = NECK|FACE
+	nudist_approved = TRUE
 
 /obj/item/clothing/neck/roguetown/luckcharm
 	name = "luck charm"
@@ -760,7 +776,8 @@
 	grid_height = 32
 	var/goodluckactivated = FALSE
 	salvage_result = /obj/item/natural/fibers
-	salvage_result = 1
+	salvage_amount = 1
+	nudist_approved = TRUE
 
 /obj/item/clothing/neck/roguetown/luckcharm/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -781,12 +798,10 @@
 	desc = "A massive gemerald, meticulously chiseled into a skull and affixed to a chain. </br>It's mocking me, isn't it?"
 	slot_flags = ITEM_SLOT_NECK
 	icon_state = "skullamulet"
-	//dropshrink = 0.75
 	color = "#00FF00"
 	resistance_flags = FIRE_PROOF
 	sellprice = 222
 	smeltresult = /obj/item/roguegem/green
-	anvilrepair = /datum/skill/craft/armorsmithing
 
 //
 
@@ -939,6 +954,21 @@
 		say("YOUR PENANCE WILL BE COMPLETE IN [timer_minutes] MINUTES.")
 	return
 
+/obj/item/clothing/neck/roguetown/collar/woolen
+	name = "woolen collar"
+	desc = "A comfortable and thick collar made of wools and cloth, not protective but it sure keeps your neck warm."
+	icon_state = "woolencollar"
+	item_state = "woolencollar"
+	icon = 'icons/roguetown/clothing/neck.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/neck.dmi'
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_MOUTH
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+	color = CLOTHING_BLACK
+	muteinmouth = FALSE
+	spitoutmouth = FALSE
+	sewrepair = TRUE
+
 //This is a super good neck slot item, granting +2LCK/Darkvision/HardDismember/NoDamageSlowdown.
 //Horrible compared to +2 in all stats and the 10k durability it used to have. But you can't have it all.
 //You can get these so easily that it's just dumb for them to be so absurd. Especially now with explosive bandits and the like.
@@ -957,7 +987,7 @@
 	blocksound = PLATEHIT
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	//dropshrink = 0.75
+	dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	sellprice = 666
 	static_price = TRUE
@@ -1031,6 +1061,8 @@
 	sellprice = 0
 	salvage_result = null
 	smeltresult = null
+	nudist_approved = TRUE
+	dropshrink = 0.75
 
 /obj/item/clothing/neck/roguetown/carved/jadeamulet
 	name = "jade amulet"
@@ -1087,3 +1119,65 @@
 	icon_state = "amulet_shell"
 	slot_flags = ITEM_SLOT_NECK
 	sellprice = 25
+
+/obj/item/clothing/neck/roguetown/carved/chitinamulet
+	name = "chitin amulet"
+	desc = "An amulet carved from beetle chitin."
+	icon_state = "amulet_shell"
+	color = "#7B8C5E"
+	slot_flags = ITEM_SLOT_NECK
+	sellprice = 20
+
+// AP port. 
+
+/obj/item/clothing/neck/roguetown/psicross/inhumen/g
+	name = "golden inverted psycross"
+	desc = "'Doth thee wish to live deliciously? Mortality is but a shackle; and if you wish to break free from its steely grasp, all you need to do.. is put thine faith in me.'"
+	icon_state = "zcross_g"
+	resistance_flags = FIRE_PROOF
+	sellprice = 100
+
+/obj/item/clothing/neck/roguetown/psicross/inhumen/matthios
+	name = "amulet of Matthios"
+	desc = "He was but one flame in the dark. Together, his flock shall outblaze the tyrant sun."
+	icon_state = "matthios"
+	resistance_flags = FIRE_PROOF
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
+	smeltresult = null
+
+/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar
+	name = "amulet of Graggar"
+	desc = "Blood leads only to glory, and violence begets divinity. Nothing less. Conquest is simply another name for victory."
+	icon_state = "graggar"
+	resistance_flags = FIRE_PROOF
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
+	smeltresult = null
+
+/obj/item/clothing/neck/roguetown/psicross/inhumen/graggar/bronze
+	name = "bronze amulet of Graggar"
+	desc = "'EVERYTHING - AND EVERYONE YOU LOVE - WILL BE GONE! WHAT WILL YOU HAVE, AFTER THE LAST FIRE'S BEEN SMOTHERED OUT?!' </br>‎  </br>'..You. I'd still have you.'"
+	icon_state = "graggar_b"
+	item_state = "graggar_b"
+	sellprice = 25
+
+/obj/item/clothing/neck/roguetown/psicross/inhumen/baotha
+	name = "amulet of Baotha"
+	desc = "A hollow promise rendered in gold. It weighs heavy with the memory of sweet wine turned to poison, and the comfort of a sorrow that refuses to fade."
+	icon_state = "baotha"
+	resistance_flags = FIRE_PROOF
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
+	smeltresult = null
+
+/obj/item/clothing/neck/roguetown/psicross/ten
+	name = "amulet of Ten"
+	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
+	icon_state = "undivided"
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
+
+/obj/item/clothing/neck/roguetown/psicross/silver/undivided
+	name = "silver amulet of Ten"
+	desc = "Ward of silver, sigil of eternity; by the Ten, I command thee back to Hell!"
+	icon_state = "undivided_s"
+	sellprice = 50
+
+

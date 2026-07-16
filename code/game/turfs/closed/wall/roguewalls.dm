@@ -64,6 +64,7 @@
 	desc = "A window with a solid and sturdy stone frame."
 	opacity = FALSE
 	max_integrity = 1300
+	icon_state = "stonewindow"
 
 /turf/closed/wall/mineral/rogue/stone/window/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) )
@@ -120,7 +121,8 @@
 	smooth = SMOOTH_MORE
 	blade_dulling = DULLING_BASH
 	max_integrity = 2200
-	sheet_type = /obj/item/natural/stone
+	sheet_type = /obj/item/natural/stoneblock
+	sheet_amount = 2
 	break_sound = 'sound/combat/hits/onstone/stonedeath.ogg'
 	attacked_sound = list('sound/combat/hits/onstone/wallhit.ogg', 'sound/combat/hits/onstone/wallhit2.ogg', 'sound/combat/hits/onstone/wallhit3.ogg')
 	canSmoothWith = list(/turf/closed/wall/mineral/rogue/craftstone)
@@ -142,7 +144,8 @@
 	smooth = SMOOTH_MORE
 	blade_dulling = DULLING_BASH
 	max_integrity = 1500
-	sheet_type = /obj/item/natural/stone
+	sheet_type = /obj/item/natural/stoneblock
+	sheet_amount = 1
 	break_sound = 'sound/combat/hits/onstone/stonedeath.ogg'
 	attacked_sound = list('sound/combat/hits/onstone/wallhit.ogg', 'sound/combat/hits/onstone/wallhit2.ogg', 'sound/combat/hits/onstone/wallhit3.ogg')
 	canSmoothWith = list(/turf/closed/wall/mineral/rogue/stonebrick, /turf/closed/wall/mineral/rogue/wooddark)
@@ -150,7 +153,14 @@
 	baseturfs = list(/turf/open/floor/rogue/blocks)
 	neighborlay = "dirtedge"
 	climbdiff = 4
-	damage_deflection = 20
+	damage_deflection = 20 
+
+/turf/closed/wall/mineral/rogue/stonebrick/stonebricklight
+	name = "lit stone brick wall"
+	desc = "Rows of overlapping bricks form this wall, this one glows with a soft light."
+	icon = 'icons/turf/roguewall.dmi'
+	icon_state = "stonebricklight"
+	light_outer_range = 4
 
 /turf/closed/wall/mineral/rogue/wood
 	name = "wooden wall"
@@ -168,7 +178,8 @@
 	baseturfs = list(/turf/open/floor/rogue/ruinedwood)
 	neighborlay = "dirtedge"
 	climbdiff = 3
-
+	sheet_type = /obj/item/natural/wood/plank
+	sheet_amount = 2
 	burn_power = 20
 	spread_chance = 4
 
@@ -204,7 +215,8 @@
 	baseturfs = list(/turf/open/floor/rogue/twig)
 	neighborlay = "dirtedge"
 	climbdiff = 1
-
+	sheet_type = /obj/item/natural/cloth
+	sheet_amount = 1
 	burn_power = 20
 	spread_chance = 9
 
@@ -225,6 +237,8 @@
 	climbdiff = 3
 	burn_power = 20
 	spread_chance = 4
+	sheet_type = /obj/item/natural/wood/plank
+	sheet_amount = 1
 
 /turf/closed/wall/mineral/rogue/wooddark/horizontal
 	icon_state = "horizwooddark"
@@ -273,6 +287,8 @@
 	climbdiff = 3
 	burn_power = 20
 	spread_chance = 4
+	sheet_type = /obj/item/natural/wood/plank
+	sheet_amount = 1
 
 /turf/closed/wall/mineral/rogue/roofwall/center
 	icon_state = "roofTurf_I"
@@ -323,7 +339,8 @@
 	max_integrity = 1100
 	break_sound = 'sound/combat/hits/onwood/destroywalldoor.ogg'
 	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
-//	sheet_type = /obj/item/grown/log/tree/lumber
+	sheet_type = /obj/item/natural/wood/plank
+	sheet_amount = 2
 	above_floor = /turf/open/floor/rogue/ruinedwood
 	baseturfs = list(/turf/open/floor/rogue/ruinedwood)
 	neighborlay = "dirtedge"
@@ -347,7 +364,8 @@
 	smooth = SMOOTH_MORE
 	blade_dulling = DULLING_BASH
 	max_integrity = 1800
-	sheet_type = /obj/item/natural/stone
+	sheet_type = /obj/item/natural/stoneblock
+	sheet_amount = 1
 	break_sound = 'sound/combat/hits/onstone/stonedeath.ogg'
 	attacked_sound = list('sound/combat/hits/onstone/wallhit.ogg', 'sound/combat/hits/onstone/wallhit2.ogg', 'sound/combat/hits/onstone/wallhit3.ogg')
 	above_floor = /turf/open/floor/rogue/blocks

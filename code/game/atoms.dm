@@ -48,13 +48,6 @@
 
 	var/voicecolor_override
 
-	///overlays that should remain on top and not normally removed when using cut_overlay functions, like c4.
-	var/list/priority_overlays
-	/// a very temporary list of overlays to remove
-	var/list/remove_overlays
-	/// a very temporary list of overlays to add
-	var/list/add_overlays
-
 	///vis overlays managed by SSvis_overlays to automaticaly turn them like other overlays
 	var/list/managed_vis_overlays
 	///overlays managed by update_overlays() to prevent removing overlays that weren't added by the same proc
@@ -96,6 +89,16 @@
 	///Default pixel y shifting for the atom's icon.
 	var/base_pixel_y = 0
 
+	///Icon to use for smoothing, only required for secret doors
+	var/smoothing_icon
+	///What directions this is currently smoothing with. IMPORTANT: This uses the smoothing direction flags as
+	///defined in icon_smoothing.dm, instead of the BYOND flags.
+	var/smoothing_junction = null //This starts as null for us to know when it's first set, but after that it will hold a 8-bit mask ranging from 0 to 255.
+	///What smoothing groups does this atom belongs to, to match smoothing_list. If null, nobody can smooth with it.
+	var/list/smoothing_groups = null
+	///List of smoothing groups this atom can smooth with. If this is null and atom is smooth, it smooths only with itself.
+	var/list/smoothing_list = null
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -108,11 +111,8 @@
  */
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
-	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+	if(GLOB.use_preloader && src.type == GLOB._preloader_path)//in case the instanciated atom is creating other atoms in New()
 		world.preloader_load(src)
-
-	if(datum_flags & DF_USE_TAG)
-		GenerateTag()
 
 	var/do_initialize = SSatoms.initialized
 	if(do_initialize != INITIALIZATION_INSSATOMS)
@@ -171,7 +171,7 @@
 
 	if (opacity && isturf(loc))
 		var/turf/T = loc
-		T.has_opaque_atom = TRUE // No need to recalculate it in this case, it's guaranteed to be on afterwards anyways.
+		T.opaque_atom_count++
 
 	if (canSmoothWith)
 		canSmoothWith = typelist("canSmoothWith", canSmoothWith)
@@ -222,7 +222,6 @@
 	orbiters = null // The component is attached to us normaly and will be deleted elsewhere
 
 	LAZYCLEARLIST(overlays)
-	LAZYCLEARLIST(priority_overlays)
 
 	QDEL_NULL(light)
 	QDEL_NULL(ai_controller)
@@ -258,9 +257,6 @@
 	if(!is_centcom_level(T.z))//if not, don't bother
 		return FALSE
 
-	//Check for centcom itself
-	if(istype(T.loc, /area/centcom))
-		return TRUE
 
 /**
  * Ensure a list of atoms/reagents exists inside this atom
@@ -487,11 +483,13 @@
  * An atom we are buckled or is contained within us has tried to move
  *
  * Default behaviour is to send a warning that the user can't move while buckled as long
- * as the buckle_message_cooldown has expired (50 ticks)
+ * as the [buckle_message_cooldown][/atom/var/buckle_message_cooldown] has expired (25 ticks)
  */
-/atom/proc/relaymove(mob/user)
+/atom/proc/relaymove(mob/user, direction)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_RELAYMOVE, user, direction) & COMSIG_BLOCK_RELAYMOVE)
+		return
 	if(buckle_message_cooldown <= world.time)
-		buckle_message_cooldown = world.time + 50
+		buckle_message_cooldown = world.time + 25
 		to_chat(user, "<span class='warning'>I should try resisting.</span>")
 	return
 
@@ -989,10 +987,6 @@
 ///Analyzer act
 /atom/proc/analyzer_act(mob/living/user, obj/item/I)
 	return SEND_SIGNAL(src, COMSIG_ATOM_ANALYSER_ACT, user, I)
-
-///Generate a tag for this atom
-/atom/proc/GenerateTag()
-	return
 
 /// Generic logging helper
 /atom/proc/log_message(message, message_type, color=null, log_globally=TRUE)

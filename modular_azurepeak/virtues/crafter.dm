@@ -44,7 +44,6 @@
 	desc = "In my youth, I trained under a skilled hunter, learning how to butcher animals and work with leather/hide."
 	added_traits = list(TRAIT_SURVIVAL_EXPERT)
 	added_skills = list(list(/datum/skill/craft/crafting, 2, 2),
-						list(/datum/skill/craft/traps, 2, 2),
 						list(/datum/skill/labor/butchering, 2, 2),
 						list(/datum/skill/craft/sewing, 2, 2),
 						list(/datum/skill/craft/tanning, 2, 2),
@@ -65,7 +64,8 @@
 	added_stashed_items = list(
 		"Hammer" = /obj/item/rogueweapon/hammer/wood,
 		"Chisel" = /obj/item/rogueweapon/chisel,
-		"Hand Saw" = /obj/item/rogueweapon/handsaw
+		"Hand Saw" = /obj/item/rogueweapon/handsaw,
+		"Blowing Pipe" = /obj/item/rogueweapon/blowrod
 	)
 
 /datum/virtue/utility/mining
@@ -74,5 +74,7 @@
 	desc = "The dark shafts, the damp smells of ichor and the laboring hours are no stranger to me. I keep my pickaxe and lamptern close, and have been taught how to mine well."
 	added_stashed_items = list(
 		"Steel Pickaxe" = /obj/item/rogueweapon/pick/steel,
-		"Lamptern" = /obj/item/flashlight/flare/torch/lantern)
+		"Lamptern" = /obj/item/flashlight/flare/torch/lantern,
+		"Ore Bag" = /obj/item/storage/hip/orestore/bronze,
+	)
 	added_skills = list(list(/datum/skill/labor/mining, 3, 6))

@@ -68,6 +68,8 @@
 			if(SHEATH_TYPE_NORMAL)
 				if(penis.penis_size == 3)
 					used_name = "a fat sheath"
+				else if(penis.penis_size == 1)
+					used_name = "a meager sheath"
 				else
 					used_name = "a sheath"
 			if(SHEATH_TYPE_SLIT)
@@ -132,6 +134,8 @@
 	var/obj/item/organ/vagina/vagina = H.getorganslot(ORGAN_SLOT_VAGINA)
 	if(!vagina)
 		return FALSE
+	if(H.sexcon && H.sexcon.bottom_exposed == TRUE)
+		return TRUE
 	if(H.underwear)
 		return FALSE
 	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN))

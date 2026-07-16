@@ -1,8 +1,8 @@
 /datum/species
 	var/amtfail = 0
 
-/datum/species/proc/get_accent_list(mob/living/carbon/human/H, type, convert_HTML = TRUE)
-	switch(H.char_accent)
+/proc/get_accent_list_for_name(accent_name, type, convert_HTML = TRUE)
+	switch(accent_name)
 		if("No accent")
 			return
 		if("Dwarf accent")
@@ -41,8 +41,8 @@
 			return strings("welsh_replacement.json", type, convert_HTML = TRUE)
 		if("Saut al-Atash accent")
 			return
-		if("Valley accent")
-			return strings("valley_replacement.json", type, convert_HTML = TRUE)
+		if("Gallant accent")
+			return strings("gallant_replacement.json", type, convert_HTML = TRUE)
 		if("Kazengun accent")
 			return strings("kazengun_replacement.json", type, convert_HTML = TRUE)
 		if("Xinyi accent")
@@ -55,6 +55,9 @@
 			return strings("axian_replacement.json", type, convert_HTML = TRUE)
 		if("Low-Town accent")
 			return strings("poor_replacement.json", type, convert_HTML = TRUE)
+
+/datum/species/proc/get_accent_list(mob/living/carbon/human/H, type, convert_HTML = TRUE)
+	return get_accent_list_for_name(H.char_accent, type, convert_HTML)
 
 /datum/species/proc/get_accent(mob/living/carbon/human/H)
 	return get_accent_list(H,"full")
@@ -76,7 +79,20 @@
 #define REGEX_ENDWORD 3
 #define REGEX_ANY 4
 
-/datum/species/proc/handle_speech(datum/source, mob/speech_args)
+/// Applies a named accent's full transformation pipeline to a test message and returns the result.
+/// Returns null for accents that have no text transformations (font-only or no accent).
+/proc/apply_accent_preview(accent_name, message)
+	if(accent_name == "No accent" || accent_name == "Saut al-Atash accent" || accent_name == "Posh accent")
+		return null
+	message = treat_message_accent(message, get_accent_list_for_name(accent_name, "multiword"), REGEX_FULLWORD)
+	message = treat_message_accent_fullword(message, strings("accent_universal.json", "universal", convert_HTML = TRUE), get_accent_list_for_name(accent_name, "full"))
+	message = treat_message_accent(message, get_accent_list_for_name(accent_name, "start"), REGEX_STARTWORD)
+	message = treat_message_accent(message, get_accent_list_for_name(accent_name, "end"), REGEX_ENDWORD)
+	message = treat_message_accent(message, get_accent_list_for_name(accent_name, "syllable"), REGEX_ANY)
+	message = autopunct_bare(message)
+	return trim(message)
+
+/datum/species/proc/handle_speech(datum/source, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
 
 	//message = treat_message_accent(message, strings("accent_universal.json", "universal"), REGEX_FULLWORD)

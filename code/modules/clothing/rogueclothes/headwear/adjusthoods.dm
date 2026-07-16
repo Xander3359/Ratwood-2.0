@@ -24,6 +24,12 @@
 	block2add = FOV_BEHIND
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	armor = ARMOR_CLOTHING
+	nudist_approved = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
+	heat_protection = HEAD
+	max_heat_protection_temperature = BODYTEMP_HEAT_LEVEL_ONE_MAX
 
 /obj/item/clothing/head/roguetown/roguehood/ComponentInitialize()
 	. = ..()
@@ -62,6 +68,11 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	max_integrity = 120//+20 over base. -30 from previous value.
 	blocksound = SOFTHIT
+	nudist_approved = FALSE // armored
+	cold_protection = HEAD
+	min_cold_protection_temperature = 50
+	heat_protection = null
+	max_heat_protection_temperature = BODYTEMP_NORMAL_MAX
 
 /obj/item/clothing/head/roguetown/roguehood/shalal
 	name = "keffiyeh"
@@ -70,28 +81,24 @@
 	icon_state = "shalal"
 	item_state = "shalal"
 	flags_inv = HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
-	sleevetype = null
-	sleeved = null
 	icon = 'icons/roguetown/clothing/head.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi' //Overrides slot icon behavior
 	alternate_worn_layer  = 8.9 //On top of helmet
-	body_parts_covered = HEAD|HAIR|EARS|NECK
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
-	armor = ARMOR_CLOTHING
 	dynamic_hair_suffix = ""
 	edelay_type = 1
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = SOFTHIT
-	max_integrity = 100
-	sewrepair = TRUE
 	mask_override = TRUE
 	overarmor = FALSE
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-
-/obj/item/clothing/neck/roguetown/roguehood/shalal/ComponentInitialize()
-	AddComponent(/datum/component/adjustable_clothing, HEAD|EARS|NECK|HAIR, HIDEHAIR|HIDEFACE, null, null, null, (UPD_HEAD|UPD_MASK|UPD_NECK))
+	nudist_approved = TRUE
+	cold_protection = null
+	min_cold_protection_temperature = BODYTEMP_NORMAL_MIN
+	heat_protection = HEAD
+	max_heat_protection_temperature = 600
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/black
 	color = CLOTHING_BLACK
@@ -104,15 +111,11 @@
 	desc = "Flowing like blood from a wound, this tithe of cloth-and-silk spills out to the shoulders. It carries the telltale mark of Naledian stitcheries."
 	item_state = "hijab"
 	icon_state = "deserthood"
-	hidesnoutADJ = FALSE
 	flags_inv = HIDEEARS|HIDEHAIR	//Does not hide face.
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_NECK
 	block2add = null
 
-/obj/item/clothing/neck/roguetown/roguehood/shalal/hijab/ComponentInitialize()
-	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, null, null, (UPD_HEAD|UPD_MASK|UPD_NECK))
-
-/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/raneshen
+/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/zyb
 	name = "padded headscarf"
 	desc = "A common sight amongst those travelling the long desert routes, it offers protection from the heat and a modicum of it against the beasts that prowl its more comfortable nites."
 	max_integrity = 100
@@ -122,6 +125,7 @@
 	item_state = "hijab"
 	icon_state = "deserthood"
 	naledicolor = TRUE
+	nudist_approved = FALSE // armored
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/heavyhood
 	name = "heavy hood"
@@ -131,7 +135,11 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_NECK
 	item_state = "heavyhood"
 	icon_state = "heavyhood"
-	hidesnoutADJ = FALSE
+	nudist_approved = TRUE
+	cold_protection = HEAD
+	min_cold_protection_temperature = 50
+	heat_protection = null
+	max_heat_protection_temperature = BODYTEMP_NORMAL_MAX
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yoruku
 	name = "shadowed hood"
@@ -159,7 +167,7 @@
 	max_integrity = 200
 
 	name = "weathered warden's hood"
-	desc = "A leather hood, sewn larger than usual to accomodate a helmet. There's some dried blood on its broken left antler. The price for true freedom, paid with someone else's life."
+	desc = "A leather hood, sewn larger than usual to accommodate a helmet. There's some dried blood on its broken left antler. The price for true freedom, paid with someone else's life."
 	icon_state = "poacherhood"
 	item_state = "poacherhood"
 	icon = 'icons/roguetown/clothing/special/warden.dmi'
@@ -211,7 +219,6 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	flags_inv = HIDENECK
 	dynamic_hair_suffix = ""
-	sewrepair = TRUE
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 	block2add = null
@@ -291,6 +298,7 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	max_integrity = 200
+	nudist_approved = FALSE // armored
 
 /obj/item/clothing/head/roguetown/roguehood/psydon/confessor
 	name = "confessional hood"
@@ -310,6 +318,7 @@
 	max_integrity = 200
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
+	resistance_flags = FIRE_PROOF
 
 /obj/item/clothing/head/roguetown/roguehood/hierophant
 	name = "hierophant's pashmina"
@@ -320,6 +329,7 @@
 	icon_state = "deserthood"
 	item_state = "deserthood"
 	naledicolor = TRUE
+	nudist_approved = FALSE // armored
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 
@@ -334,6 +344,7 @@
 	naledicolor = TRUE
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
+	nudist_approved = FALSE // armored
 
 /obj/item/clothing/head/roguetown/roguehood/sojourner
 	name = "sojourner's shroud"
@@ -346,7 +357,6 @@
 	icon_state = "surghood"
 	item_state = "surghood"
 	color = "#a88d8d"
-	sewrepair = TRUE
 	resistance_flags = FIRE_PROOF
 	armor = ARMOR_SPELLSINGER //Higher-tier protection for pugilist-centric classes. Fits the 'glass cannon' style, and prevents instant death through a glancing headshot on the intended archetype.
 	blade_dulling = DULLING_BASHCHOP
@@ -354,3 +364,4 @@
 	max_integrity = ARMOR_INT_SIDE_STEEL //High leather-tier protection and critical resistances, steel-tier integrity. Integrity boost encourages hand-to-hand parrying. Weaker than the Psydonic Thorns.
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
+	nudist_approved = FALSE // armored

@@ -58,7 +58,7 @@
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shirt = /obj/item/clothing/suit/roguetown/shirt/vampire
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
-	beltr = /obj/item/storage/belt/pouch/coins/veryrich
+	beltr = /obj/item/storage/belt/rogue/pouch/coins/veryrich
 	head  = /obj/item/clothing/head/roguetown/vampire
 	beltl = /obj/item/roguekey/vampire
 	cloak = /obj/item/clothing/cloak/cape/puritan
@@ -145,6 +145,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
 	resistance_flags = FIRE_PROOF | ACID_PROOF
+	dropshrink = null
 
 /obj/item/clothing/suit/roguetown/shirt/vampire
 	slot_flags = ITEM_SLOT_SHIRT
@@ -248,5 +249,6 @@
 /obj/structure/vampire/necromanticbook // Used to summon undead to attack town/defend manor.
 	name = "Tome of Souls"
 	icon_state = "tome"
+	pixel_x = -16
 	var/list/useoptions = list("Create Death Knight", "Steal the Sun")
 	var/sunstolen = FALSE
