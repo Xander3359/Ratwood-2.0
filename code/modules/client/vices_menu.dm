@@ -978,7 +978,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 			</div>
 			
 			<div class="tabs">
-				<a class="tab active" onclick="showTab('traits')">Traits & Virtues</a>
+				<a class="tab active" onclick="showTab('traits')">Character Traits</a>
 				<a class="tab" onclick="showTab('loadout')">Loadout Items</a>
 				<a class="tab" onclick="showTab('languages')">Languages</a>
 			</div>
@@ -1146,7 +1146,60 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 			html += "</div>"
 		
 		html += "</div>"
-	
+
+	html += {"
+			</div>
+		</div>
+		
+		<h2 style='color: [theme["text"]]; padding: 0 20px; margin: 20px 0 10px 0; border-bottom: 1px solid [theme["border"]]; padding-bottom: 10px;'>Quirk Selection</h2>
+		<p style='color: [theme["label"]]; padding: 0 20px; margin: 0 0 15px 0; font-size: 0.9em;'>Select whatever quirks your character has. Each one will cost an increasing amount of triumphs.</p>			<div class="vices-grid">
+	"}
+
+	// Generate 5 quirk slots
+	for(var/i = 1 to 5)
+		var/slot_var = "quirk[i]"
+		var/datum/charflaw/current_vice = vars[slot_var]
+		var/is_required = (i == 1)
+		
+		html += "<div class='quirk-slot[is_required ? " required" : ""]'>"
+		html += "<div class='slot-header'>"
+		html += "<span class='slot-number'>Vice Slot [i]</span>"
+		
+		if(is_required)
+			html += "<span class='slot-required'>REQUIRED</span>"
+		
+		if(current_vice)
+			// In point-buy, every quirk contributes +1 point
+			html += "<span class='slot-cost'>+1 Point</span>"
+		
+		html += "</div>"
+		
+		if(current_vice)
+			// Vice is selected
+			html += "<div class='quirk-display'>"
+			html += "<div class='quirk-info'>"
+			html += "<div class='quirk-name'>[current_vice.name]</div>"
+			html += "<div class='quirk-desc'>[current_vice.desc]</div>"
+			html += "</div>"
+			html += "</div>"
+			
+			html += "<div class='actions'>"
+			html += "<a class='btn btn-select' href='byond://?src=\ref[src];vice_action=change;slot=[i]'>Change Vice</a>"
+			if(!is_required)
+				html += "<a class='btn btn-clear' href='byond://?src=\ref[src];vice_action=clear;slot=[i]'>Clear</a>"
+			html += "</div>"
+		else
+			// Empty slot
+			html += "<div class='empty-slot'>"
+			if(is_required)
+				html += "No Vice Selected - <b>REQUIRED</b><br><br>"
+			else
+				html += "Empty Slot<br><br>"
+			html += "<a class='btn btn-select' href='byond://?src=\ref[src];vice_action=select;slot=[i]'>Select Vice</a>"
+			html += "</div>"
+		
+		html += "</div>"
+
 	html += {"
 			</div>
 			</div>
