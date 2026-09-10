@@ -622,7 +622,6 @@
 	item_state = "inqboots"
 	allowed_race = ALL_RACES_TYPES
 
-
 // ----------------- BLACKSTEEL -----------------------
 
 /obj/item/clothing/shoes/roguetown/boots/blacksteel/modern/plateboots

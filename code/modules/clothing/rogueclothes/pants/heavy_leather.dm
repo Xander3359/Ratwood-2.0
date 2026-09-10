@@ -39,8 +39,6 @@
 	name = "otavan leather trousers"
 	desc = "padded leather armor made by Otavan tailors, its quality is remarkable."
 	icon_state = "fencerpants"
-	cold_protection = GROIN | LEG_RIGHT | LEG_LEFT
-	min_cold_protection_temperature = BODYTEMP_COLD_LEVEL_ONE_MAX
 
 /obj/item/clothing/under/roguetown/heavy_leather_pants/otavan/generic
 	name = "fencing breeches"

@@ -327,10 +327,7 @@
 	desc = "The finest leather tunic. Made to ENDURE, Made to Inquire, come heretic or hellfire."
 	icon_state = "leathertunic"
 	color = null
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_CHOP)
-	armor = ARMOR_PADDED
 	shiftable = FALSE
-	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 
 /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/shadowrobe
 	name = "stalker robe"
