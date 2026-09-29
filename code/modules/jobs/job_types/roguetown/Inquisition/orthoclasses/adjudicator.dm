@@ -13,12 +13,7 @@
 	cmode_music = 'sound/music/templarofpsydonia.ogg'
 	subclass_social_rank = SOCIAL_RANK_MINOR_NOBLE
 	traits_applied = list(TRAIT_HEAVYARMOR)
-	subclass_stats = list(
-		STATKEY_WIL = 3,
-		STATKEY_CON = 3,
-		STATKEY_STR = 2,
-		STATKEY_SPD = -1
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,

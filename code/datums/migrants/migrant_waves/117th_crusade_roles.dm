@@ -16,13 +16,7 @@
 	traits_applied = list(TRAIT_NOBLE, TRAIT_DECEIVING_MEEKNESS, TRAIT_BREADY, TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_CRUSADE)
 
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 3,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 3,
-	)
+	subclass_statpoints = 14
 
 	subclass_languages = list(
 		/datum/language/grenzelhoftian,
@@ -90,13 +84,7 @@
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_CRUSADE)
 
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1,
-	)
+	subclass_statpoints = 10
 
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_JOURNEYMAN,
@@ -161,13 +149,7 @@
 	outfit = /datum/outfit/job/roguetown/crusader/paladin
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_CRUSADE)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-		STATKEY_INT = 1,
-		STATKEY_PER = 1,
-	)
+	subclass_statpoints = 10
 
 	subclass_languages = list(
 		/datum/language/grenzelhoftian,
@@ -235,12 +217,7 @@
 	outfit = /datum/outfit/job/roguetown/crusader/footman
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_CRUSADE)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-		STATKEY_PER = 2,
-	)
+	subclass_statpoints = 10
 
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,
@@ -297,13 +274,7 @@
 	outfit = /datum/outfit/job/roguetown/crusader/marksman
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_CRUSADE)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2,
-	)
+	subclass_statpoints = 10
 
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_MASTER,

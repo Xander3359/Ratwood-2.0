@@ -9,12 +9,7 @@
 	category_tags = list(CTAG_WRETCH)
 	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_WOODSMAN, TRAIT_OUTDOORSMAN, TRAIT_SURVIVAL_EXPERT)
 	// No straight upgrade to perception / speed to not stack one stat too high, but still stronger than MAA Skirm out of town.
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 1
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/misc/tracking = SKILL_LEVEL_MASTER,
 		/datum/skill/combat/bows = SKILL_LEVEL_EXPERT,

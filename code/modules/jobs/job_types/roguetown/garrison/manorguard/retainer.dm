@@ -6,13 +6,7 @@
 	allowed_ages = list(AGE_OLD)
 	category_tags = list(CTAG_MENATARMS)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 1,// seems kinda lame but remember guardsman bonus!!
-		STATKEY_INT = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,

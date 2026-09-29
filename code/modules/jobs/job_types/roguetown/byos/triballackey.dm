@@ -49,13 +49,7 @@
 	outfit = /datum/outfit/job/roguetown/tribalrabble/rabble
 	category_tags = list(CTAG_TRIBALRABBLE)
 	traits_applied = list(TRAIT_DODGEEXPERT)
-	subclass_stats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 1,
-		STATKEY_PER = 1,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 3,)
-
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/combat/bows = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/slings = SKILL_LEVEL_JOURNEYMAN,

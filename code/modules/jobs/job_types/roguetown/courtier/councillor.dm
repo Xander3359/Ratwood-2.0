@@ -31,13 +31,7 @@
 	tutorial = "You may have inherited this position, bought your way into it, or were appointed to it by merit--perish the thought! Whatever the case though, you work as an assistant and agent of the crown in matters of state. Whether this be aiding the steward, the sheriff, or the crown itself, or simply enjoying the free food of the keep, your duties vary day by day. You may be the lowest rung of the ladder, but that rung still towers over everyone else in town."
 	outfit = /datum/outfit/job/roguetown/councillor/basic
 	category_tags = list(CTAG_COUNCILLOR)
-	subclass_stats = list(
-		STATKEY_SPD = 2,
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
-		STATKEY_STR = -1,
-		STATKEY_CON = -1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,

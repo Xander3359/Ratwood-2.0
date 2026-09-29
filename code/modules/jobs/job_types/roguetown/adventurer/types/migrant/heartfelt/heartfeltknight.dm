@@ -55,14 +55,7 @@
 	class_select_category = CLASS_CAT_HFT_COURT
 	subclass_social_rank = SOCIAL_RANK_NOBLE
 	traits_applied = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_HEARTFELT)
-	subclass_stats = list(
-		STATKEY_STR = 3,
-		STATKEY_PER = 2,
-		STATKEY_INT = 2,
-		STATKEY_CON = 3,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = -1,
-	)
+	subclass_statpoints = 13
 
 	subclass_skills = list(
 	/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,

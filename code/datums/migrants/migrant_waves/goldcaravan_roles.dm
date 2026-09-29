@@ -17,11 +17,7 @@
 	outfit = /datum/outfit/job/roguetown/merchant/ea_hasir
 	traits_applied = list(TRAIT_NOBLE, TRAIT_SEEPRICES, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_EA_MERCHANT)
-	subclass_stats = list(
-		STATKEY_PER = 3,
-		STATKEY_INT = 2,
-		STATKEY_STR = -1
-	)
+	subclass_statpoints = 3
 
 	subclass_virtues = list(
 		/datum/virtue/utility/riding
@@ -78,11 +74,6 @@
 	outfit = /datum/outfit/job/roguetown/ea_guard
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_BREADY, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_EA_GUARD)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 1,
-		STATKEY_CON = 2,
-	)
 
 /datum/outfit/job/roguetown/ea_guard/pre_equip(mob/living/carbon/human/H)
 	..()

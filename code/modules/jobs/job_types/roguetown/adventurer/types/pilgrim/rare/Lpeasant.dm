@@ -12,14 +12,7 @@
 	maximum_possible_slots = 1
 	pickprob = 5
 	category_tags = list(CTAG_TOWNER)
-	subclass_stats = list(
-		STATKEY_LCK = 4,
-		STATKEY_STR = 2,
-		STATKEY_INT = 2,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 1,
-		STATKEY_PER = 1
-	)
+	subclass_statpoints = 14
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,

@@ -43,11 +43,7 @@
 	outfit = /datum/outfit/job/roguetown/absolver/basic
 	subclass_languages = list(/datum/language/otavan)
 	category_tags = list(CTAG_ABSOLVER)
-	subclass_stats = list(
-		STATKEY_CON = 7,
-		STATKEY_WIL = 3,
-		STATKEY_SPD = -2 //Originally swapped to -3, but this probably isn't as important due to the pacifism trait.
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN, // Enduring.
 		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,

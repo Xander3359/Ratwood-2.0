@@ -10,13 +10,7 @@
 	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_SEEPRICES, TRAIT_GRAVEROBBER)
 	category_tags = list(CTAG_ADVENTURER, CTAG_COURTAGENT, CTAG_LICKER_WRETCH)
 	class_select_category = CLASS_CAT_ROGUE
-	subclass_stats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 1,
-		STATKEY_PER = 1,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 3,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/misc/tracking = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
@@ -73,13 +67,7 @@
 	subclass_languages = list(/datum/language/thievescant)
 	cmode_music = 'sound/music/cmode/antag/combat_cutpurse.ogg'
 	traits_applied = list(TRAIT_DODGEEXPERT)
-	subclass_stats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 1,
-		STATKEY_PER = 1,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 3,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
@@ -127,11 +115,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/bard
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander3.ogg'
 	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_GOODLOVER, TRAIT_EMPATH)
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_SPD = 2,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
@@ -213,11 +197,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/swashbuckler
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander3.ogg'
 	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_NUTCRACKER, TRAIT_DECEIVING_MEEKNESS)
-	subclass_stats = list(
-		STATKEY_SPD = 2,
-		STATKEY_STR = 1,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,

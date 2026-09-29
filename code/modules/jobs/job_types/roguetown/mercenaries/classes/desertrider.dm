@@ -9,12 +9,7 @@
 	cmode_music = 'sound/music/combat_desertrider.ogg' //GREATEST COMBAT TRACK IN THE GAME SO FAR BESIDES MAYBE MANIAC2.OGG
 	subclass_languages = list(/datum/language/celestial)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 1,
-		STATKEY_CON = 1,
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/shields = SKILL_LEVEL_JOURNEYMAN,
@@ -85,11 +80,7 @@
 	tutorial = "Zybantine 'Blade Dancers' are famed and feared the world over. Their expertise in blades both long and short is well known."
 	outfit = /datum/outfit/job/roguetown/mercenary/desert_rider_zeybek
 	traits_applied = list(TRAIT_DODGEEXPERT,TRAIT_DUALWIELDER)
-	subclass_stats = list(
-		STATKEY_SPD = 3,
-		STATKEY_WIL = 2,
-		STATKEY_INT = 1,
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
@@ -162,12 +153,7 @@
 	tutorial = "Almah are those skilled in both magyck and swordsmanship, but excelling in nothing."
 	outfit = /datum/outfit/job/roguetown/mercenary/desert_rider_almah
 	traits_applied = list(TRAIT_ARCYNE_T2, TRAIT_MAGEARMOR)
-	subclass_stats = list(
-		STATKEY_SPD = 3,
-		STATKEY_WIL = 2,
-		STATKEY_INT = 2,
-		STATKEY_PER = -1
-	)
+	subclass_statpoints = 9
 	subclass_spellpoints = 15
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,

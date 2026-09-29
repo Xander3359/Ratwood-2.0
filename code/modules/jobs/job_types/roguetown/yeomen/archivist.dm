@@ -61,11 +61,7 @@
 		/datum/language/thievescant/signlanguage, // All but Beastish, Zizo Chant (unless Zizoist) and true Thieves' Cant (unless Matthiosite or Xylixian).
 	)
 	category_tags = list(CTAG_ARCHIVIST)
-	subclass_stats = list(
-		STATKEY_INT = 4,
-		STATKEY_CON = -1,
-		STATKEY_STR = -1
-	)
+	subclass_statpoints = 1
 	subclass_spellpoints = 12
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_LEGENDARY,

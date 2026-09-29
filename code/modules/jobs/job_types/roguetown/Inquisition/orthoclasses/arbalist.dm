@@ -17,11 +17,7 @@
 		TRAIT_PERFECT_TRACKER,
 		TRAIT_SLEUTH,
 	)
-	subclass_stats = list(//+9, You get PER/STR for the crossbow.
-		STATKEY_PER = 3,
-		STATKEY_STR = 2,
-		STATKEY_WIL = 2,
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/tracking = SKILL_LEVEL_MASTER,

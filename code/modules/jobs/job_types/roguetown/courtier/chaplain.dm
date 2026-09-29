@@ -37,12 +37,7 @@
 	outfit = /datum/outfit/job/roguetown/chaplain
 	subclass_languages = list(/datum/language/grenzelhoftian)
 	category_tags = list(CTAG_CHAPLAIN)
-	subclass_stats = list(
-		STATKEY_INT = 2,//court knowledge
-		STATKEY_WIL = 2,
-		STATKEY_PER = 2,//eye for intrigue
-		STATKEY_CON = -1,//scrawny pencil-pusher
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,

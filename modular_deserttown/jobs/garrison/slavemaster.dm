@@ -54,12 +54,7 @@
 	outfit = /datum/outfit/job/roguetown/slavemaster/base
 
 	category_tags = list(CTAG_SLAVEMASTER)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 1,//slave chasin'
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_EXPERT,//slave whippin
 		/datum/skill/combat/wrestling = SKILL_LEVEL_MASTER, //slave wranglin

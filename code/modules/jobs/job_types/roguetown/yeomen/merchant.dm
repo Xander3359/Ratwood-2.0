@@ -36,11 +36,7 @@
 	Don't let these filth-covered troglodytes ever forget that."
 	outfit = /datum/outfit/job/roguetown/merchant/basic
 	category_tags = list(CTAG_MERCH)
-	subclass_stats = list(
-		STATKEY_PER = 3,
-		STATKEY_INT = 2,
-		STATKEY_STR = -1
-	)
+	subclass_statpoints = 4
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,

@@ -104,14 +104,7 @@
 	// outfit = /datum/outfit/job/roguetown/tribalchieftain/warrior
 	category_tags = list(CTAG_TRIBALCHIEFTAIN)
 	traits_applied = list(TRAIT_DNR, TRAIT_HEAVYARMOR, TRAIT_TRIBAL, TRAIT_DARKVISION)
-	subclass_stats = list(
-		STATKEY_LCK = 5,
-		STATKEY_INT = 3,
-		STATKEY_WIL = 3,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 1,
-		STATKEY_STR = 1,
-	)
+	subclass_statpoints = 16
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,

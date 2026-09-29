@@ -16,9 +16,7 @@
 	cmode_music = 'sound/music/combat_delf.ogg'
 	traits_applied = list(TRAIT_DARKVISION)
 	subclass_languages = list(/datum/language/otavan)
-	subclass_stats = list(
-		STATKEY_WIL = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,//you learn to backstab early
@@ -38,10 +36,8 @@
 
 	)
 	extra_context = "This subclass is race-limited to: Dark Elves Only. \
-	This subclass can choose between dodge expert with SPD 2, WIL 2, and PER 1 \
-	or medium armor with STR 2, CON 2, and WIL 1. \
-	Female drow recieve nutcracker and bedbreaker. Male drow \
-	lose -1 STR & -1 LCK, but gain 1 SPD & 1 WIL."
+	This subclass can choose between dodge expert or medium armor. \
+	Female drow recieve nutcracker and bedbreaker."
 
 /datum/outfit/job/roguetown/adventurer/drow/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -90,9 +86,6 @@
 		switch(armorchoice)
 			if("Dodge Expert")
 				ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-				H.change_stat(STATKEY_WIL, 1)
-				H.change_stat(STATKEY_SPD, 2)
-				H.change_stat(STATKEY_PER, 1)
 				shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/shadowrobe
 				armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/shadowvest
 				cloak = /obj/item/clothing/cloak/shadowcloak
@@ -111,8 +104,6 @@
 				pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/shadowpants
 			if("Medium Armor")
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-				H.change_stat(STATKEY_STR, 2)
-				H.change_stat(STATKEY_CON, 2)
 				shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced
 				belt = /obj/item/storage/belt/rogue/leather/black
 				pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/shadowpants/maille
@@ -148,12 +139,6 @@
 	if(H.gender == FEMALE)
 		ADD_TRAIT(H, TRAIT_DEATHBYSNUSNU, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC) // female drow have a certain stereotype
-	
-	if(H.gender == MALE)
-		H.change_stat(STATKEY_STR, -1)
-		H.change_stat(STATKEY_LCK, -1)//you dont want to be a male underdwelling drow
-		H.change_stat(STATKEY_WIL, 1)//more likely to have been beaten = more pain tolerance
-		H.change_stat(STATKEY_SPD, 1)
 
 	if(H.age == AGE_MIDDLEAGED)
 		ADD_TRAIT(H, TRAIT_GOODLOVER, TRAIT_GENERIC) // YEARS of experience

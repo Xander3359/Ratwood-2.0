@@ -6,13 +6,7 @@
 	outfit = /datum/outfit/job/roguetown/gnoll/shaman
 	applies_post_equipment = FALSE
 	traits_applied = list(TRAIT_RITUALIST, TRAIT_DODGEEXPERT, TRAIT_ALCHEMY_EXPERT)
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 3,
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-	)
+	subclass_statpoints = 13
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/tracking = SKILL_LEVEL_LEGENDARY,

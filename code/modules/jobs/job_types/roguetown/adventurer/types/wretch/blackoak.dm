@@ -15,13 +15,7 @@
 	category_tags = list(CTAG_WRETCH)
 	traits_applied = list(TRAIT_AZURENATIVE, TRAIT_OUTDOORSMAN, TRAIT_BLACKOAK, TRAIT_DODGEEXPERT, TRAIT_ARCYNE_T2, TRAIT_WOODWALKER)
 	//lower-than-avg stats for wretch but their traits are insanely good
-	subclass_stats = list(
-		STATKEY_INT = 1,
-		STATKEY_PER = 1,
-		STATKEY_SPD = 2,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 8
 	subclass_spellpoints = 10
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,

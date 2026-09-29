@@ -93,11 +93,7 @@
 	outfit = /datum/outfit/job/roguetown/monk/basic
 	subclass_languages = list(/datum/language/grenzelhoftian)
 	category_tags = list(CTAG_ACOLYTE)
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,

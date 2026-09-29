@@ -428,7 +428,7 @@
 	duration = 45 MINUTES
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/debt_indicator
 	effectedstats = list(
-		STATKEY_STR = -2,
+		-2,
 		STATKEY_PER = -4,
 		STATKEY_CON = -2
 	)

@@ -7,17 +7,7 @@
 	maximum_possible_slots = 10 // Should never fill, for the purpose of players to know what types towners are in round at the menu
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	traits_applied = list(TRAIT_HOMESTEAD_EXPERT)
-	subclass_stats = list(
-		STATKEY_SPD = -1,
-		STATKEY_STR = 1,
-		STATKEY_CON = 1,
-		STATKEY_INT = 2,
-	)
-
-
-//	adaptive_name = FALSE
-
-
+	subclass_statpoints = 2
 	subclass_skills = list(
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,

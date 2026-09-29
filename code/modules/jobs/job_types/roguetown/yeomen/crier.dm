@@ -48,11 +48,7 @@
 		/datum/language/aavnic, // All but beast, which is associated with werewolves.
 	)
 	category_tags = list(CTAG_TOWNCRIER)
-	subclass_stats = list(
-		STATKEY_WIL = 3,
-		STATKEY_INT = 3,
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/craft/alchemy = SKILL_LEVEL_JOURNEYMAN,

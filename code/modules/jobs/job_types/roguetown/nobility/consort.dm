@@ -36,14 +36,7 @@
 	outfit = /datum/outfit/job/roguetown/lady/heartthrob
 	category_tags = list(CTAG_CONSORT)
 	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_KEENEARS, TRAIT_DECEIVING_MEEKNESS, TRAIT_NOBLE)
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 1,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 3,
-		STATKEY_STR = -1,
-		STATKEY_LCK = 3,
-	)
+	subclass_statpoints = 13
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
@@ -84,13 +77,7 @@
 	outfit = /datum/outfit/job/roguetown/lady/trophy
 	category_tags = list(CTAG_CONSORT)
 	traits_applied = list(TRAIT_SEEPRICES, TRAIT_KEENEARS, TRAIT_LIGHT_STEP, TRAIT_NUTCRACKER, TRAIT_NOBLE)
-	subclass_stats = list( // 10 stats total, 7 without the carrot. based on consort's current stat block.
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 2,
-		STATKEY_LCK = 3,
-	)
+	subclass_statpoints = 12
 	subclass_skills = list(
 		/datum/skill/misc/stealing = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_LEGENDARY,
@@ -137,13 +124,7 @@
 	outfit = /datum/outfit/job/roguetown/lady/housespouse
 	category_tags = list(CTAG_CONSORT)
 	traits_applied = list(TRAIT_CICERONE, TRAIT_SEEDKNOW, TRAIT_KEENEARS, TRAIT_GOODLOVER, TRAIT_HOMESTEAD_EXPERT, TRAIT_SEWING_EXPERT, TRAIT_NOBLE)
-	subclass_stats = list( //10 stats total, 7 without carrot. based on senechal. high int for skill progression and crafting %
-		STATKEY_INT = 3,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 1,
-		STATKEY_STR = 1,
-		STATKEY_LCK = 3,
-	)
+	subclass_statpoints = 11
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,

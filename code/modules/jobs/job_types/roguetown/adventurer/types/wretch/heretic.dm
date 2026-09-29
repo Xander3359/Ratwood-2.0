@@ -9,11 +9,7 @@
 	traits_applied = list(TRAIT_RITUALIST, TRAIT_HEAVYARMOR)
 	maximum_possible_slots = 2
 	// same stats as templar as you are essentially an antagonist aligned templar with miracles and armor
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 3
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
@@ -248,12 +244,7 @@
 	maximum_possible_slots = 2
 	traits_applied = list(TRAIT_RITUALIST, TRAIT_DODGEEXPERT)
 	//Slower than outlaw, but a bit more PER and INT
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 2,
-		STATKEY_INT = 1
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
@@ -467,14 +458,7 @@
 	traits_applied = list(TRAIT_RITUALIST, TRAIT_CRITICAL_RESISTANCE)
 	maximum_possible_slots = 1
 	//+9 weighted stat total. Atgervi Shaman's stats 1:1.
-	subclass_stats = list(
-		STATKEY_STR = 3,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 1,
-		STATKEY_INT = -1,
-		STATKEY_PER = -1
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,

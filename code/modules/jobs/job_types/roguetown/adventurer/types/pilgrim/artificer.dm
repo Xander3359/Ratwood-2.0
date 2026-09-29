@@ -9,12 +9,7 @@
 	cmode_music = 'sound/music/cmode/towner/combat_towner3.ogg'
 	traits_applied = list(TRAIT_TRAINED_SMITH, TRAIT_SMITHING_EXPERT, TRAIT_ARCYNE_T1) // same as the guildsman variant
 	maximum_possible_slots = 5 // We don't need a bunch of nerds running around, five will do, perhaps less, not everyone should be an artificer after all
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 1,
-	) // removed both the str and per bonus, so it is not the same as the guildsman artificer, being a bit 'nerfed'
-	
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/combat/axes = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN, // Different from the guildsman, this one has been travelling.. They need to know how to defend themselves, a bit if only.

@@ -9,12 +9,7 @@
 	subclass_languages = list(/datum/language/etruscan, /datum/language/thievescant)
 	cmode_music = 'sound/music/combat_condottiero.ogg'
 	traits_applied = list(TRAIT_DODGEEXPERT)
-	subclass_stats = list(
-		STATKEY_WIL = 2,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2,
-		STATKEY_INT = 1
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_MASTER, //Possibly too high, no idea.
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,

@@ -9,11 +9,7 @@
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	traits_applied = list(TRAIT_DEATHSIGHT, TRAIT_WITCH, TRAIT_ARCYNE_T1, TRAIT_ALCHEMY_EXPERT)
 	maximum_possible_slots = 5 // really I want to say 3 but 5 is PRETTY roomy
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_SPD = 2,
-		STATKEY_LCK = 1
-	)
+	subclass_statpoints = 8
 
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,

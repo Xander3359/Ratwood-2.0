@@ -159,7 +159,7 @@
 	tick_interval = 3 SECONDS
 	effectedstats = list(
 		STATKEY_CON = -1,
-		STATKEY_STR = -3,
+		-3,
 	)
 	var/outline_colour = "#095000"
 

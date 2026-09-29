@@ -12,14 +12,7 @@
 	pickprob = 5
 	category_tags = list(CTAG_TOWNER)
 	traits_applied = list(TRAIT_DARKVISION, TRAIT_SMITHING_EXPERT, TRAIT_LEGENDARY_MINER)
-	subclass_stats = list(
-		STATKEY_LCK = 4,
-		STATKEY_STR = 2,
-		STATKEY_INT = 2,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 1,
-		STATKEY_PER = 1
-	)
+	subclass_statpoints = 14
 	subclass_skills = list(
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT, // Tough. Well fed. The strongest of the strong.
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,

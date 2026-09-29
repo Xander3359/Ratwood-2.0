@@ -42,11 +42,7 @@
 	outfit = /datum/outfit/job/roguetown/nightmaiden/attendant
 	category_tags = list(CTAG_NIGHTMAIDEN)
 	traits_applied = list(TRAIT_NUTCRACKER, TRAIT_CICERONE)
-	subclass_stats = list(
-		STATKEY_CON = 3,
-		STATKEY_WIL = 2,
-		STATKEY_STR = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
@@ -94,11 +90,7 @@
 	outfit = /datum/outfit/job/roguetown/nightmaiden/concubine
 	category_tags = list(CTAG_NIGHTMAIDEN)
 	traits_applied = list(TRAIT_LIGHT_STEP, TRAIT_BEAUTIFUL)
-	subclass_stats = list(
-		STATKEY_PER = 3,
-		STATKEY_WIL = 2,
-		STATKEY_STR = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
@@ -185,12 +177,7 @@
 	//maximum_possible_slots = 1 //It could be funny to have a gang of them, probably fine
 	category_tags = list(CTAG_NIGHTMAIDEN)
 	traits_applied = list(TRAIT_NUTCRACKER, TRAIT_NOPAINSTUN) //might be a bit much but given their profession I imagine they'd be able to handle a bit of pain.
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 2,
-		STATKEY_INT = -1,
-		STATKEY_CON = 1
-	)
+	subclass_statpoints = 6
 
 /datum/outfit/job/roguetown/nightmaiden/dominatrix/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -232,11 +219,7 @@
 	outfit = /datum/outfit/job/roguetown/nightmaiden/courtesan
 	category_tags = list(CTAG_NIGHTMAIDEN)
 	traits_applied = list(TRAIT_KEENEARS, TRAIT_BEAUTIFUL)
-	subclass_stats = list(
-		STATKEY_SPD = 3,
-		STATKEY_WIL = 2,
-		STATKEY_PER = 1
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,

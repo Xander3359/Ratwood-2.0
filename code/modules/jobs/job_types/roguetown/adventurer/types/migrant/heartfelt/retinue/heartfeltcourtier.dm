@@ -15,14 +15,7 @@
 // HIGH COURT - /ONE SLOT/ Roles that were previously in the Court, but moved here.
 
 	traits_applied = list(TRAIT_SEEPRICES, TRAIT_NOBLE, TRAIT_NUTCRACKER, TRAIT_HEARTFELT)
-
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_WIL = 3,
-		STATKEY_SPD = 2,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 5,
-	)
+	subclass_statpoints = 17
 
 	subclass_skills = list(
 	/datum/skill/misc/stealing = SKILL_LEVEL_EXPERT,

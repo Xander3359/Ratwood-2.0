@@ -11,13 +11,7 @@
 	class_select_category = CLASS_CAT_HFT_WORKER
 	subclass_social_rank = SOCIAL_RANK_YEOMAN
 	traits_applied = list(TRAIT_CICERONE, TRAIT_KEENEARS, TRAIT_SLEUTH, TRAIT_HOMESTEAD_EXPERT, TRAIT_SEWING_EXPERT)
-
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_INT = 2,
-		STATKEY_SPD = 2,
-	)
-
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/cooking = SKILL_LEVEL_EXPERT,

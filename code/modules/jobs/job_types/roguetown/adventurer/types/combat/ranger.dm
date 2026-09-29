@@ -10,10 +10,7 @@
 	subclass_social_rank = SOCIAL_RANK_PEASANT
 	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_OUTDOORSMAN)
 	category_tags = list(CTAG_ADVENTURER, CTAG_COURTAGENT, CTAG_LICKER_WRETCH)
-	subclass_stats = list(
-		STATKEY_PER = 3,
-		STATKEY_SPD = 2,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
@@ -74,11 +71,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander.ogg'
 	subclass_languages = list(/datum/language/thievescant)
 	traits_applied = list(TRAIT_DODGEEXPERT)
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/crossbows = SKILL_LEVEL_EXPERT,
@@ -123,11 +116,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/bombadier
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander2.ogg'
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_ALCHEMY_EXPERT, TRAIT_EXPLOSIVE_SUPPLY, TRAIT_BOMBER_EXPERT) // Bombardier get an exception - alchemy is part of the gimmick.
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
@@ -169,11 +158,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/bwanderer
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander4.ogg'
 	traits_applied = list(TRAIT_OUTDOORSMAN)
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_WIL = 2,
-		STATKEY_INT = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/bows = SKILL_LEVEL_NOVICE, // Base skill, if not wanted, pick another weapon.
@@ -237,11 +222,9 @@
 				pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
 				gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather
 				ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-				H.change_stat(STATKEY_SPD, 1)
 			if("Medium Armor")
 				armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 				pants = /obj/item/clothing/under/roguetown/chainlegs/iron
 				gloves = /obj/item/clothing/gloves/roguetown/chain/iron
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-				H.change_stat(STATKEY_STR, 1)
 				H.set_blindness(0)

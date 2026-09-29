@@ -32,12 +32,7 @@
 	name = "Seneschal"
 	tutorial = "While still expected to fill in for the duties of the household servantry as needed, you have styled yourself as a figure beyond them."
 	outfit = /datum/outfit/job/roguetown/seneschal/seneschal
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 1, // Usual leadership carrot.
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
@@ -83,12 +78,7 @@
 	name = "Head Maid"
 	tutorial = "Whether you were promoted from one or just like the frills, you stylize yourself as a head maid. Your duties and talents remain the same, though."
 	outfit = /datum/outfit/job/roguetown/seneschal/headmaid
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 1, // Usual leadership carrot.
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
@@ -118,12 +108,7 @@
 	name = "Chief Butler"
 	tutorial = "You are the ruling class of butler and your ability to clear your throat and murmur 'I say' is without peer. Your duties and talents as seneschal remain the same, though."
 	outfit = /datum/outfit/job/roguetown/seneschal/chiefbutler
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 1, // Usual leadership carrot.
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,

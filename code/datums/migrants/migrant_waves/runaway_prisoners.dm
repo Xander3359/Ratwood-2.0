@@ -25,14 +25,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/runaway_prisoner/commoner
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE)
 	category_tags = list(CTAG_RUNAWAY_PRISONER)
-	subclass_stats = list(
-		STATKEY_LCK = 3,
-		STATKEY_CON = -1,
-		STATKEY_STR = -1,
-		STATKEY_WIL = 2,
-		STATKEY_PER = 3,
-		STATKEY_INT = 3,
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/stealing = SKILL_LEVEL_JOURNEYMAN,
@@ -63,14 +56,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/runaway_prisoner/noble
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_NOBLE, TRAIT_SEEPRICES)
 	category_tags = list(CTAG_RUNAWAY_PRISONER)
-	subclass_stats = list(
-		STATKEY_LCK = 3,
-		STATKEY_CON = -1,
-		STATKEY_STR = -1,
-		STATKEY_WIL = 3,
-		STATKEY_PER = 2,
-		STATKEY_INT = 3,
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
@@ -92,14 +78,7 @@
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_ARCYNE_T3, TRAIT_ALCHEMY_EXPERT)
 	category_tags = list(CTAG_RUNAWAY_PRISONER)
 	subclass_spellpoints = 18
-	subclass_stats = list(
-		STATKEY_LCK = 3,
-		STATKEY_CON = -1,
-		STATKEY_STR = -1,
-		STATKEY_WIL = 2,
-		STATKEY_PER = 3,
-		STATKEY_INT = 3,
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/stealing = SKILL_LEVEL_JOURNEYMAN,

@@ -52,13 +52,7 @@
 	category_tags = list(CTAG_KEEPER)
 	// No perception as to dissuade picking statpacks to negate the strength penalty.
 	// Positive stat delta of 3. It's lower than a towner (5) & Acolyte (7), but you have outlier stats and master skills, so less stats for you.
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_WIL = 5,
-		STATKEY_CON = 3,
-		STATKEY_STR = -5,
-		STATKEY_PER = 2
-	)
+	subclass_statpoints = 3
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,

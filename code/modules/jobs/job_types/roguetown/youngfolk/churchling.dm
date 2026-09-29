@@ -37,10 +37,7 @@
 	cmode_music = 'sound/music/combat_holy.ogg'
 	category_tags = list(CTAG_CHURCHLING)
 	traits_applied = list(TRAIT_HOMESTEAD_EXPERT)
-	subclass_stats = list(
-		STATKEY_SPD = 2,
-		STATKEY_PER = 1,
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
@@ -107,11 +104,7 @@
 	outfit = /datum/outfit/job/roguetown/churchling/neophyte
 	category_tags = list(CTAG_CHURCHLING)
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_SQUIRE_REPAIR)
-	subclass_stats = list(
-		STATKEY_CON = 2,
-		STATKEY_STR = 1,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 4
 	subclass_skills = list(
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/magic/holy = SKILL_LEVEL_NOVICE,

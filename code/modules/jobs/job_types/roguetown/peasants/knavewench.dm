@@ -31,13 +31,7 @@
 	tutorial = "You have a simple role at the city tavern; please. You wait tables and help guests, clean the rooms, grow and brew more drink, and assist in the kitchens as need be. Bring a smile to the masses--and those cheapsake townsfolk and adventures might just give you an extra coin...assuming you've not already pilfered their pouch while they're in a drunken stupor off your latest brew."
 	outfit = /datum/outfit/job/roguetown/knavewench/basic
 	category_tags = list(CTAG_TAPSTER)
-	// 5 points weighted
-	subclass_stats = list(
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-		STATKEY_INT = 1,
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,

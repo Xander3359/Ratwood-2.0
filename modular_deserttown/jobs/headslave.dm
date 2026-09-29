@@ -9,9 +9,9 @@
 	allowed_races = ACCEPTED_RACES
 
 	tutorial = "Servitude unto death; that is your motto. You are the manor's head slave, commanding over the lesser slaves and seeing to the administrative affairs,\
-	 day to day of the estate. While you will always be understood as what you are - a slave - your many years of hard work have proven you to be a loyal, trusted, valuable,\
-	  and, to a certain degree, respected member of the court, trained far beyond need of the whip. Indeed, you are entrusted to take the whip to those slaves beneath you.\
-	  You love your masters."
+				day to day of the estate. While you will always be understood as what you are - a slave - your many years of hard work have proven you to be a loyal, trusted, valuable,\
+				and, to a certain degree, respected member of the court, trained far beyond need of the whip. Indeed, you are entrusted to take the whip to those slaves beneath you.\
+				You love your masters."
 	outfit = /datum/outfit/job/roguetown/headslave
 	advclass_cat_rolls = list(CTAG_HEADSLAVE = 20)
 	display_order = JDO_BUTLER
@@ -33,12 +33,7 @@
 	name = "Head Slave"
 	tutorial = "While still expected to fill in for the duties of the household slaves as needed, you have styled yourself as a figure beyond them."
 	outfit = /datum/outfit/job/roguetown/headslave/headslave
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 1, // Usual leadership carrot.
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
@@ -98,12 +93,7 @@
 // 	name = "Head Maid"
 // 	tutorial = "Whether you were promoted from one or just like the frills, you stylize yourself as a head maid. Your duties and talents remain the same, though."
 // 	outfit = /datum/outfit/job/roguetown/headslave/headmaid
-// 	subclass_stats = list(
-// 		STATKEY_INT = 2,
-// 		STATKEY_PER = 2,
-// 		STATKEY_LCK = 1, // Usual leadership carrot.
-// 		STATKEY_SPD = 1
-// 	)
+//	subclass_statpoints = 7
 // 	subclass_skills = list(
 // 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 // 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
@@ -132,12 +122,7 @@
 // 	name = "Chief Butler"
 // 	tutorial = "You are the ruling class of butler and your ability to clear your throat and murmur 'I say' is without peer. Your duties and talents as headslave remain the same, though."
 // 	outfit = /datum/outfit/job/roguetown/headslave/chiefbutler
-// 	subclass_stats = list(
-// 		STATKEY_INT = 2,
-// 		STATKEY_PER = 2,
-// 		STATKEY_LCK = 1, // Usual leadership carrot.
-// 		STATKEY_SPD = 1
-// 	)
+//	subclass_statpoints = 7
 // 	subclass_skills = list(
 // 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 // 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,

@@ -6,16 +6,7 @@
 	outfit = /datum/outfit/job/roguetown/slaver/master
 	traits_applied = list(TRAIT_XENOPHOBIC, TRAIT_PERFECT_TRACKER, TRAIT_SLEUTH, TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_SLAVER_MASTER)
-
-	subclass_stats = list(
-		STATKEY_STR = 3,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 2,
-		STATKEY_PER = 1,
-		STATKEY_LCK = 1, // Small boon
-	)
-
+	subclass_statpoints = 16
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_MASTER,

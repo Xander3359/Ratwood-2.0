@@ -80,14 +80,7 @@
 	on any battlefield."
 	outfit = /datum/outfit/job/roguetown/captain/infantry
 	category_tags = list(CTAG_CAPTAIN)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-		STATKEY_INT = 2,
-		STATKEY_PER = 1,
-		STATKEY_LCK = 1
-	)
+	subclass_statpoints = 12
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,

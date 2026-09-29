@@ -70,11 +70,7 @@
 	outfit = /datum/outfit/job/roguetown/azeb/ranger
 	category_tags = list(CTAG_AZEB)
 	traits_applied = list(TRAIT_DODGEEXPERT)
-	subclass_stats = list(
-		STATKEY_PER = 2,//7 points weighted, same as MAA. They get temp buffs in the city instead of in the city.
-		STATKEY_SPD = 2,
-		STATKEY_WIL = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/bows = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/slings = SKILL_LEVEL_EXPERT,
@@ -133,12 +129,7 @@
 	outfit = /datum/outfit/job/roguetown/azeb/footman
 	category_tags = list(CTAG_AZEB)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 2,//7 points weighted, same as MAA. They get temp buffs in the desert instead of in the city.
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-		STATKEY_PER = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/axes = SKILL_LEVEL_JOURNEYMAN,

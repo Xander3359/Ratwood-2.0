@@ -9,11 +9,7 @@
 	pickprob = 100
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_SEEPRICES)
 	category_tags = list(CTAG_DISABLED)
-	subclass_stats = list(
-		STATKEY_PER = 3,
-		STATKEY_INT = 3,
-		STATKEY_STR = 2
-	)
+	subclass_statpoints = 10
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/medicine = SKILL_LEVEL_EXPERT,

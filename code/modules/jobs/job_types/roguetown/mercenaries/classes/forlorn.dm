@@ -16,11 +16,7 @@
 	traits_applied = list(TRAIT_NOPAINSTUN, TRAIT_CRITICAL_RESISTANCE) // We're going back to the original gimmick of Forlorn Hope, having Critical Resistance
 	// Since we demoted them to light armor, I think it is fair they have access to expert weapons as that is also the unarmed barbarian gimmick
 	// And unarmed now have weapons in AP's new meta. So nothing wrong with it.
-	subclass_stats = list(
-		STATKEY_WIL = 3,
-		STATKEY_STR = 2,
-		STATKEY_CON = 2
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,

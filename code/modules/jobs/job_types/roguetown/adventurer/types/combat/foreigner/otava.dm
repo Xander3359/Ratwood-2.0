@@ -9,12 +9,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/combat_outlander2.ogg'
 	category_tags = list(CTAG_ADVENTURER, CTAG_COURTAGENT)//No licker. Intentional.
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN)
-	subclass_stats = list(
-		STATKEY_CON = 3,
-		STATKEY_SPD = -1,
-		STATKEY_STR = -1,
-		STATKEY_WIL = 3,
-	)
+	subclass_statpoints = 2
 	subclass_skills = list(
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,

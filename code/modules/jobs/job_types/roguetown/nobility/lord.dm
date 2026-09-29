@@ -141,14 +141,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	outfit = /datum/outfit/job/roguetown/lord/warrior
 	category_tags = list(CTAG_LORD)
 	traits_applied = list(TRAIT_NOBLE, TRAIT_DNR, TRAIT_HEAVYARMOR)
-	subclass_stats = list(
-		STATKEY_LCK = 5,
-		STATKEY_INT = 3,
-		STATKEY_WIL = 3,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 1,
-		STATKEY_STR = 1,
-	)
+	subclass_statpoints = 16
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
@@ -186,13 +179,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	category_tags = list(CTAG_LORD)
 	noble_income = 400 // Let's go crazy. This is +400 per day for a total of 2400 per round at the end of a day. This is probably equal to doubling passive incomes of the keep.
 	traits_applied = list(TRAIT_NOBLE, TRAIT_SEEPRICES, TRAIT_CICERONE, TRAIT_KEENEARS, TRAIT_DNR, TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_LCK = 5,
-		STATKEY_INT = 5,
-		STATKEY_PER = 4,
-		STATKEY_SPD = 1,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 17
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
@@ -230,13 +217,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	outfit = /datum/outfit/job/roguetown/lord/wizard
 	category_tags = list(CTAG_LORD)
 	traits_applied = list(TRAIT_NOBLE, TRAIT_MAGEARMOR, TRAIT_DNR, TRAIT_ARCYNE_T3, TRAIT_INTELLECTUAL)
-	subclass_stats = list(
-		STATKEY_LCK = 5,
-		STATKEY_INT = 5,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 17
 	subclass_spellpoints = 27
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE,
@@ -269,14 +250,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	outfit = /datum/outfit/job/roguetown/lord/inbred
 	category_tags = list(CTAG_LORD)
 	traits_applied = list(TRAIT_NOBLE, TRAIT_CRITICAL_WEAKNESS, TRAIT_DNR, TRAIT_NORUN, TRAIT_HEAVYARMOR, TRAIT_GOODLOVER)
-	subclass_stats = list(
-		STATKEY_LCK = 10,
-		STATKEY_INT = -2,
-		STATKEY_PER = -2,
-		STATKEY_CON = -2,
-		STATKEY_WIL = -2,
-		STATKEY_STR = -2,
-	)
+	subclass_statpoints = 0
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,

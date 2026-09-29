@@ -6,13 +6,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/torso
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
 	category_tags = list(CTAG_DISABLED, CTAG_LICKER_WRETCH)
-	subclass_stats = list(
-		STATKEY_STR = 3,
-		STATKEY_WIL = 3,
-		STATKEY_CON = 3,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2
-	)
+	subclass_statpoints = 18
 
 /datum/outfit/job/roguetown/adventurer/torso/pre_equip(mob/living/carbon/human/H)
 	..()

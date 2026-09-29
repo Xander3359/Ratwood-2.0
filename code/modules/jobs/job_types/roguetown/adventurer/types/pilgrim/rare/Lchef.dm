@@ -14,10 +14,7 @@
 	maximum_possible_slots = 1
 	pickprob = 5
 	category_tags = list(CTAG_TOWNER)
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_CON = 2,
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,

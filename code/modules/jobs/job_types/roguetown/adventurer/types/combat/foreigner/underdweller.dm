@@ -17,12 +17,7 @@
 	class_select_category = CLASS_CAT_RACIAL
 	category_tags = list(CTAG_ADVENTURER)
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_WEBWALK, TRAIT_EXPLOSIVE_SUPPLY, TRAIT_ALCHEMY_EXPERT, TRAIT_LEGENDARY_MINER)
-	subclass_stats = list(
-		STATKEY_CON = 1,
-		STATKEY_WIL = 2,
-		STATKEY_STR = 2,
-		STATKEY_LCK = 1
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/combat/axes = SKILL_LEVEL_EXPERT,
 		/datum/skill/labor/mining = SKILL_LEVEL_EXPERT,

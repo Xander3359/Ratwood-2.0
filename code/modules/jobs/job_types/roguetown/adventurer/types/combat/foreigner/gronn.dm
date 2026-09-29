@@ -10,10 +10,7 @@
 	subclass_languages = list(/datum/language/gronnic)
 	cmode_music = 'sound/music/combat_gronn.ogg'
 	traits_applied = list(TRAIT_STEELHEARTED)
-	subclass_stats = list(
-		STATKEY_WIL = 2,
-		STATKEY_INT = -1,
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/axes = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
@@ -24,9 +21,9 @@
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 	)
 	extra_context = "Inhumen exclusive. \
-	Bruiser provides: +3STR/-2INT, medium armor training, JMAN polearms and JMAN riding, paired with critical resistance. \
-	Archer provides:  +3PER/+2STR, medium armor training, EXPT bows, JMAN tracking. \
-	Zealot provides: +2SPD/+2STR, dodge expert, T2 miracles."
+	Bruiser provides: medium armor training, JMAN polearms and JMAN riding, paired with critical resistance. \
+	Archer provides: medium armor training, EXPT bows, JMAN tracking. \
+	Zealot provides: dodge expert, T2 miracles."
 
 /datum/outfit/job/roguetown/adventurer/gronnic
 	allowed_patrons = ALL_GRONNIC_PATRONS //Subvariant of the 'ALL_INHUMEN_PATRONS' tag, with Abyssor and Dendor as situational additions. Do not add any more to this, no matter what.
@@ -73,8 +70,6 @@
 				//Skills & Stats.
 				H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 				H.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-				H.change_stat(STATKEY_STR, 3)
-				H.change_stat(STATKEY_INT, -2)
 				//The rest.
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
@@ -87,8 +82,6 @@
 				//Skills & Stats.
 				H.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
 				H.adjust_skillrank(/datum/skill/misc/tracking, 3, TRUE)
-				H.change_stat(STATKEY_PER, 3)
-				H.change_stat(STATKEY_STR, 2)
 				//The rest.
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 			if("Zealot")
@@ -98,8 +91,6 @@
 				r_hand = /obj/item/rogueweapon/stoneaxe/handaxe
 				//Skills & Stats.
 				H.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-				H.change_stat(STATKEY_STR, 2)
-				H.change_stat(STATKEY_SPD, 2)
 				//The rest.
 				var/datum/devotion/C = new /datum/devotion(H, H.patron)
 				C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_2) //Capped to T2 miracles. Devotion at T2.

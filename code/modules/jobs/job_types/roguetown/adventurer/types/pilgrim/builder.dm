@@ -10,13 +10,7 @@
 	cmode_music = 'sound/music/cmode/towner/combat_towner2.ogg'
 	maximum_possible_slots = 20 // Should never fill, for the purpose of players to know what types towners are in round at the menu
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 1,
-		STATKEY_INT = 1,
-		STATKEY_SPD = -1,
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/combat/axes = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,

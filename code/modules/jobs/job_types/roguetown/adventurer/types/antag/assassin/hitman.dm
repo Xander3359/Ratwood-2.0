@@ -7,16 +7,7 @@
 	category_tags = list(CTAG_ASSASSIN)
 	subclass_social_rank = SOCIAL_RANK_PEASANT
 	traits_applied = list(TRAIT_BLACKBAGGER)	// Agent (15)47 - Lets you use the blackbag and garrote you
-	// Weighted 14
-	subclass_stats = list(
-		STATKEY_PER = 1,
-		STATKEY_SPD = 2,
-		STATKEY_STR = 1,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 2,
-		STATKEY_INT = 1,
-		STATKEY_LCK = 2,	//Bit quirky but should be good for them with maces etc.
-	)
+	subclass_statpoints = 14
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_EXPERT,			// Main weapon is going to be their garrote but maces are a good backup. (Cudgel prob)
 		/datum/skill/combat/wrestling = SKILL_LEVEL_MASTER,		// GRAB HEEEE!!!

@@ -34,8 +34,8 @@
 	/// Stat ceilings for the specific subclass.
 	var/list/adv_stat_ceiling
 
-	/// Subclass stat bonuses.
-	var/list/subclass_stats
+	/// Amount of points this class has to assign stats
+	var/subclass_statpoints = 7 // Is about the standard, some power roles have more.
 
 	/// Subclass skills. Everything here is leveled UP TO using adjust_skillrank_up_to EX. list(/datum/skill = SKILL_LEVEL_JOURNEYMAN)
 	var/list/subclass_skills
@@ -106,9 +106,11 @@
 		for(var/lang in subclass_languages)
 			H.grant_language(lang)
 
+	/* XANTODO: Make the UI
 	if(length(subclass_stats))
 		for(var/stat in subclass_stats)
 			H.change_stat(stat, subclass_stats[stat])
+	*/
 
 	if(length(subclass_skills))
 		for(var/skill in subclass_skills)

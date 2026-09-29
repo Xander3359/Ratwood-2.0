@@ -38,12 +38,7 @@
 	outfit = /datum/outfit/job/roguetown/druid/basic
 	category_tags = list(CTAG_DRUID)
 	subclass_languages = list(/datum/language/beast)
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 1,
-		STATKEY_PER = -1
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/craft/sewing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,

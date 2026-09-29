@@ -13,12 +13,7 @@
 		/datum/language/aavnic,
 	)
 
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 2,
-		STATKEY_PER = 1,
-	)
+	subclass_statpoints = 8
 
 	subclass_skills = list(
 	/datum/skill/combat/maces = SKILL_LEVEL_NOVICE,

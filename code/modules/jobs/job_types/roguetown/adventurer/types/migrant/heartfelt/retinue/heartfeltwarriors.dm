@@ -12,14 +12,7 @@
 	class_select_category = CLASS_CAT_HFT_GUARD
 	subclass_social_rank = SOCIAL_RANK_YEOMAN
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_HEARTFELT) // Heavy Armor MAA footman W/O Guardsman Trait
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = 1,
-		STATKEY_CON = 3,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 1,
-	)
-
+	subclass_statpoints = 12
 	subclass_skills = list(
 	/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 	/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
@@ -120,13 +113,7 @@
 	class_select_category = CLASS_CAT_HFT_GUARD
 	subclass_social_rank = SOCIAL_RANK_YEOMAN
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_HEARTFELT) // Medium Armor Forced - Heavier 'Defensive' Class
-	subclass_stats = list(
-		STATKEY_SPD = 2,
-		STATKEY_PER = 2,
-		STATKEY_WIL = 2,
-		STATKEY_STR = 1,
-		STATKEY_CON = 1,
-	)
+	subclass_statpoints = 10
 
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
@@ -232,14 +219,7 @@
 	category_tags = list(CTAG_HFT_RETINUE)
 	class_select_category = SOCIAL_RANK_MINOR_NOBLE
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_SQUIRE_REPAIR, TRAIT_STEELHEARTED, TRAIT_HEARTFELT)
-	subclass_stats = list( // Made 9 points due to lack of Guardsman Trait
-		STATKEY_STR = 1,
-		STATKEY_INT = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 2,
-	)
+	subclass_statpoints = 11
 	cmode_music = 'sound/music/combat_squire.ogg'
 
 	subclass_skills = list(

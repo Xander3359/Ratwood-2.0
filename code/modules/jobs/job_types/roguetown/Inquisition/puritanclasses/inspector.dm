@@ -21,13 +21,7 @@
 		TRAIT_OUTLANDER,
 		TRAIT_NOBLE
 		)
-	subclass_stats = list(
-		STATKEY_WIL = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 2,
-		STATKEY_INT = 1
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/tracking = SKILL_LEVEL_MASTER,

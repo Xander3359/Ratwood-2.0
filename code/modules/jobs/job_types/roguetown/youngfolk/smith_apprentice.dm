@@ -33,11 +33,7 @@
 	outfit = /datum/outfit/job/roguetown/gapprentice/basic
 	cmode_music = 'sound/music/cmode/towner/combat_towner3.ogg'
 	category_tags = list(CTAG_GUILDAPPRENTICE)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 1,
-		STATKEY_CON = 1
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(//apprentice levels in all smithing/engineering section. Journeyman in smelting.
 		/datum/skill/combat/axes = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,

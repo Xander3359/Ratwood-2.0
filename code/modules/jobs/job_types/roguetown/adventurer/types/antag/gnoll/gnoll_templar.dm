@@ -8,12 +8,7 @@
 	applies_post_equipment = FALSE
 	category_tags = list(CTAG_GNOLL)
 	traits_applied = list(TRAIT_HEAVYARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 4,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 2
-	)
+	subclass_statpoints = 14
 	subclass_skills = list(
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,

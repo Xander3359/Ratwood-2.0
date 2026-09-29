@@ -12,12 +12,7 @@
 		TRAIT_CIVILIZEDBARBARIAN,// To be up to date with other unarmed classes.
 		TRAIT_RITUALIST,
 		)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 2,
-		STATKEY_LCK = 2,
-		STATKEY_CON = 2, //We have a total of +10 in stats. +13 if we have a visible bounty.
-	)
+	subclass_statpoints = 10
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/shields = SKILL_LEVEL_JOURNEYMAN,

@@ -9,14 +9,7 @@
 	outfit = /datum/outfit/job/roguetown/slaver/slave/service
 	traits_applied = list(TRAIT_GOODLOVER, TRAIT_EMPATH, TRAIT_BEAUTIFUL, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_SLAVER_SLAVE)
-
-	subclass_stats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 3,
-		STATKEY_WIL = 3,
-		STATKEY_SPD = 2,
-	)
-
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
@@ -66,14 +59,7 @@
 	outfit = /datum/outfit/job/roguetown/slaver/slave/battle
 	traits_applied = list(TRAIT_GOODLOVER, TRAIT_BREADY, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_SLAVER_SLAVE)
-
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 1,
-		STATKEY_WIL = 3,
-		STATKEY_LCK = -1,
-	)
-
+	subclass_statpoints = 4
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,

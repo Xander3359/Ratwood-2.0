@@ -50,11 +50,7 @@
 
 	category_tags = list(CTAG_ROOKIE)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 4
 	subclass_skills = list(
 		/datum/skill/combat/shields = 2,
 		/datum/skill/combat/maces = 3,
@@ -122,11 +118,7 @@
 	outfit = /datum/outfit/job/roguetown/rookie/skirmisher
 
 	category_tags = list(CTAG_ROOKIE)
-	subclass_stats = list(
-		STATKEY_SPD = 1,
-		STATKEY_PER = 1,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 4
 	subclass_skills = list(
 		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,

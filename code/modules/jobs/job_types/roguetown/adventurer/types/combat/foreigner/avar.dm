@@ -11,10 +11,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/aavnik
 	cmode_music = 'sound/music/combat_league.ogg'
 	subclass_languages = list(/datum/language/aavnic)
-	subclass_stats = list(
-		STATKEY_PER = 3,
-		STATKEY_SPD = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 	//Universal skills
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_JOURNEYMAN,
@@ -64,7 +61,6 @@
 		var/purpose_choice = input(H, "Choose your FALL", "WHY YOU LEFT") as anything in aavnik_purpose
 		switch(purpose_choice)
 			if("Saiga Archer")
-				H.change_stat(STATKEY_SPD, 1)
 				H.adjust_skillrank_up_to(/datum/skill/combat/bows, 4, TRUE)
 				H.adjust_skillrank_up_to(/datum/skill/misc/riding, 4, TRUE)
 				ADD_TRAIT(H, TRAIT_EQUESTRIAN, TRAIT_GENERIC)
@@ -74,20 +70,17 @@
 				if(TU)
 					new /mob/living/simple_animal/hostile/retaliate/rogue/saiga/tame/saddled(TU)
 			if("Footman")
-				H.change_stat(STATKEY_STR, 1)
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)
 				r_hand = /obj/item/rogueweapon/sword/sabre/steppesman
 				beltl = /obj/item/rogueweapon/scabbard/sword
 				backl = /obj/item/rogueweapon/shield/buckler
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 			if("Axeman")
-				H.change_stat(STATKEY_STR, 1)
 				H.adjust_skillrank_up_to(/datum/skill/combat/axes, 3, TRUE)
 				r_hand = /obj/item/rogueweapon/stoneaxe/battle/steppesman
 				backl = /obj/item/rogueweapon/shield/buckler
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 			if("Pikeman")
-				H.change_stat(STATKEY_STR, 1)
 				H.adjust_skillrank_up_to(/datum/skill/combat/polearms, 3, TRUE)
 				r_hand = /obj/item/rogueweapon/spear/boar/aav
 				l_hand = /obj/item/rogueweapon/katar/punchdagger/aav

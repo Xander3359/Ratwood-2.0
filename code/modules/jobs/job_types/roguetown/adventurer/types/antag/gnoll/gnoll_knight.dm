@@ -8,13 +8,7 @@
 	category_tags = list(CTAG_GNOLL)
 	applies_post_equipment = FALSE
 	traits_applied = list(TRAIT_HEAVYARMOR) // Flavoring
-
-	subclass_stats = list(
-		STATKEY_WIL = 5,
-		STATKEY_CON = 5,
-		STATKEY_SPD = 2,
-		STATKEY_INT = 1
-	)
+	subclass_statpoints = 15
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/swimming = SKILL_LEVEL_EXPERT,

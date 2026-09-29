@@ -13,13 +13,7 @@
 	traits_applied = list(TRAIT_HEARTFELT, TRAIT_CHOSEN, TRAIT_RITUALIST, TRAIT_SOUL_EXAMINE, TRAIT_GRAVEROBBER, TRAIT_RESONANCE, TRAIT_VOTARY, TRAIT_HOMESTEAD_EXPERT)
 	class_select_category = CLASS_CAT_HFT_COURT
 
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_WIL = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 1,
-		STATKEY_STR = -1,
-	)
+	subclass_statpoints = 5
 
 	subclass_skills = list(
 	/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,

@@ -15,13 +15,7 @@
 	outfit = /datum/outfit/job/roguetown/grenzel/envoy
 	traits_applied = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_GRENZEL_ENVOY)
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 2,
-		STATKEY_PER = 1,
-		STATKEY_SPD = 1,
-	)
+	subclass_statpoints = 8
 
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
@@ -83,13 +77,7 @@
 	outfit = /datum/outfit/job/roguetown/grenzel/doppel
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED)
 	category_tags = list(CTAG_GRENZEL_GUARD)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 2,
-		STATKEY_CON = 3,
-		STATKEY_PER = 1,
-		STATKEY_SPD = 1,
-	)
+	subclass_statpoints = 12
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
@@ -170,12 +158,7 @@
 	outfit = /datum/outfit/job/roguetown/grenzel/priest
 	traits_applied = list(TRAIT_CHOSEN, TRAIT_RITUALIST, TRAIT_SOUL_EXAMINE, TRAIT_GRAVEROBBER, TRAIT_HOMESTEAD_EXPERT, TRAIT_MEDICINE_EXPERT)
 	category_tags = list(CTAG_GRENZEL_PRIEST)
-	subclass_stats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 3,
-		STATKEY_WIL = 3,
-		STATKEY_SPD = -1,
-	)
+	subclass_statpoints = 2
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,

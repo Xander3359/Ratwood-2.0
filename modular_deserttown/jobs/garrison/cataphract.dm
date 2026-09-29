@@ -68,13 +68,7 @@
 
 	category_tags = list(CTAG_CATAPHRACT)
 	traits_applied = list(TRAIT_HEAVYARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 3,//Heavy hitters. Less con/end, high strength.
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = -1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
@@ -155,12 +149,7 @@
 
 	category_tags = list(CTAG_CATAPHRACT)
 	traits_applied = list(TRAIT_HEAVYARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 1,//Tanky, less strength, but high con/end.
-		STATKEY_INT = 1,
-		STATKEY_CON = 3,
-		STATKEY_WIL = 3,
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_EXPERT,
@@ -234,13 +223,7 @@
 
 // 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_EQUESTRIAN)
 // 	//Decent all-around stats. Nothing spectacular. Ranged/melee hybrid class on horseback.
-// 	subclass_stats = list(
-// 		STATKEY_STR = 2,
-// 		STATKEY_INT = 1,
-// 		STATKEY_CON = 1,
-// 		STATKEY_WIL = 1,
-// 		STATKEY_PER = 2,
-// 	)
+//	subclass_statpoints = 9
 // 	subclass_skills = list(
 // 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 // 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
@@ -351,12 +334,7 @@
 
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_DODGEEXPERT)
 	category_tags = list(CTAG_CATAPHRACT)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 3,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 2,
-	)
+	subclass_statpoints = 10
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,

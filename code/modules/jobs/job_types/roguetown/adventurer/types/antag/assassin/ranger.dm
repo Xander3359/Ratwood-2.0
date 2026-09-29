@@ -7,14 +7,7 @@
 	category_tags = list(CTAG_ASSASSIN)
 	subclass_social_rank = SOCIAL_RANK_PEASANT
 	traits_applied = list(TRAIT_WOODWALKER, TRAIT_OUTDOORSMAN)	// Master of the Forest - Tosses them a bone for wilderness chases.
-	// Weighted 14
-	subclass_stats = list(
-		STATKEY_PER = 4,
-		STATKEY_SPD = 3,
-		STATKEY_STR = 1,
-		STATKEY_WIL = 1,
-		STATKEY_INT = 1,
-	)
+	subclass_statpoints = 14
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/axes = SKILL_LEVEL_EXPERT,			// Fall-back/melee weapon is using a big ol' axe.

@@ -9,13 +9,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_NOBLE)
 	cmode_music = 'sound/music/combat_routier.ogg'
-	subclass_stats = list(
-		STATKEY_CON = 4,
-		STATKEY_WIL = 2,
-		STATKEY_STR = 2,
-		STATKEY_PER = 1,
-		STATKEY_SPD = -1
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,

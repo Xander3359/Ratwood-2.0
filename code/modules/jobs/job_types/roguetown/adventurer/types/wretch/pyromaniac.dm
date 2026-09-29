@@ -8,11 +8,7 @@
 	class_select_category = CLASS_CAT_MAGE
 	category_tags = list(CTAG_WRETCH)
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_ALCHEMY_EXPERT)
-	subclass_stats = list(
-		STATKEY_WIL = 3,
-		STATKEY_CON = 3,
-		STATKEY_INT = 3
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/bows = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,

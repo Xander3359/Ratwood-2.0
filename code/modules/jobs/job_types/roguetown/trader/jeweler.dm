@@ -8,12 +8,7 @@
 	traits_applied = list(TRAIT_TRAINED_SMITH, TRAIT_SMITHING_EXPERT, TRAIT_LEGENDARY_MINER)
 	outfit = /datum/outfit/job/roguetown/adventurer/trader
 	subclass_social_rank = SOCIAL_RANK_YEOMAN
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_PER = 1,
-		STATKEY_STR = 1,
-		STATKEY_WIL = 1
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,

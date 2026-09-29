@@ -41,13 +41,7 @@
 	outfit = /datum/outfit/job/roguetown/heir/daring
 	category_tags = list(CTAG_HEIR)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 1,
-		STATKEY_LCK = 1,
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/bows = SKILL_LEVEL_APPRENTICE,
@@ -102,13 +96,7 @@
 	outfit = /datum/outfit/job/roguetown/heir/bookworm
 	traits_applied = list(TRAIT_ARCYNE_T2, TRAIT_MAGEARMOR, TRAIT_GOODWRITER)
 	category_tags = list(CTAG_HEIR)
-	subclass_stats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1,
-		STATKEY_CON = -1,
-		STATKEY_LCK = 2,
-	)
+	subclass_statpoints = 4
 	subclass_spellpoints = 9
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_MASTER,
@@ -172,13 +160,7 @@
 	outfit = /datum/outfit/job/roguetown/heir/aristocrat
 	traits_applied = list(TRAIT_SEEPRICES_SHITTY, TRAIT_GOODLOVER, TRAIT_SEWING_EXPERT)
 	category_tags = list(CTAG_HEIR)
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_STR = -1,
-		STATKEY_INT = 2,
-		STATKEY_LCK = 1,
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/combat/bows = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
@@ -243,14 +225,7 @@
 	traits_applied = list(TRAIT_CRITICAL_WEAKNESS, TRAIT_NORUN, TRAIT_GOODLOVER)
 	category_tags = list(CTAG_HEIR)
 	//They already can't run, no need to do speed and torture their move speed.
-	subclass_stats = list(
-		STATKEY_STR = -2,
-		STATKEY_PER = -2,
-		STATKEY_INT = -2,
-		STATKEY_CON = -2,
-		STATKEY_WIL = -2,
-		STATKEY_LCK = -2
-	)
+	subclass_statpoints = -12
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,
@@ -314,16 +289,7 @@
 	outfit = /datum/outfit/job/roguetown/heir/scamp
 	traits_applied = list(TRAIT_SEEPRICES_SHITTY)
 	category_tags = list(CTAG_HEIR)
-	//Not standard weighted. Not intended to be considering the stat ceilings. -F
-	subclass_stats = list(
-	STATKEY_STR = -3,
-	STATKEY_CON = -3,
-	STATKEY_SPD = 4,
-	STATKEY_PER = 2,
-	STATKEY_INT = 2,
-	STATKEY_WIL = 1,
-	STATKEY_LCK = 1,
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/misc/sneaking = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,

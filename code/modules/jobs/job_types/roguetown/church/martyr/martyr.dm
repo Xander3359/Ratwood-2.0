@@ -57,13 +57,7 @@
 	outfit = /datum/outfit/job/roguetown/martyr/basic
 	subclass_languages = list(/datum/language/grenzelhoftian)
 	category_tags = list(CTAG_MARTYR)
-	subclass_stats = list(
-		STATKEY_CON = 3,
-		STATKEY_WIL = 3,
-		STATKEY_STR = 2,
-		STATKEY_PER = 1,
-		STATKEY_INT = 1
-	)
+	subclass_statpoints = 12
 	subclass_skills = list(
 	//No, they don't get any miracles. Their miracle is being able to use their weapon at all.
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,

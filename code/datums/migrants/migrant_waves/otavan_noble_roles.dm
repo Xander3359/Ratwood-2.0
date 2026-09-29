@@ -17,14 +17,7 @@
 	outfit = /datum/outfit/job/roguetown/otavan/envoy
 	traits_applied = list(TRAIT_NOBLE, TRAIT_DODGEEXPERT, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_OTAVAN_ENVOY)
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_STR = -1,
-		STATKEY_CON = -1,		//You're not really fight-y. Get behind your knight, punk. Expert swords bc you probably danced a lot with it but otherwise you suck.
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 2,
-		STATKEY_LCK = 1,
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/combat/swords= SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/crossbows= SKILL_LEVEL_JOURNEYMAN,
@@ -89,12 +82,7 @@
 	outfit = /datum/outfit/job/roguetown/otavan/knight
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_NOBLE, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_OTAVAN_KNIGHT)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_WIL = 3,
-		STATKEY_CON = 3,
-		STATKEY_SPD = -1,
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/misc/swimming= SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing= SKILL_LEVEL_APPRENTICE,
@@ -156,13 +144,7 @@
 	outfit = /datum/outfit/job/roguetown/otavan/guard
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_OTAVAN_GUARD)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 2,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 1,
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/bows = SKILL_LEVEL_APPRENTICE,
@@ -221,12 +203,6 @@
 	outfit = /datum/outfit/job/roguetown/otavan/preacher
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_STEELHEARTED, TRAIT_SILVER_BLESSED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_OTAVAN_PREACHER)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-	)
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,		//everybody was kung-fu fighting. Jman bc you're defending yourself, punk. Roleplay.
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
@@ -287,12 +263,7 @@
 	outfit = /datum/outfit/job/roguetown/otavan/scribe
 	traits_applied = list(TRAIT_NOBLE, TRAIT_SEEPRICES, TRAIT_CICERONE, TRAIT_INTELLECTUAL, TRAIT_OUTLANDER)	//booksmart, moneysmart, winesmart
 	category_tags = list(CTAG_OTAVAN_SCRIBE)
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_CON = -1,		//You are DEFINITELY not a fighting role.
-		STATKEY_STR = -2,
-		STATKEY_SPD = 2,
-	)
+	subclass_statpoints = 2
 	subclass_skills = list(
 		/datum/skill/combat/knives= SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling= SKILL_LEVEL_APPRENTICE,

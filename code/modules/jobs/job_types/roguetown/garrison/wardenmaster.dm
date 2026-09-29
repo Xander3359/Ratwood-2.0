@@ -64,14 +64,7 @@
 	outfit = /datum/outfit/job/roguetown/wardenmaster/wardenmaster
 
 	category_tags = list(CTAG_BOGMASTER)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_SPD = 1,
-		STATKEY_INT = 1,
-		STATKEY_PER = 1, 
-		STATKEY_CON = 1, 
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/axes = SKILL_LEVEL_EXPERT,

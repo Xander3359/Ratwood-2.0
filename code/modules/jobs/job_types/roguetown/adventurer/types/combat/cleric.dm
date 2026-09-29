@@ -10,10 +10,7 @@
 	class_select_category = CLASS_CAT_CLERIC
 	subclass_social_rank = SOCIAL_RANK_YEOMAN
 	traits_applied = list(TRAIT_CIVILIZEDBARBARIAN, TRAIT_OUTLANDER)
-	subclass_stats = list(
-		STATKEY_WIL = 2,
-		STATKEY_CON = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
@@ -104,15 +101,13 @@
 				gloves = /obj/item/clothing/gloves/roguetown/bandages
 
 		//Wow, these sure are long!
-		var/monk_vow = list("Vow of Solace | +2SPD, Dodge Expert","Vow of the Feat | +2STR, Critical Resistance")
+		var/monk_vow = list("Vow of Solace | Dodge Expert","Vow of the Feat | Critical Resistance")
 		var/vow_choice = input(H, "Choose your VOW", "VALIDATE YOUR FAILINGS") as anything in monk_vow
 		switch(vow_choice)
-			if("Vow of Solace | +2SPD, Dodge Expert")
-				H.change_stat(STATKEY_SPD, 2)
+			if("Vow of Solace | Dodge Expert")
 				ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-			if("Vow of the Feat | +2STR, Critical Resistance")
+			if("Vow of the Feat | Critical Resistance")
 				ADD_TRAIT(H, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
-				H.change_stat(STATKEY_STR, 2)
 
 	H.cmode_music = 'sound/music/combat_holy.ogg'
 
@@ -195,11 +190,7 @@
 	- a longsword in one hand, and a clenched psycross in the other."
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/shields = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
@@ -458,11 +449,7 @@
 	tutorial = "You were a bard once - but you've found a new calling. Your eyes have been opened to the divine, now you wander from city to city singing songs and telling tales of your patron's greatness."
 	outfit = /datum/outfit/job/roguetown/adventurer/cantor
 	traits_applied = list(TRAIT_DODGEEXPERT, TRAIT_EMPATH)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 2,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/misc/music = SKILL_LEVEL_EXPERT,
 		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
@@ -626,12 +613,7 @@
 	tutorial = "You are a devout worshipper of the divine with a strong connection to your patron god. You've spent years studying scriptures and serving your deity - now you wander into foreign lands, spreading the word of your faith. Preachers focus on homesteading while Shepards preach through example and protecting their would-be flock."
 	outfit = /datum/outfit/job/roguetown/adventurer/missionary
 	traits_applied = list(TRAIT_EMPATH)
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
@@ -798,12 +780,7 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_SELF_AWARE
 	)
-	subclass_stats = list(
-		STATKEY_CON = 5,
-		STATKEY_WIL = 3,
-		STATKEY_SPD = 1,
-		STATKEY_STR = -2,
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,

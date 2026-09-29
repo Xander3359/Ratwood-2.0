@@ -35,11 +35,7 @@
 	outfit = /datum/outfit/job/roguetown/slave/servant
 	category_tags = list(CTAG_PSLAVE)
 	traits_applied = list(TRAIT_CICERONE, TRAIT_KEENEARS, TRAIT_SLEUTH, TRAIT_ROYALSERVANT, TRAIT_ROYAL_SUBSIDY)
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_INT = 1,
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_JOURNEYMAN,
@@ -81,11 +77,7 @@
 	outfit = /datum/outfit/job/roguetown/slave/pleasure
 	category_tags = list(CTAG_PSLAVE)
 	traits_applied = list(TRAIT_CICERONE, TRAIT_KEENEARS, TRAIT_SLEUTH, TRAIT_ROYALSERVANT, TRAIT_ROYAL_SUBSIDY)
-	subclass_stats = list(
-		STATKEY_PER = 2,
-		STATKEY_INT = 1,
-		STATKEY_SPD = 1
-	)
+	subclass_statpoints = 5
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_JOURNEYMAN,
@@ -160,13 +152,7 @@
 // 	tutorial = "CHANGE THIS. You do HARD WORK!."
 // 	outfit = /datum/outfit/job/roguetown/slave/worker
 // 	category_tags = list(CTAG_PSLAVE)
-// 	subclass_stats = list(
-// 		STATKEY_STR = 2,
-// 		STATKEY_END = 3,
-// 		STATKEY_CON = 1,
-// 		STATKEY_SPE = -1,
-// 		STATKEY_PER = -1,
-// 		STATKEY_INT = -1
+//	subclass_statpoints = 4
 // 	)
 // 	subclass_skills = list(
 // 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,

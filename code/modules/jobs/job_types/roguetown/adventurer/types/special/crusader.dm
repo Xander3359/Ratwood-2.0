@@ -14,13 +14,7 @@
 	The 451st crusade is sure to be the last."
 
 	category_tags = list(CTAG_DISABLED)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
-		STATKEY_PER = 1,
-		STATKEY_INT = 1
-	)
+	subclass_statpoints = 10
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,

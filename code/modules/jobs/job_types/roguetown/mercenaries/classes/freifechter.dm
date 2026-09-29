@@ -10,11 +10,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	cmode_music = 'sound/music/combat_fencer.ogg'
 	traits_applied = list(TRAIT_BADTRAINER, TRAIT_INTELLECTUAL, TRAIT_LONGSWORDSMAN, TRAIT_FENCERDEXTERITY)
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_PER = 3,
-		STATKEY_WIL = 3
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
@@ -76,12 +72,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	cmode_music = 'sound/music/frei_fencer.ogg'
 	traits_applied = list(TRAIT_BADTRAINER, TRAIT_FENCERDEXTERITY, TRAIT_INTELLECTUAL)
-	subclass_stats = list(
-		STATKEY_CON = 2,
-		STATKEY_PER = 3,
-		STATKEY_STR = 1,
-		STATKEY_WIL = 2
-	)
+	subclass_statpoints = 8
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_MASTER,	//This is the danger zone. Ultimately, the class won't be picked without this. I took the liberty of adjusting everything around to make this somewhat inoffensive, but we'll see if it sticks.
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
@@ -136,11 +127,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	cmode_music = 'sound/music/frei_sabre.ogg'
 	traits_applied = list(TRAIT_BADTRAINER, TRAIT_INTELLECTUAL, TRAIT_FENCERDEXTERITY, TRAIT_SABRIST)
-	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 3,
-		STATKEY_SPD = 2
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,

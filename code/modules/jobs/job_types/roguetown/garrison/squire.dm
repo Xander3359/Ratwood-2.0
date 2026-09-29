@@ -54,13 +54,7 @@
 
 	category_tags = list(CTAG_SQUIRE)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_INT = 1,
-	)
+	subclass_statpoints = 6
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/crossbows = SKILL_LEVEL_NOVICE,
@@ -107,13 +101,7 @@
 
 	category_tags = list(CTAG_SQUIRE)
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_INT = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/crossbows = SKILL_LEVEL_APPRENTICE,
@@ -170,12 +158,7 @@
 
 	category_tags = list(CTAG_SQUIRE)
 	traits_applied = list(TRAIT_DODGEEXPERT)
-	subclass_stats = list(
-		STATKEY_SPD = 2,
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_INT = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/bows = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/crossbows = SKILL_LEVEL_JOURNEYMAN,

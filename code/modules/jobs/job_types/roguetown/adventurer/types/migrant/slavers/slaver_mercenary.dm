@@ -11,16 +11,7 @@
 	outfit = /datum/outfit/job/roguetown/slaver/mercenary/blade
 	traits_applied = list(TRAIT_XENOPHOBIC, TRAIT_SLEUTH, TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_SLAVER_MERC)
-
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 1,
-	)
-
+	subclass_statpoints = 11
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_JOURNEYMAN,
@@ -87,16 +78,7 @@
 	outfit = /datum/outfit/job/roguetown/slaver/mercenary/whip
 	traits_applied = list(TRAIT_XENOPHOBIC, TRAIT_SLEUTH, TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_SLAVER_MERC)
-
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 1,
-	)
-
+	subclass_statpoints = 11
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_EXPERT,
@@ -163,15 +145,7 @@
 	outfit = /datum/outfit/job/roguetown/slaver/mercenary/crossbow
 	traits_applied = list(TRAIT_XENOPHOBIC, TRAIT_SLEUTH, TRAIT_DODGEEXPERT, TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
 	category_tags = list(CTAG_SLAVER_MERC)
-
-	subclass_stats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 3,
-		STATKEY_WIL = 2,
-		STATKEY_SPD = 2,
-		STATKEY_PER = 3,
-	)
-
+	subclass_statpoints = 13
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_JOURNEYMAN,

@@ -603,7 +603,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/baotha_withdrawal
 	// Mild debuff because it's mixed with a mood debuff!
 	effectedstats = list(
-		STATKEY_STR = -2,
+		-2,
 		STATKEY_SPD = -2,
 		STATKEY_WIL = -2,
 	)

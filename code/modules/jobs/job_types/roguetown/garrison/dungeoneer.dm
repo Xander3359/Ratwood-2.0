@@ -56,11 +56,7 @@
 	outfit = /datum/outfit/job/roguetown/dungeoneer/base
 
 	category_tags = list(CTAG_DUNGEONEER)
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 1
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/whipsflails = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_MASTER, //hilarious

@@ -34,11 +34,7 @@
 	tutorial = "You are an accomplished physician, trained and practiced in the art of medicine. You answer to the Head Physician, who enables your practice. Woe betide the one who suffers your scalpel."
 	outfit = /datum/outfit/job/roguetown/apothecary/basic
 	category_tags = list(CTAG_APOTH)
-	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 1,
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE, //enhances survival chances.

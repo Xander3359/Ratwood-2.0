@@ -7,13 +7,7 @@
 
 	category_tags = list(CTAG_MENATARMS)
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_EQUESTRIAN)
-	//Garrison mounted class; charge and charge often.
-	subclass_stats = list(
-		STATKEY_CON = 2,// seems kinda lame but remember guardsman bonus!!
-		STATKEY_WIL = 2,// Your name is speed, and speed is running.
-		STATKEY_STR = 1,
-		STATKEY_INT = 1, // No strength to account for the nominally better weapons. We'll see.
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,

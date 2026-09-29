@@ -7,14 +7,7 @@
 	category_tags = list(CTAG_ROYALGUARD)
 
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_EQUESTRIAN)
-	//Decent all-around stats. Nothing spectacular. Ranged/melee hybrid class on horseback.
-	subclass_stats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-		STATKEY_WIL = 1,
-		STATKEY_PER = 2,
-	)
+	subclass_statpoints = 9
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,

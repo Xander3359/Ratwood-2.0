@@ -14,10 +14,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/nostromo
 	cmode_music = 'sound/music/combat_vaquero.ogg'
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_GOODLOVER, TRAIT_INTELLECTUAL)//No dodge / crit resist slop. Zzz...
-	subclass_stats = list(
-		STATKEY_SPD = 1,
-		STATKEY_INT = 3
-	)
+	subclass_statpoints = 7
 	subclass_skills = list(
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,//Not much of a wrestler.
@@ -49,7 +46,6 @@
 		var/purpose_choice = input(H, "Choose your FAILING", "WHY THE PLANK") as anything in nostromo_purpose
 		switch(purpose_choice)
 			if("Navigator")
-				H.change_stat(STATKEY_PER, 2)
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 3, TRUE)//No shield skill, since you're buckler reliant.
 				r_hand = /obj/item/rogueweapon/sword/rapier/vaquero //You would've stolen this, probably.
 				beltl = /obj/item/rogueweapon/scabbard/sword
@@ -62,8 +58,6 @@
 			if("Castaway")
 				var/datum/inspiration/I = new /datum/inspiration(H)
 				I.grant_inspiration(H, bard_tier = BARD_T1)
-				H.change_stat(STATKEY_PER, 1)
-				H.change_stat(STATKEY_WIL, 1)
 				H.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, 3, TRUE)
 				//You already know why...
 				backr = /obj/item/rogue/instrument/flute

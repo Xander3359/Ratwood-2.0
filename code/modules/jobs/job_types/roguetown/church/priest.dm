@@ -77,13 +77,7 @@ GLOBAL_LIST_EMPTY(priest_swap_timers)
 	outfit = /datum/outfit/job/roguetown/priest/basic
 	subclass_languages = list(/datum/language/grenzelhoftian)
 	category_tags = list(CTAG_BISHOP)
-	subclass_stats = list(
-		STATKEY_INT = 4,
-		STATKEY_WIL = 2,
-		STATKEY_STR = -1,
-		STATKEY_CON = -1,
-		STATKEY_SPD = -1
-	)
+	subclass_statpoints = 1
 	subclass_skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_MASTER,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_MASTER,
