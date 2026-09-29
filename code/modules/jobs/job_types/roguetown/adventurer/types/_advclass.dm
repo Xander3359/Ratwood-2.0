@@ -35,7 +35,7 @@
 	var/list/adv_stat_ceiling
 
 	/// Amount of points this class has to assign stats
-	var/subclass_statpoints = 7 // Is about the standard, some power roles have more.
+	var/subclass_statpoints = 0
 
 	/// Subclass skills. Everything here is leveled UP TO using adjust_skillrank_up_to EX. list(/datum/skill = SKILL_LEVEL_JOURNEYMAN)
 	var/list/subclass_skills

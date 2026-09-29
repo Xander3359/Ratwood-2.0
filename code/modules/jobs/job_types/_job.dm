@@ -517,7 +517,8 @@
 				dat += "<td width = 70%><i><font color ='#ece9e9'>[adv_ref.tutorial]</font></i></td>"
 				dat += "<td width = 30%; style='text-align:right'>"
 				var/font_color = adv_ref.subclass_statpoints > 0 ? "#91cf68" : "#cf2a2a" // Green if over 0
-				dat += "<font color ='#7a4d0a'>Stat Points: </font><font color = [font_color]>[adv_ref.subclass_statpoints]</font>" // XANTODO: Check the html
+				if(adv_ref.subclass_statpoints != 0)
+					dat += "<font color ='#7a4d0a'>Stat Points: </font><font color = [font_color]>[adv_ref.subclass_statpoints]</font>" // XANTODO: Check the html
 				dat += "<br></td></tr></table></font>"
 				if(length(adv_ref.adv_stat_ceiling))
 					dat += "["<font color = '#cf2a2a'><b>This subclass has the following stat limits: "]</b></font><br>"
