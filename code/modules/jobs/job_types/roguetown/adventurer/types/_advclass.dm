@@ -66,79 +66,91 @@
 	/// Set to FALSE to skip apply_character_post_equipment() which applies virtue, flaw, loadout
 	var/applies_post_equipment = TRUE
 
-/datum/advclass/proc/equipme(mob/living/carbon/human/H, dummy = FALSE)
+/datum/advclass/proc/equipme(mob/living/carbon/human/equipping_human, dummy = FALSE)
 	// input sleeps....
 	set waitfor = FALSE
-	if(!H)
+	if(!ishuman(equipping_human))
 		return FALSE
 
 	if(outfit)
-		H.equipOutfit(outfit, dummy)
+		equipping_human.equipOutfit(outfit, dummy)
 
 		if(dummy)	//This means we're doing a Char Sheet preview. We don't need to equip the dummy with anything else, the outfits are likely to runtime on their own.
 			return
 
-	post_equip(H)
+	post_equip(equipping_human)
 
-	H.advjob = name
+	equipping_human.advjob = name
 
-	var/turf/TU = get_turf(H)
+	var/turf/TU = get_turf(equipping_human)
 	if(TU)
 		if(horse)
 			new horse(TU)
 
 	for(var/trait in traits_applied)
-		if(trait in H.dna.species.banned_traits)
+		if(trait in equipping_human.dna.species.banned_traits)
 			continue
-		ADD_TRAIT(H, trait, ADVENTURER_TRAIT)
-	if(H.client && (HAS_TRAIT(H, TRAIT_MEDIUMARMOR) || HAS_TRAIT(H, TRAIT_HEAVYARMOR)))
-		H.def_intent_change(INTENT_PARRY)
+		ADD_TRAIT(equipping_human, trait, ADVENTURER_TRAIT)
+	if(equipping_human.client && (HAS_TRAIT(equipping_human, TRAIT_MEDIUMARMOR) || HAS_TRAIT(equipping_human, TRAIT_HEAVYARMOR)))
+		equipping_human.def_intent_change(INTENT_PARRY)
 
 	if(noble_income)
-		var/already_has_income = (H in SStreasury.noble_incomes)
-		SStreasury.noble_incomes[H] = noble_income
-		SStreasury.grant_estate_income(H, noble_income, !already_has_income)
+		var/already_has_income = (equipping_human in SStreasury.noble_incomes)
+		SStreasury.noble_incomes[equipping_human] = noble_income
+		SStreasury.grant_estate_income(equipping_human, noble_income, !already_has_income)
 
 	if(adaptive_name)
-		H.adaptive_name = TRUE
+		equipping_human.adaptive_name = TRUE
 
 	if(length(subclass_languages))
 		for(var/lang in subclass_languages)
-			H.grant_language(lang)
+			equipping_human.grant_language(lang)
+
+	var/list/stat_spread = list(
+		list("value" = "[STATKEY_STR]", "current_value" = 8, "minimum_value" = 8, "maximum_value" = 15),
+		list("value" = "[STATKEY_PER]", "current_value" = 8, "minimum_value" = 8, "maximum_value" = 15),
+		list("value" = "[STATKEY_INT]", "current_value" = 8, "minimum_value" = 8, "maximum_value" = 15),
+		list("value" = "[STATKEY_CON]", "current_value" = 8, "minimum_value" = 8, "maximum_value" = 15),
+		list("value" = "[STATKEY_WIL]", "current_value" = 8, "minimum_value" = 8, "maximum_value" = 15),
+		list("value" = "[STATKEY_SPD]", "current_value" = 8, "minimum_value" = 8, "maximum_value" = 15),
+		list("value" = "[STATKEY_LCK]", "current_value" = 8, "minimum_value" = 8, "maximum_value" = 15),
+	)
+	subclass_statpoints += 18
+	var/list/input = tgui_input_sliders(equipping_human, "What should your stats look like?", "CONFIGURE STATS", stat_spread)
 
 	/* XANTODO: Make the UI
 	if(length(subclass_stats))
 		for(var/stat in subclass_stats)
-			H.change_stat(stat, subclass_stats[stat])
+			equipping_human.change_stat(stat, subclass_stats[stat])
 	*/
 
 	if(length(subclass_skills))
 		for(var/skill in subclass_skills)
-			H.adjust_skillrank_up_to(skill, subclass_skills[skill], TRUE)
+			equipping_human.adjust_skillrank_up_to(skill, subclass_skills[skill], TRUE)
 
 	if(length(subclass_stashed_items))
-		if(!H.mind)
+		if(!equipping_human.mind)
 			return
 		for(var/stashed_item in subclass_stashed_items)
-			H.mind?.special_items[stashed_item] = subclass_stashed_items[stashed_item]
+			equipping_human.mind?.special_items[stashed_item] = subclass_stashed_items[stashed_item]
 	if(subclass_spellpoints > 0)
-		H.mind?.adjust_spellpoints(subclass_spellpoints)
+		equipping_human.mind?.adjust_spellpoints(subclass_spellpoints)
 
 	if(subclass_social_rank)
-		H.social_rank = subclass_social_rank
+		equipping_human.social_rank = subclass_social_rank
 
 	// After the end of adv class equipping, apply a SPECIAL trait if able
 
 	if(length(subclass_virtues))
 		for(var/virtue in subclass_virtues)
-			apply_virtue(H, new virtue)
+			apply_virtue(equipping_human, new virtue)
 
 	if(applies_post_equipment)
-		if(H.dna?.species?.id == "gnoll")
+		if(equipping_human.dna?.species?.id == "gnoll")
 			// Gnolls should be built only from gnoll-specific prefs, not base-slot virtue/flaw/race bonus state.
-			H.apply_gnoll_preferences(FALSE)
+			equipping_human.apply_gnoll_preferences(FALSE)
 		else
-			apply_character_post_equipment(H)
+			apply_character_post_equipment(equipping_human)
 
 /datum/advclass/proc/post_equip(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,TYPE_PROC_REF(/mob/living/carbon/human, add_credit), TRUE), 20)
