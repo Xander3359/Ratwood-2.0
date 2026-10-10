@@ -16,6 +16,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	"Cyclops (L) (+2 Q-Points)"=/datum/charflaw/noeyel,
 	"Cyclops (R) (+2 Q-Points)"=/datum/charflaw/noeyer,
 	"Devout Follower"=/datum/charflaw/addiction/godfearing,
+	"Family Heirloom"=/datum/charflaw/family_heirloom,
 	"Greedy"=/datum/charflaw/greedy,
 	"Indebted"=/datum/charflaw/indebted,
 	"Isolationist"=/datum/charflaw/isolationist,
@@ -359,6 +360,14 @@ GLOBAL_LIST_INIT(character_flaws, list(
 		REMOVE_TRAIT(H, TRAIT_COMPLIANT, TRAIT_GENERIC)
 		H.compliance = 0
 		H.remove_status_effect(/datum/status_effect/compliance)
+
+/datum/charflaw/family_heirloom
+	name = "Family Heirloom"
+	desc = "I've been graced with a valuable heirloom that has existed in my family throughout generations. I sure hope nothing bad ever happens to it"
+
+/datum/charflaw/family_heirloom/on_mob_creation(mob/user)
+	. = ..()
+	
 
 /datum/charflaw/nudist
 	name = "Nudist"
